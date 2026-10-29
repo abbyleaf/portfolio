@@ -24,6 +24,10 @@ export function SiteFooter() {
               <li key={link.label}>
                 <a
                   href={link.href}
+                  {...((link.href.endsWith(".pdf") || link.href.startsWith("http")) && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  })}
                   className="font-sans text-label-sm text-grey-10 hover:underline"
                 >
                   {link.label} ↗

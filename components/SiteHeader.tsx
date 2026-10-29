@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MobileNav } from "./MobileNav";
 
-const resume = { label: "Resume", href: "#" };
+const resume = { label: "Resume", href: "/resume.pdf" };
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -36,9 +36,12 @@ export function SiteHeader() {
           ))}
           <a
             href={resume.href}
-            className="flex h-item-40 items-center bg-surface-inverted px-item-24 font-sans text-label-link text-text-on-inverted"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-item-40 items-center bg-surface-inverted px-item-24 font-sans text-label-link text-text-on-inverted transition-[translate,box-shadow] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:shadow-button-hover"
           >
             {resume.label}
+            <span className="sr-only"> (opens PDF in a new tab)</span>
           </a>
         </nav>
         <MobileNav links={navLinks} resume={resume} />

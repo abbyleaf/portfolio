@@ -163,7 +163,7 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const footerLinks = [
-  { label: "Resume", href: "#" },
-  { label: "LinkedIn", href: "#" },
+  { label: "Resume", href: "/resume.pdf" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/abigailyeap/" },
   { label: "Email", href: "mailto:abigailyeap@gmail.com" },
 ];

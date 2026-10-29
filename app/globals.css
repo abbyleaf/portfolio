@@ -240,6 +240,7 @@
   /* Shadow */
   --shadow-sticker: 6px 7px 0 0 var(--color-grey-10);
   --shadow-badge: 2px 3px 0 0 color-mix(in oklab, var(--color-grey-10) 90%, transparent);
+  --shadow-button-hover: 4px 4px 0 0 var(--color-azure-55);
   --shadow-image: 0 2px 8px 0 rgb(0 0 0 / 0.08);
   --shadow-phone: 0 2.2px 8.8px 0 color-mix(in oklab, var(--color-grey-10) 16%, transparent);
   --shadow-status-dot: 0 0 0 3px color-mix(in oklab, var(--color-green-500) 25%, transparent);

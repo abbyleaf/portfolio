@@ -68,10 +68,13 @@ export function MobileNav({ links, resume }: MobileNavProps) {
         ))}
         <a
           href={resume.href}
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => setOpen(false)}
           className="mt-item-24 flex h-item-40 items-center justify-center bg-surface-inverted font-sans text-label-link text-text-on-inverted"
         >
           {resume.label}
+          <span className="sr-only"> (opens PDF in a new tab)</span>
         </a>
       </nav>
     </div>
