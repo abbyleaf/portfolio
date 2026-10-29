@@ -1,6 +1,8 @@
 type MarqueeProps = {
   items: string[];
   label: string;
+  /** Which way the strip travels. */
+  direction?: "left" | "right";
 };
 
 function Strip({ items, hidden }: { items: string[]; hidden?: boolean }) {
@@ -24,14 +26,18 @@ function Strip({ items, hidden }: { items: string[]; hidden?: boolean }) {
 }
 
 /** Dark strip of looping text. The second copy is hidden from assistive tech. */
-export function Marquee({ items, label }: MarqueeProps) {
+export function Marquee({ items, label, direction = "left" }: MarqueeProps) {
   return (
     <div
       role="region"
       aria-label={label}
       className="overflow-hidden bg-surface-inverted py-item-26"
     >
-      <div className="flex w-max animate-marquee motion-reduce:animate-none motion-reduce:pl-item-56">
+      <div
+        className={`flex w-max motion-reduce:animate-none motion-reduce:pl-item-56 ${
+          direction === "right" ? "animate-marquee-reverse" : "animate-marquee"
+        }`}
+      >
         <Strip items={items} />
         <Strip items={items} hidden />
       </div>

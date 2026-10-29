@@ -17,8 +17,7 @@ import {
   testimonials,
 } from "@/content/home";
 
-const phoneClass =
-  "col-start-1 row-start-1 h-auto w-phone-w max-w-none";
+const phoneClass = "col-start-1 row-start-1 h-auto w-phone-w max-w-none";
 
 function Cover({ slug }: { slug: string }) {
   if (slug === "campus-ride-booking") {
@@ -151,7 +150,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Marquee items={howIWork} label="How I work" />
+        <Marquee items={howIWork} label="How I work" direction="right" />
 
         <section
           aria-labelledby="testimonials-title"
