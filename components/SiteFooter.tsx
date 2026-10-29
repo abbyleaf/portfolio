@@ -6,7 +6,7 @@ const labelClass =
 
 export function SiteFooter() {
   return (
-    <footer className="flex flex-col items-center gap-item-m bg-surface-primary px-item-64 pb-item-m pt-item-56">
+    <footer className="flex flex-col items-center gap-item-m bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24 pb-item-m pt-item-56">
       <div className="grid min-h-item-117_4 w-full max-w-width-1280 grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] gap-item-40 max-md:grid-cols-1">
         <div className="flex flex-col gap-item-9">
           <p className={labelClass}>Work with me</p>

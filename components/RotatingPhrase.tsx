@@ -73,7 +73,7 @@ export function RotatingPhrase({ phrases, className }: RotatingPhraseProps) {
       <span className="sr-only">{phrases.join(", ")}</span>
       <span aria-hidden="true">
         {phrases[index].slice(0, length)}
-        <span className="ml-item-4 inline-block h-item-56 w-item-4 translate-y-item-8 bg-text-primary motion-safe:animate-caret motion-reduce:hidden" />
+        <span className="ml-item-4 inline-block h-item-56 w-item-4 translate-y-item-8 max-lg:h-item-40 max-md:h-item-m max-lg:translate-y-item-6 bg-text-primary motion-safe:animate-caret motion-reduce:hidden" />
       </span>
     </em>
   );

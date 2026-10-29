@@ -118,6 +118,10 @@
   --text-label-link--line-height: 1.21;
   --text-label-link--font-weight: 500;
 
+  --text-label-link-lg: 1rem;
+  --text-label-link-lg--line-height: 1.21;
+  --text-label-link-lg--font-weight: 500;
+
   --text-label-caption: 0.75rem;
   --text-label-caption--line-height: 1.25;
   --text-label-caption--letter-spacing: 0.88px;
@@ -140,6 +144,7 @@
   --text-heading-fraunces-hero: 4rem;
   --text-heading-fraunces-hero--line-height: 1.234;
   --text-heading-fraunces-hero--font-weight: 400;
+  --leading-display-tight: 1.1;
 
   --text-heading-inter-xl: 2.75rem;
   --text-heading-inter-xl--line-height: 1.21;
@@ -223,6 +228,9 @@
   --stroke-hairline: 1px;
   --stroke-sticker: 3px;
 
+  /* Zoom applied to a project picture while its card is hovered. */
+  --scale-media-hover: 1.1;
+
   /* Rotation: the shared set of sticker tilts. */
   --rotate-tilt-left: -2deg;
   --rotate-tilt-right: 3deg;
@@ -289,4 +297,22 @@ body {
 :focus-visible {
   outline: var(--stroke-sticker) solid var(--color-azure-55);
   outline-offset: 3px;
+}
+
+/* Display type steps down on smaller screens; the tokens keep their names. */
+@media (max-width: 63.99rem) {
+  :root {
+    --text-heading-fraunces-hero: 3rem;
+    --text-heading-inter-xl: 2.25rem;
+    --text-heading-fraunces-italic-xl: 2.25rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  :root {
+    --text-heading-fraunces-hero: 2.5rem;
+    --text-heading-inter-xl: 2rem;
+    --text-heading-fraunces-italic-xl: 1.875rem;
+    --text-heading-fraunces-xl: 1.75rem;
+  }
 }

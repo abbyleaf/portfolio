@@ -16,7 +16,7 @@ export function Ruler({ edge, left, right }: RulerProps) {
   const isTop = edge === "top";
   return (
     <div
-      className={`h-item-m shrink-0 bg-surface-canvas px-item-64 font-mono text-stamp-xs uppercase text-text-primary ${
+      className={`h-item-m shrink-0 bg-surface-canvas px-item-64 max-xl:px-item-40 max-md:px-item-24 font-mono text-stamp-xs uppercase text-text-primary ${
         isTop
           ? "border-t-(length:--stroke-sticker) border-b-(length:--stroke-hairline) border-border-strong"
           : "border-t-(length:--stroke-hairline) border-b-(length:--stroke-sticker) border-border-strong"

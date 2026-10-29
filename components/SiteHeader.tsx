@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { MobileNav } from "./MobileNav";
+
+const resume = { label: "Resume", href: "#" };
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -8,7 +11,7 @@ const navLinks = [
 
 export function SiteHeader() {
   return (
-    <header className="h-item-80 shrink-0 border-b-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-primary px-item-64">
+    <header className="relative h-item-80 shrink-0 border-b-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24">
       <div className="mx-auto flex h-full w-full max-w-width-1312 items-center justify-between">
         <Link href="/" className="flex items-center gap-item-12">
           <span
@@ -21,7 +24,7 @@ export function SiteHeader() {
             Abigail Yeap
           </span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-item-28">
+        <nav aria-label="Primary" className="flex items-center gap-item-28 max-md:hidden">
           {navLinks.map((link) => (
             <Link
               key={link.label}
@@ -32,12 +35,13 @@ export function SiteHeader() {
             </Link>
           ))}
           <a
-            href="#"
+            href={resume.href}
             className="flex h-item-40 items-center bg-surface-inverted px-item-24 font-sans text-label-link text-text-on-inverted"
           >
-            Resume
+            {resume.label}
           </a>
         </nav>
+        <MobileNav links={navLinks} resume={resume} />
       </div>
     </header>
   );

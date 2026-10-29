@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Badge } from "@/components/Badge";
+import { LoopVideo } from "@/components/LoopVideo";
 import { Marquee } from "@/components/Marquee";
 import { ProjectCard } from "@/components/ProjectCard";
 import { RotatingPhrase } from "@/components/RotatingPhrase";
@@ -17,29 +18,14 @@ import {
   testimonials,
 } from "@/content/home";
 
-const phoneClass = "col-start-1 row-start-1 h-auto w-phone-w max-w-none";
-
 function Cover({ slug }: { slug: string }) {
   if (slug === "campus-ride-booking") {
     return (
-      <div className="grid size-full grid-cols-1 grid-rows-1 place-items-center">
-        <Image
-          src="/images/home/case-study-1-phone-a.png"
-          alt="Campus ride app showing the shuttle booking flow"
-          width={222}
-          height={453}
-          sizes="(min-width: 768px) 222px, 42vw"
-          className={`${phoneClass} -translate-x-phone-shift-x -translate-y-phone-shift-y shadow-phone`}
-        />
-        <Image
-          src="/images/home/case-study-1-phone-b.png"
-          alt="Campus ride app showing a booked ride"
-          width={222}
-          height={453}
-          sizes="(min-width: 768px) 222px, 42vw"
-          className={`${phoneClass} translate-x-phone-shift-x translate-y-phone-shift-y`}
-        />
-      </div>
+      <LoopVideo
+        src="/videos/case-study-1-hero.mp4"
+        label="Campus ride app showing shuttle and on-demand booking side by side"
+        className="size-full object-cover"
+      />
     );
   }
   const isOrderSplitting = slug === "order-splitting";
@@ -71,11 +57,11 @@ export default function Home() {
         <section
           id="about"
           aria-labelledby="hero-title"
-          className="px-item-120 py-item-64 max-md:px-item-24"
+          className="px-item-120 py-item-64 max-xl:px-item-40 max-md:px-item-24"
         >
-          <div className="mx-auto flex w-full max-w-width-1200 flex-col gap-item-80">
+          <div className="mx-auto flex w-full max-w-width-1200 flex-col gap-item-80 max-md:gap-item-40">
             <div className="flex flex-col gap-item-56">
-              <div className="flex h-item-47 items-center gap-item-14">
+              <div className="flex min-h-item-47 flex-wrap items-center gap-item-14">
                 <Badge tone="neutral" tilt="left" status>
                   Open to work
                 </Badge>
@@ -94,7 +80,7 @@ export default function Home() {
                 </span>
                 <RotatingPhrase
                   phrases={heroPhrases}
-                  className="border-(length:--stroke-sticker) border-border-strong bg-surface-raised px-item-17 py-px shadow-sticker"
+                  className="border-(length:--stroke-sticker) border-border-strong bg-surface-raised px-item-17 py-px shadow-sticker max-lg:leading-display-tight"
                 />
               </h1>
             </div>
@@ -109,7 +95,7 @@ export default function Home() {
                 {currently.map(({ label, value }) => (
                   <div
                     key={label}
-                    className="flex h-item-20 items-center gap-item-16"
+                    className="flex min-h-item-20 items-baseline gap-item-16"
                   >
                     <dt className="w-item-100 shrink-0 font-sans text-heading-inter-xs uppercase text-text-muted">
                       {label}
@@ -129,7 +115,7 @@ export default function Home() {
         <section
           id="work"
           aria-labelledby="work-title"
-          className="px-item-120 py-item-80 max-md:px-item-24"
+          className="px-item-120 py-item-80 max-xl:px-item-40 max-md:px-item-24"
         >
           <div className="mx-auto flex w-full max-w-width-1200 flex-col">
             <SectionHeader
@@ -156,7 +142,7 @@ export default function Home() {
           aria-labelledby="testimonials-title"
           className="flex flex-col items-center bg-surface-light-accent-warm py-item-80"
         >
-          <div className="w-full max-w-width-1200 max-xl:px-item-24">
+          <div className="w-full max-w-width-1200 max-xl:px-item-40 max-md:px-item-24">
             <SectionHeader
               marker="§03 · Testimonials"
               title="What others say"

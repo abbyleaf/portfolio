@@ -22,7 +22,7 @@ const tilts = {
 export function Badge({ tone, tilt, status, children }: BadgeProps) {
   return (
     <span
-      className={`inline-flex items-center gap-item-8 rounded-pill border-(length:--stroke-hairline) border-border-strong px-item-16 py-item-9 font-mono text-mono-m uppercase shadow-badge motion-safe:hover:animate-wiggle ${tones[tone]} ${tilts[tilt]}`}
+      className={`inline-flex items-center gap-item-8 whitespace-nowrap rounded-pill border-(length:--stroke-hairline) border-border-strong px-item-16 py-item-9 font-mono text-mono-m uppercase shadow-badge motion-safe:hover:animate-wiggle ${tones[tone]} ${tilts[tilt]}`}
     >
       {status && (
         <span

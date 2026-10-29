@@ -11,8 +11,8 @@ type ProjectCardProps = {
 
 export function ProjectCard({ study, media }: ProjectCardProps) {
   return (
-    <article className="group relative flex items-start gap-item-40 has-focus-visible:outline-(length:--stroke-sticker) has-focus-visible:outline-offset-8 has-focus-visible:outline-surface-accent-cool max-md:flex-col">
-      <p className="w-item-64 shrink-0 font-mono text-mono-l uppercase text-text-muted">
+    <article className="group relative flex items-start gap-item-40 has-focus-visible:outline-(length:--stroke-sticker) has-focus-visible:outline-offset-8 has-focus-visible:outline-surface-accent-cool max-lg:flex-col">
+      <p className="w-item-64 shrink-0 max-lg:w-auto font-mono text-mono-l uppercase text-text-muted">
         № {study.number} · {study.year}
       </p>
       <div className="flex min-w-0 flex-1 flex-col gap-item-24 self-stretch">
@@ -40,7 +40,7 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
         <Link
           href={`/case-studies/${study.slug}`}
           aria-label={`Read case study: ${study.title}`}
-          className="flex items-center gap-item-4 font-sans text-label-link text-text-accent-cool after:absolute after:inset-0 after:z-10 focus-visible:outline-none"
+          className="flex items-center gap-item-4 font-sans text-label-link-lg text-text-accent-cool after:absolute after:inset-0 after:z-10 focus-visible:outline-none"
         >
           Read case study
           <span
@@ -51,8 +51,10 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           </span>
         </Link>
       </div>
-      <div className="relative aspect-project-card min-w-0 flex-1 overflow-hidden max-md:w-full">
-        {media}
+      <div className="relative aspect-project-card min-w-0 flex-1 overflow-hidden max-lg:w-full">
+        <div className="absolute inset-0 transition-transform duration-500 ease-out motion-safe:group-hover:scale-(--scale-media-hover)">
+          {media}
+        </div>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 border-(length:--stroke-hairline) border-border-canvas-subtle"
