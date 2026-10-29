@@ -23,58 +23,19 @@ Personal portfolio: editorial, sticker-and-stamp, craft-forward. Next.js App Rou
 
 Source: the Figma file "Case Studies" (`4RCJgEA6vqGzYE5reqImGC`). Tokens are defined **once**, in the `@theme` block in `app/globals.css`. Nothing else defines colours, type or spacing.
 
-**Rule: components use token utilities (`bg-surface-canvas`, `text-body`, `shadow-sticker`), never hardcoded hex, rgb or arbitrary values (`bg-[#f0ebe5]`).** If a value is missing, add a token to `@theme` first, then use it. Do not name a token after its hex.
+**Rule: components use token utilities (`bg-surface-canvas`, `text-text-body`, `shadow-sticker`), never hardcoded hex, rgb or arbitrary values (`bg-[#f0ebe5]`).** If a value is missing, add a token to `@theme` first, then use it. Do not name a token after its hex.
 
-### Colour
+### Reading the tokens
 
-| Token | Value |
-| --- | --- |
-| surface/canvas | `#f0ebe5` |
-| surface/primary | `#faf8f5` |
-| surface/raised | `#ffffff` |
-| surface/inverted | `#1f1d1a` |
-| surface/accent-warm | `#f2d0d1` |
-| surface/light-accent-warm | `#f5e3e3` |
-| surface/light-accent-cool | `#e0e8fb` |
-| text/primary | `#1f1d1a` |
-| text/body | `#3a3833` |
-| text/muted | `#63615a` |
-| text/sub-headers | `#85837c` |
-| text/on-inverted | `#f0ebe5` |
-| text/accent-warm | `#5f3031` |
-| text/accent-cool | `#2e66ed` |
-| border/strong | `#1f1d1a` |
-| border/subtle | `#1b1a17` at 14% |
-| border/canvas-subtle | `#dfdfdf` |
-| palette: green/500 | `#56b388` |
-| palette: red/300 | `#eaa4a6` |
-| palette: red/200 | `#f2d0d1` |
-| palette: grey/900, 800 | `#1f1d1a`, `#3a3833` |
+The values live in `app/globals.css`; read them there, not here. Naming follows Figma with `/` turned into `-`, so Tailwind utilities double up (`text-text-body`, `bg-surface-canvas`).
 
-Alpha variants of the ink colour (`#1b1a17` at 10% and 14%) are tokens too.
-
-### Type
-
-Fonts: Fraunces (headings), Inter (body, UI labels), Space Mono (captions, stamps, metadata).
-
-| Token | Spec |
-| --- | --- |
-| heading/fraunces/xl | Fraunces Regular 32 / line-height 100% |
-| heading/inter/xs | Inter Medium 12 / 100%, tracking 0.88px |
-| paragraph/md | Inter Regular 16 / 24 |
-| label/sm | Inter Regular 14 / 19.6 |
-| label/upper | Inter Medium 11, uppercase, tracking 0.44px |
-| mono/l | Space Mono Regular 14 / 20 |
-| mono/m | Space Mono Regular 12 / 12, tracking 0.72px |
-
-The Figma file also has a 10px size with 1.2px tracking, for tiny stamp text.
-
-### Shape, stroke, shadow, spacing
-
-- Sticker shadow: hard offset, `6px 7px 0 0 #1b1a17`, no blur. Token `shadow-sticker`.
-- Radius: pill `999px`. Other corners stay square or near-square unless a token says otherwise.
-- Stroke weights: 1 (hairline), 3 (sticker outline).
-- Spacing: Figma only defines item spacing 6, 9 and 10. This is too sparse to be a scale. Use Tailwind's default spacing scale until a real spacing scale is added to `@theme`.
+- **Colour:** palette tokens (`grey-900`, `red-200`, ...) hold raw values. Semantic tokens (`surface-*`, `text-*`, `border-*`) reference them. Prefer semantic tokens in components.
+- **Opacity:** use Tailwind opacity modifiers on colour tokens, never alpha tokens. Figma's `border/subtle` is `border-grey-10/14`; the 10% tint is `grey-10/10`.
+- **Type:** `text-*` size tokens carry size, line-height, tracking and weight (`text-heading-fraunces-xl`). Pair with `font-heading`, `font-sans` or `font-mono`. Italic display text adds `italic`.
+- **Spacing:** use the `item-*` tokens (`p-item-s`, `gap-item-9`), not Tailwind's default numeric scale.
+- **Shape:** `rounded-pill`, `shadow-sticker` (hard offset, no blur), `shadow-image`. Strokes are `--stroke-hairline` (1px) and `--stroke-sticker` (3px); use them as `border-(length:--stroke-sticker)`.
+- **Contrast:** `text-sub-headers` fails WCAG AA for normal text on every surface. Use it only for large or decorative text, or darken it. `text-muted` on `surface-accent-warm` and `text-accent-cool` on `surface-canvas` also fall below 4.5:1.
+- Never use pure black (`#000`). Do not use the unmerged near-duplicate colours (`red-37`, `grey-93-2`) until they are resolved in Figma.
 
 ## Aesthetic
 
@@ -90,7 +51,7 @@ Editorial, sticker-and-stamp, craft-forward. It must not read as a generic portf
 
 - **Fonts:** `next/font` only (`next/font/google` for Fraunces, Inter and Space Mono). Use `variable` and `display: 'swap'`, expose each as a CSS variable, and map them in `@theme`. No `<link>` tags or CSS `@import` for fonts.
 - **Images:** `next/image` only, never a raw `<img>`. Always set `alt`, plus `width` and `height` or `fill` with a sized parent. Give `fill` images a `sizes` prop. In this version `priority` is replaced by `preload` (`onLoadingComplete` is deprecated). Check `node_modules/next/dist/docs/01-app/03-api-reference/02-components/image.md`.
-- **Case study content:** lives in `content/case-studies/*.mdx` and never in layout or component code. Layout code renders it. Use `@next/mdx` with `mdx-components.tsx` (required for App Router). Load a study with `await import(`@/content/case-studies/${slug}.mdx`)` in a dynamic route with `generateStaticParams` and `dynamicParams = false`.
+- **Case study content:** lives in `content/case-studies/*.mdx` and never in layout or component code. Layout code renders it. Use `@next/mdx` with `mdx-components.tsx` (required for App Router). Load a study with `await import(`@/content/case-studies/${slug}.mdx`)` in a dynamic route with `generateStaticParams`, calling `notFound()` for unknown slugs. Do not export `dynamicParams`: it is incompatible with `cacheComponents`, which this project enables.
 - **Frontmatter:** `@next/mdx` does not parse it by default. Add `remark-frontmatter` and `remark-mdx-frontmatter`. With Turbopack, remark and rehype plugins must be passed by string name with serialisable options. See `node_modules/next/dist/docs/01-app/02-guides/mdx.md`.
 - **Next.js config:** the project uses `next.config.ts`. Add `pageExtensions` for `md` and `mdx` when setting up MDX.
 

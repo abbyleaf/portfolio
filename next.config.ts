@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   /* config options here */
   experimental: {
     agentFeedback: true,
@@ -17,4 +19,14 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Turbopack needs plugins passed by name, with serialisable options.
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [
+      "remark-frontmatter",
+      ["remark-mdx-frontmatter", { name: "frontmatter" }],
+    ],
+  },
+});
+
+export default withMDX(nextConfig);

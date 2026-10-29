@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Single source of truth for design tokens. Values come from the Figma file
+   "Case Studies". Components use the utilities these generate, never raw values.
+   Semantic tokens reference palette tokens so a value changes in one place. */
 
+/* Fonts are set on <html> by next/font, so they must be inlined. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-space-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  /* Palette */
+  --color-grey-900: #1f1d1a;
+  --color-grey-800: #3a3833;
+  --color-grey-44: #74726c;
+  --color-grey-10: #1b1a17;
+  --color-azure-55: #2e66ed;
+  --color-blue-600: #174dcf;
+  --color-green-500: #56b388;
+  --color-red-200: #f2d0d1;
+  --color-red-300: #eaa4a6;
+  --color-red-400: #dd7e81;
+  --color-red-600: #a8484b;
+  --color-red-37: #7e3f3f;
+  --color-grey-93-2: #fedcde;
+
+  /* Surface */
+  --color-surface-canvas: #f0ebe5;
+  --color-surface-primary: #faf8f5;
+  --color-surface-raised: #ffffff;
+  --color-surface-inverted: var(--color-grey-900);
+  --color-surface-accent-warm: var(--color-red-200);
+  --color-surface-accent-cool: var(--color-azure-55);
+  --color-surface-light-accent-warm: #f5e3e3;
+  --color-surface-light-accent-cool: #e0e8fb;
+
+  /* Text */
+  --color-text-primary: var(--color-grey-900);
+  --color-text-body: var(--color-grey-800);
+  --color-text-muted: #63615a;
+  --color-text-sub-headers: #85837c;
+  --color-text-on-inverted: #f0ebe5;
+  --color-text-accent-warm: #5f3031;
+  --color-text-accent-cool: var(--color-azure-55);
+
+  /* Border. Figma's border/subtle is grey-10 at 14%: use border-grey-10/14. */
+  --color-border-strong: var(--color-grey-900);
+  --color-border-canvas-subtle: #dfdfdf;
+
+  /* Type */
+  --text-display-fraunces: 5.75rem;
+  --text-display-fraunces--line-height: 1;
+  --text-display-fraunces--letter-spacing: -3.08px;
+  --text-display-fraunces--font-weight: 400;
+
+  --text-display-inter: 5.5rem;
+  --text-display-inter--line-height: 1;
+  --text-display-inter--letter-spacing: -3.08px;
+  --text-display-inter--font-weight: 500;
+
+  --text-heading-fraunces-xxl: 3.25rem;
+  --text-heading-fraunces-xxl--line-height: 1;
+  --text-heading-fraunces-xxl--font-weight: 600;
+
+  --text-heading-fraunces-xl: 2rem;
+  --text-heading-fraunces-xl--line-height: 1;
+  --text-heading-fraunces-xl--font-weight: 400;
+
+  --text-heading-fraunces-lg: 1.5rem;
+  --text-heading-fraunces-lg--line-height: 1;
+  --text-heading-fraunces-lg--font-weight: 600;
+
+  --text-heading-inter-sm: 0.875rem;
+  --text-heading-inter-sm--line-height: 1;
+  --text-heading-inter-sm--letter-spacing: 0.88px;
+  --text-heading-inter-sm--font-weight: 500;
+
+  --text-heading-inter-xs: 0.75rem;
+  --text-heading-inter-xs--line-height: 1;
+  --text-heading-inter-xs--letter-spacing: 0.88px;
+  --text-heading-inter-xs--font-weight: 500;
+
+  --text-paragraph-lg: 1.0625rem;
+  --text-paragraph-lg--line-height: 1.646875rem;
+  --text-paragraph-lg--font-weight: 300;
+
+  --text-paragraph-md: 1rem;
+  --text-paragraph-md--line-height: 1.5rem;
+  --text-paragraph-md--font-weight: 400;
+
+  --text-label-md: 0.8125rem;
+  --text-label-md--line-height: 1;
+  --text-label-md--font-weight: 500;
+
+  --text-label-sm: 0.875rem;
+  --text-label-sm--line-height: 1.225rem;
+  --text-label-sm--font-weight: 400;
+
+  --text-label-upper: 0.6875rem;
+  --text-label-upper--line-height: 1;
+  --text-label-upper--letter-spacing: 0.44px;
+  --text-label-upper--font-weight: 500;
+
+  --text-mono-l: 0.875rem;
+  --text-mono-l--line-height: 1.25rem;
+  --text-mono-l--font-weight: 400;
+
+  --text-mono-m: 0.75rem;
+  --text-mono-m--line-height: 1;
+  --text-mono-m--letter-spacing: 0.72px;
+  --text-mono-m--font-weight: 400;
+
+  --text-stamp-xs: 0.625rem;
+  --text-stamp-xs--line-height: 1;
+  --text-stamp-xs--letter-spacing: 1.2px;
+
+  /* Spacing (Figma "item spacing") */
+  --spacing-item-6: 6px;
+  --spacing-item-9: 9px;
+  --spacing-item-10: 10px;
+  --spacing-item-12: 12px;
+  --spacing-item-s: 16px;
+  --spacing-item-s-plus: 24px;
+  --spacing-item-m: 32px;
+
+  /* Layout widths */
+  --container-width-520: 520px;
+  --container-width-540: 540px;
+
+  /* Shape */
+  --radius-pill: 999px;
+  --stroke-hairline: 1px;
+  --stroke-sticker: 3px;
+
+  /* Shadow */
+  --shadow-sticker: 6px 7px 0 0 var(--color-grey-10);
+  --shadow-image: 0 2px 8px 0 rgb(0 0 0 / 0.08);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface-canvas);
+  color: var(--color-text-body);
+  font-family: var(--font-sans);
 }
