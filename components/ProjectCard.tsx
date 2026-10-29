@@ -48,7 +48,7 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           </span>
         </Link>
       </div>
-      <div className="relative h-item-360 min-w-0 flex-1 overflow-hidden max-md:w-full">
+      <div className="relative aspect-project-card min-w-0 flex-1 overflow-hidden max-md:w-full">
         {media}
         <div
           aria-hidden="true"

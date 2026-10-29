@@ -199,11 +199,16 @@
   --spacing-item-120: 120px;
   --spacing-item-260: 260px;
   --spacing-item-320: 320px;
-  --spacing-item-360: 360px;
-  /* Offsets that stagger the two phone screenshots in a project card. */
-  --spacing-item-117: 117px;
   --spacing-item-117_4: 117.38px;
-  --spacing-item-82_5: 82.5px;
+  /* The two phone screenshots in a project card are sized and staggered as a
+     share of the picture frame (222px wide in a 528px frame, shifted 117px and
+     82.5px from centre), so they scale with it. */
+  --spacing-phone-w: 42.05%;
+  --spacing-phone-shift-x: 52.7%;
+  --spacing-phone-shift-y: 18.21%;
+
+  /* Aspect ratios */
+  --aspect-project-card: 528 / 360;
 
   /* Layout widths */
   --container-width-520: 520px;

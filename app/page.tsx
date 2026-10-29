@@ -17,27 +17,28 @@ import {
   testimonials,
 } from "@/content/home";
 
-const phoneClass = "col-start-1 row-start-1 relative h-auto w-auto max-w-none";
+const phoneClass =
+  "col-start-1 row-start-1 h-auto w-phone-w max-w-none";
 
 function Cover({ slug }: { slug: string }) {
   if (slug === "campus-ride-booking") {
     return (
-      <div className="grid size-full place-items-center">
+      <div className="grid size-full grid-cols-1 grid-rows-1 place-items-center">
         <Image
           src="/images/home/case-study-1-phone-a.png"
           alt="Campus ride app showing the shuttle booking flow"
           width={222}
           height={453}
-          sizes="222px"
-          className={`${phoneClass} -left-item-117 -top-item-82_5 shadow-phone`}
+          sizes="(min-width: 768px) 222px, 42vw"
+          className={`${phoneClass} -translate-x-phone-shift-x -translate-y-phone-shift-y shadow-phone`}
         />
         <Image
           src="/images/home/case-study-1-phone-b.png"
           alt="Campus ride app showing a booked ride"
           width={222}
           height={453}
-          sizes="222px"
-          className={`${phoneClass} left-item-117 top-item-82_5`}
+          sizes="(min-width: 768px) 222px, 42vw"
+          className={`${phoneClass} translate-x-phone-shift-x translate-y-phone-shift-y`}
         />
       </div>
     );
