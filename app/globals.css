@@ -191,12 +191,14 @@
   --spacing-item-24: 24px;
   --spacing-item-26: 26px;
   --spacing-item-28: 28px;
+  --spacing-item-30: 30px;
   --spacing-item-m: 32px;
   --spacing-item-33: 33px;
   --spacing-item-36: 36px;
   --spacing-item-40: 40px;
   --spacing-item-47: 47px;
   --spacing-item-52: 52px;
+  --spacing-item-54: 54px;
   --spacing-item-56: 56px;
   --spacing-item-64: 64px;
   --spacing-item-80: 80px;
@@ -316,4 +318,9 @@ body {
     --text-heading-fraunces-italic-xl: 1.875rem;
     --text-heading-fraunces-xl: 1.75rem;
   }
+}
+
+/* Anchor targets land below the pinned header and ruler. */
+html {
+  scroll-padding-top: 6rem;
 }

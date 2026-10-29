@@ -6,6 +6,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { RotatingPhrase } from "@/components/RotatingPhrase";
 import { Ruler } from "@/components/Ruler";
 import { SectionHeader } from "@/components/SectionHeader";
+import { StickyTop } from "@/components/StickyTop";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TestimonialMarquee } from "@/components/TestimonialMarquee";
@@ -51,8 +52,10 @@ function Cover({ slug }: { slug: string }) {
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col bg-surface-primary">
-      <SiteHeader />
-      <Ruler edge="top" left="Abi / HOME" right="★ Folio/26" />
+      <StickyTop>
+        <SiteHeader />
+        <Ruler edge="top" left="Abi / HOME" right="★ Folio/26" />
+      </StickyTop>
       <main className="flex flex-col">
         <section
           id="about"
@@ -139,6 +142,7 @@ export default function Home() {
         <Marquee items={howIWork} label="How I work" direction="right" />
 
         <section
+          id="testimonials"
           aria-labelledby="testimonials-title"
           className="flex flex-col items-center bg-surface-light-accent-warm py-item-80"
         >
@@ -155,7 +159,7 @@ export default function Home() {
           <TestimonialMarquee testimonials={testimonials} />
         </section>
       </main>
-      <Ruler edge="bottom" left="END 01" right="EST. 2026" />
+      <Ruler edge="bottom" left="HOME / END" right="EST. 2026" />
       <SiteFooter />
     </div>
   );
