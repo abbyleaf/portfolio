@@ -11,7 +11,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ study, media }: ProjectCardProps) {
   return (
-    <article className="flex items-start gap-item-40 max-md:flex-col">
+    <article className="group relative flex items-start gap-item-40 has-focus-visible:outline-(length:--stroke-sticker) has-focus-visible:outline-offset-8 has-focus-visible:outline-surface-accent-cool max-md:flex-col">
       <p className="w-item-64 shrink-0 font-mono text-mono-l uppercase text-text-muted">
         № {study.number} · {study.year}
       </p>
@@ -20,7 +20,7 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           {study.category}
         </p>
         <div className="flex flex-1 flex-col gap-item-16">
-          <h3 className="font-heading font-wonk text-heading-fraunces-xl text-text-primary">
+          <h3 className="font-heading font-wonk text-heading-fraunces-xl text-text-primary underline-offset-4 group-hover:underline">
             {study.title}
           </h3>
           <p className="font-sans text-paragraph-md text-text-body">
@@ -35,9 +35,12 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
             ))}
           </ul>
         </div>
+        {/* The ::after stretches this link over the whole card, so the card is one
+            click target without nesting interactive content inside a link. */}
         <Link
           href={`/case-studies/${study.slug}`}
-          className="group flex items-center gap-item-4 font-sans text-label-link text-text-accent-cool"
+          aria-label={`Read case study: ${study.title}`}
+          className="flex items-center gap-item-4 font-sans text-label-link text-text-accent-cool after:absolute after:inset-0 after:z-10 focus-visible:outline-none"
         >
           Read case study
           <span
