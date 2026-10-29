@@ -4,11 +4,19 @@
    "Case Studies". Components use the utilities these generate, never raw values.
    Semantic tokens reference palette tokens so a value changes in one place. */
 
+/* Space Mono has no № (U+2116). next/font's size-adjusted fallback would draw
+   Arial's at 137%, so catch that one character with unscaled system Arial. */
+@font-face {
+  font-family: "Space Mono Numero";
+  src: local("Arial"), local("Helvetica");
+  unicode-range: U+2116;
+}
+
 /* Fonts are set on <html> by next/font, so they must be inlined. */
 @theme inline {
   --font-heading: var(--font-fraunces);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-space-mono);
+  --font-sans: var(--font-inter-arrows), var(--font-inter);
+  --font-mono: "Space Mono Numero", var(--font-space-mono);
 }
 
 @theme {
@@ -41,13 +49,16 @@
   --color-text-primary: var(--color-grey-900);
   --color-text-body: var(--color-grey-800);
   --color-text-muted: #63615a;
-  --color-text-sub-headers: #85837c;
+  --color-text-sub-headers: var(--color-grey-44);
   --color-text-on-inverted: #f0ebe5;
   --color-text-accent-warm: #5f3031;
+  /* azure-55 is 4.7:1 on surface-primary but 4.2:1 on surface-canvas, so keep it
+     to large text or text on surface-primary. */
   --color-text-accent-cool: var(--color-azure-55);
 
-  /* Border. Figma's border/subtle is grey-10 at 14%: use border-grey-10/14. */
+  /* Border. border-subtle is grey-10 at 14%. */
   --color-border-strong: var(--color-grey-900);
+  --color-border-subtle: color-mix(in oklab, var(--color-grey-10) 14%, transparent);
   --color-border-canvas-subtle: #dfdfdf;
 
   /* Type */
@@ -66,8 +77,12 @@
   --text-heading-fraunces-xxl--font-weight: 600;
 
   --text-heading-fraunces-xl: 2rem;
-  --text-heading-fraunces-xl--line-height: 1;
+  --text-heading-fraunces-xl--line-height: 1.22;
   --text-heading-fraunces-xl--font-weight: 400;
+
+  --text-heading-fraunces-md: 1.25rem;
+  --text-heading-fraunces-md--line-height: 1.25;
+  --text-heading-fraunces-md--font-weight: 600;
 
   --text-heading-fraunces-lg: 1.5rem;
   --text-heading-fraunces-lg--line-height: 1;
@@ -99,6 +114,15 @@
   --text-label-sm--line-height: 1.225rem;
   --text-label-sm--font-weight: 400;
 
+  --text-label-link: 0.875rem;
+  --text-label-link--line-height: 1.21;
+  --text-label-link--font-weight: 500;
+
+  --text-label-caption: 0.75rem;
+  --text-label-caption--line-height: 1.25;
+  --text-label-caption--letter-spacing: 0.88px;
+  --text-label-caption--font-weight: 500;
+
   --text-label-upper: 0.6875rem;
   --text-label-upper--line-height: 1;
   --text-label-upper--letter-spacing: 0.44px;
@@ -113,35 +137,150 @@
   --text-mono-m--letter-spacing: 0.72px;
   --text-mono-m--font-weight: 400;
 
+  --text-heading-fraunces-hero: 4rem;
+  --text-heading-fraunces-hero--line-height: 1.234;
+  --text-heading-fraunces-hero--font-weight: 400;
+
+  --text-heading-inter-xl: 2.75rem;
+  --text-heading-inter-xl--line-height: 1.21;
+  --text-heading-inter-xl--font-weight: 600;
+
+  --text-heading-fraunces-italic-xl: 2.875rem;
+  --text-heading-fraunces-italic-xl--line-height: 1.2326;
+  --text-heading-fraunces-italic-xl--font-weight: 400;
+
+  --text-heading-inter-lg: 1.5rem;
+  --text-heading-inter-lg--line-height: 1.2;
+  --text-heading-inter-lg--font-weight: 500;
+
+  --text-mono-marker: 0.75rem;
+  --text-mono-marker--line-height: 1.25rem;
+  --text-mono-marker--letter-spacing: 0.96px;
+  --text-mono-marker--font-weight: 400;
+
+  --text-glyph: 1rem;
+  --text-glyph--line-height: 1.1875rem;
+
   --text-stamp-xs: 0.625rem;
   --text-stamp-xs--line-height: 1;
   --text-stamp-xs--letter-spacing: 1.2px;
 
+  /* Tracking */
+  --tracking-marquee: 1.96px;
+  --tracking-caption: 0.2px;
+
   /* Spacing (Figma "item spacing") */
+  --spacing-item-2: 2px;
+  --spacing-item-4: 4px;
   --spacing-item-6: 6px;
+  --spacing-item-7: 7px;
+  --spacing-item-8: 8px;
   --spacing-item-9: 9px;
   --spacing-item-10: 10px;
   --spacing-item-12: 12px;
-  --spacing-item-s: 16px;
-  --spacing-item-s-plus: 24px;
+  --spacing-item-16: 16px;
+  --spacing-item-14: 14px;
+  --spacing-item-17: 17px;
+  --spacing-item-18: 18px;
+  --spacing-item-20: 20px;
+  --spacing-item-24: 24px;
+  --spacing-item-26: 26px;
+  --spacing-item-28: 28px;
   --spacing-item-m: 32px;
+  --spacing-item-33: 33px;
+  --spacing-item-36: 36px;
+  --spacing-item-40: 40px;
+  --spacing-item-47: 47px;
+  --spacing-item-52: 52px;
+  --spacing-item-56: 56px;
+  --spacing-item-64: 64px;
+  --spacing-item-80: 80px;
+  --spacing-item-100: 100px;
+  --spacing-item-120: 120px;
+  --spacing-item-260: 260px;
+  --spacing-item-320: 320px;
+  --spacing-item-360: 360px;
+  /* Offsets that stagger the two phone screenshots in a project card. */
+  --spacing-item-117: 117px;
+  --spacing-item-117_4: 117.38px;
+  --spacing-item-82_5: 82.5px;
 
   /* Layout widths */
   --container-width-520: 520px;
   --container-width-540: 540px;
+  --container-width-580: 580px;
+  --container-width-1200: 1200px;
+  --container-width-1280: 1280px;
+  --container-width-1312: 1312px;
 
   /* Shape */
   --radius-pill: 999px;
   --stroke-hairline: 1px;
   --stroke-sticker: 3px;
 
+  /* Rotation: the shared set of sticker tilts. */
+  --rotate-tilt-left: -2deg;
+  --rotate-tilt-right: 3deg;
+  --rotate-polaroid-left: -5deg;
+  --rotate-polaroid-right: 5deg;
+
   /* Shadow */
   --shadow-sticker: 6px 7px 0 0 var(--color-grey-10);
+  --shadow-badge: 2px 3px 0 0 color-mix(in oklab, var(--color-grey-10) 90%, transparent);
   --shadow-image: 0 2px 8px 0 rgb(0 0 0 / 0.08);
+  --shadow-phone: 0 2.2px 8.8px 0 color-mix(in oklab, var(--color-grey-10) 16%, transparent);
+  --shadow-status-dot: 0 0 0 3px color-mix(in oklab, var(--color-green-500) 25%, transparent);
+  --drop-shadow-polaroid:
+    0 2px 1px color-mix(in oklab, var(--color-grey-10) 8%, transparent),
+    0 12px 7px color-mix(in oklab, var(--color-grey-10) 12%, transparent);
+
+  /* Motion */
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 70s linear infinite;
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+  --animate-caret: caret-blink 1s steps(1) infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes caret-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes wiggle {
+    25% {
+      transform: rotate(-3deg);
+    }
+    75% {
+      transform: rotate(3deg);
+    }
+  }
+}
+
+/* Holds a marquee still while any polaroid inside it is hovered. */
+@utility marquee-pause-on-hover {
+  &:has(figure:hover) {
+    animation-play-state: paused;
+  }
+}
+
+/* Fraunces display setting from the design: SOFT 0, WONK 1. */
+@utility font-wonk {
+  font-variation-settings: "SOFT" 0, "WONK" 1;
 }
 
 body {
   background: var(--color-surface-canvas);
   color: var(--color-text-body);
   font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: var(--stroke-sticker) solid var(--color-azure-55);
+  outline-offset: 3px;
 }

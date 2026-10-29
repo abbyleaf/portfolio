@@ -30,11 +30,11 @@ Source: the Figma file "Case Studies" (`4RCJgEA6vqGzYE5reqImGC`). Tokens are def
 The values live in `app/globals.css`; read them there, not here. Naming follows Figma with `/` turned into `-`, so Tailwind utilities double up (`text-text-body`, `bg-surface-canvas`).
 
 - **Colour:** palette tokens (`grey-900`, `red-200`, ...) hold raw values. Semantic tokens (`surface-*`, `text-*`, `border-*`) reference them. Prefer semantic tokens in components.
-- **Opacity:** use Tailwind opacity modifiers on colour tokens, never alpha tokens. Figma's `border/subtle` is `border-grey-10/14`; the 10% tint is `grey-10/10`.
+- **Opacity:** use Tailwind opacity modifiers on colour tokens, never alpha tokens. `border-subtle` is the one semantic alias for ink at 14%; for any other tint, use a modifier such as `bg-grey-10/10`.
 - **Type:** `text-*` size tokens carry size, line-height, tracking and weight (`text-heading-fraunces-xl`). Pair with `font-heading`, `font-sans` or `font-mono`. Italic display text adds `italic`.
-- **Spacing:** use the `item-*` tokens (`p-item-s`, `gap-item-9`), not Tailwind's default numeric scale.
+- **Spacing:** use the `item-*` tokens (`p-item-16`, `gap-item-9`), not Tailwind's default numeric scale.
 - **Shape:** `rounded-pill`, `shadow-sticker` (hard offset, no blur), `shadow-image`. Strokes are `--stroke-hairline` (1px) and `--stroke-sticker` (3px); use them as `border-(length:--stroke-sticker)`.
-- **Contrast:** `text-sub-headers` fails WCAG AA for normal text on every surface. Use it only for large or decorative text, or darken it. `text-muted` on `surface-accent-warm` and `text-accent-cool` on `surface-canvas` also fall below 4.5:1.
+- **Contrast:** `text-accent-cool` is `azure-55` (#2e66ed): 4.7:1 on `surface-primary`, 4.2:1 on `surface-canvas`, so use it only for large text or on `surface-primary`. Avoid `text-muted` on `surface-accent-warm` (4.3:1). On `surface-accent-cool` (`azure-55`), `text-on-inverted` is 4.2:1, so use it only for large or bold text, and use white for body-size text (5.0:1).
 - Never use pure black (`#000`). Do not use the unmerged near-duplicate colours (`red-37`, `grey-93-2`) until they are resolved in Figma.
 
 ## Aesthetic
