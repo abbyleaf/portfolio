@@ -37,6 +37,8 @@ export type CaseStudySummary = {
   title: string;
   summary: string;
   tags: string[];
+  /** Listed on the Work page but not written up yet, so it has no page to link to. */
+  comingSoon?: boolean;
 };
 
 export const caseStudies: CaseStudySummary[] = [

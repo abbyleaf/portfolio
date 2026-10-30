@@ -20,7 +20,7 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           {study.category}
         </p>
         <div className="flex flex-1 flex-col gap-item-16">
-          <h3 className="font-heading font-wonk text-heading-fraunces-xl text-text-primary underline-offset-4 group-hover:underline">
+          <h3 className={`font-heading font-wonk text-heading-fraunces-xl text-text-primary underline-offset-4 ${study.comingSoon ? "" : "group-hover:underline"}`}>
             {study.title}
           </h3>
           <p className="font-sans text-paragraph-md text-text-body">
@@ -35,24 +35,30 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
             ))}
           </ul>
         </div>
-        {/* The ::after stretches this link over the whole card, so the card is one
+        {/* The ::after on the link stretches it over the whole card, so the card is one
             click target without nesting interactive content inside a link. */}
-        <Link
-          href={`/case-studies/${study.slug}`}
-          aria-label={`Read case study: ${study.title}`}
-          className="flex items-center gap-item-4 font-sans text-label-link-lg text-text-accent-cool after:absolute after:inset-0 after:z-10 focus-visible:outline-none"
-        >
-          Read case study
-          <span
-            aria-hidden="true"
-            className="transition-transform motion-safe:group-hover:translate-x-item-2 motion-safe:group-hover:-translate-y-item-2"
+        {study.comingSoon ? (
+          <p className="font-sans text-label-link-lg text-text-disabled">
+            Coming soon
+          </p>
+        ) : (
+          <Link
+            href={`/case-studies/${study.slug}`}
+            aria-label={`Read case study: ${study.title}`}
+            className="flex items-center gap-item-4 font-sans text-label-link-lg text-text-accent-cool after:absolute after:inset-0 after:z-10 focus-visible:outline-none"
           >
-            ↗
-          </span>
-        </Link>
+            Read case study
+            <span
+              aria-hidden="true"
+              className="transition-transform motion-safe:group-hover:translate-x-item-2 motion-safe:group-hover:-translate-y-item-2"
+            >
+              ↗
+            </span>
+          </Link>
+        )}
       </div>
       <div className="relative aspect-project-card min-w-0 flex-1 overflow-hidden max-lg:w-full">
-        <div className="absolute inset-0 transition-transform duration-500 ease-out motion-safe:group-hover:scale-(--scale-media-hover)">
+        <div className={`absolute inset-0 transition-transform duration-500 ease-out ${study.comingSoon ? "" : "motion-safe:group-hover:scale-(--scale-media-hover)"}`}>
           {media}
         </div>
         <div

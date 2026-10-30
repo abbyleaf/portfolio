@@ -1,14 +1,9 @@
-import Image from "next/image";
 import { Badge } from "@/components/Badge";
-import { LoopVideo } from "@/components/LoopVideo";
 import { Marquee } from "@/components/Marquee";
-import { ProjectCard } from "@/components/ProjectCard";
+import { CaseStudyList } from "@/components/CaseStudyList";
+import { PageFrame } from "@/components/PageFrame";
 import { RotatingPhrase } from "@/components/RotatingPhrase";
-import { Ruler } from "@/components/Ruler";
 import { SectionHeader } from "@/components/SectionHeader";
-import { StickyTop } from "@/components/StickyTop";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
 import { TestimonialMarquee } from "@/components/TestimonialMarquee";
 import {
   caseStudies,
@@ -19,44 +14,9 @@ import {
   testimonials,
 } from "@/content/home";
 
-function Cover({ slug }: { slug: string }) {
-  if (slug === "campus-ride-booking") {
-    return (
-      <LoopVideo
-        src="/videos/case-study-1-hero.mp4"
-        label="Campus ride app showing shuttle and on-demand booking side by side"
-        className="size-full object-cover"
-      />
-    );
-  }
-  const isOrderSplitting = slug === "order-splitting";
-  return (
-    <Image
-      src={
-        isOrderSplitting
-          ? "/images/home/case-study-2-cover.png"
-          : "/images/home/case-study-3-cover.png"
-      }
-      alt={
-        isOrderSplitting
-          ? "Soft green and lilac gradient cover for the order splitting case study"
-          : "Route planning interface on a desktop monitor"
-      }
-      fill
-      sizes="(min-width: 768px) 40vw, 100vw"
-      className="object-cover"
-    />
-  );
-}
-
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col bg-surface-primary">
-      <StickyTop>
-        <SiteHeader />
-        <Ruler edge="top" left="Abi / HOME" right="★ Folio/26" />
-      </StickyTop>
-      <main className="flex flex-col">
+    <PageFrame topLabel="Abi / HOME" bottomLabel="HOME / END">
         <section
           id="about"
           aria-labelledby="hero-title"
@@ -127,15 +87,7 @@ export default function Home() {
               subtitle="A closer look at my work."
               titleId="work-title"
             />
-            {caseStudies.map((study) => (
-              <div key={study.slug} className="flex flex-col">
-                <hr className="my-item-40 border-0 border-t-(length:--stroke-hairline) border-border-subtle" />
-                <ProjectCard
-                  study={study}
-                  media={<Cover slug={study.slug} />}
-                />
-              </div>
-            ))}
+            <CaseStudyList studies={caseStudies} />
           </div>
         </section>
 
@@ -158,9 +110,6 @@ export default function Home() {
           </div>
           <TestimonialMarquee testimonials={testimonials} />
         </section>
-      </main>
-      <Ruler edge="bottom" left="HOME / END" right="EST. 2026" />
-      <SiteFooter />
-    </div>
+    </PageFrame>
   );
 }

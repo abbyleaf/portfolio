@@ -5,7 +5,7 @@ const resume = { label: "Resume", href: "/resume.pdf" };
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/#work" },
+  { label: "Work", href: "/work" },
   { label: "About", href: "/#about" },
 ];
 
