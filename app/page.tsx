@@ -28,8 +28,8 @@ export default function Home() {
                 <Badge tone="neutral" tilt="left" status>
                   Open to work
                 </Badge>
-                <Badge tone="warm" tilt="right">
-                  ★ Hello from Singapore
+                <Badge tone="warm" tilt="right" star>
+                  Hello from Singapore
                 </Badge>
               </div>
               <h1

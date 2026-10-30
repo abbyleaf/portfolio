@@ -64,7 +64,7 @@ export const caseStudies: CaseStudySummary[] = [
     category: "Logistics · web",
     title: "Helping planners split orders across vehicles",
     summary:
-      "Redesigned how transport planners split orders across vehicles based on available capacity, with the aim of supporting 28 planners handling 2,000 to 3,000 orders daily.",
+      "Redesigned how transport planners split orders across vehicles based on available capacity, with the aim of supporting 25+ planners handling 2,000 to 3,000 orders daily.",
     tags: [
       "Workflow Research",
       "Product Framing",
@@ -79,7 +79,7 @@ export const caseStudies: CaseStudySummary[] = [
     category: "Logistics · web",
     title: "Giving planners control over automated routes",
     summary:
-      "Designed manual planning and violation review features that gave transport planners control over automated routes. Shipped as part of a logistics platform supporting 50+ planners and a median of 11,000 orders daily.",
+      "Designed manual planning and violation review features that gave transport planners control over automated routes. Shipped as part of a logistics platform supporting 30+ planners and a median of 11,000 orders daily.",
     tags: [
       "Product Thinking",
       "User Research",

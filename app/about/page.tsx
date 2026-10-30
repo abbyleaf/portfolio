@@ -33,8 +33,8 @@ export default function AboutPage() {
               <Badge tone="neutral" tilt="left" status>
                 Open to work
               </Badge>
-              <Badge tone="warm" tilt="right">
-                ★ Singapore
+              <Badge tone="warm" tilt="right" star>
+                Singapore
               </Badge>
             </div>
             <div className="my-item-12 max-lg:mx-item-12">

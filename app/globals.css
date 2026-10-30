@@ -177,6 +177,9 @@
   --text-mono-polaroid--line-height: 1.22;
   --text-mono-polaroid--font-weight: 400;
 
+  --text-mono-badge-star: 1.25rem;
+  --text-mono-badge-star--line-height: 0;
+
   --text-mono-marker: 0.75rem;
   --text-mono-marker--line-height: 1.25rem;
   --text-mono-marker--letter-spacing: 0.96px;
