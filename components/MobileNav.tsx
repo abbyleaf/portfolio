@@ -61,7 +61,7 @@ export function MobileNav({ links, resume }: MobileNavProps) {
             key={link.label}
             href={link.href}
             onClick={() => setOpen(false)}
-            className="border-b-(length:--stroke-hairline) border-border-subtle py-item-16 font-mono text-mono-m uppercase text-text-primary"
+            className="flex h-item-48 items-center border-b-(length:--stroke-hairline) border-border-subtle font-mono text-mono-m uppercase text-text-primary"
           >
             {link.label}
           </Link>
