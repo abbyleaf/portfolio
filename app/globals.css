@@ -145,7 +145,21 @@
   --text-heading-fraunces-hero: 4rem;
   --text-heading-fraunces-hero--line-height: 1.234;
   --text-heading-fraunces-hero--font-weight: 400;
+
+  --text-heading-fraunces-name: 4.5rem;
+  --text-heading-fraunces-name--line-height: 1.234;
+  --text-heading-fraunces-name--font-weight: 400;
+
+  --text-heading-fraunces-italic-md: 1.75rem;
+  --text-heading-fraunces-italic-md--line-height: 1.2;
+  --text-heading-fraunces-italic-md--font-weight: 400;
+
+  --text-heading-inter-section: 2.25rem;
+  --text-heading-inter-section--line-height: 1.21;
+  --text-heading-inter-section--letter-spacing: 0.88px;
+  --text-heading-inter-section--font-weight: 600;
   --leading-display-tight: 1.1;
+  --leading-natural: 1.22;
 
   --text-heading-inter-xl: 2.75rem;
   --text-heading-inter-xl--line-height: 1.21;
@@ -158,6 +172,10 @@
   --text-heading-inter-lg: 1.5rem;
   --text-heading-inter-lg--line-height: 1.2;
   --text-heading-inter-lg--font-weight: 500;
+
+  --text-mono-polaroid: 0.9231rem;
+  --text-mono-polaroid--line-height: 1.22;
+  --text-mono-polaroid--font-weight: 400;
 
   --text-mono-marker: 0.75rem;
   --text-mono-marker--line-height: 1.25rem;
@@ -174,6 +192,7 @@
   /* Tracking */
   --tracking-marquee: 1.96px;
   --tracking-caption: 0.2px;
+  --tracking-date: 0.48px;
 
   /* Spacing (Figma "item spacing") */
   --spacing-item-2: 2px;
@@ -200,6 +219,7 @@
   --spacing-item-47: 47px;
   --spacing-item-52: 52px;
   --spacing-item-54: 54px;
+  --spacing-item-150: 150px;
   --spacing-item-56: 56px;
   --spacing-item-64: 64px;
   --spacing-item-80: 80px;
@@ -207,6 +227,7 @@
   --spacing-item-120: 120px;
   --spacing-item-260: 260px;
   --spacing-item-320: 320px;
+  --spacing-item-400: 400px;
   --spacing-item-117_4: 117.38px;
   /* The two phone screenshots in a project card are sized and staggered as a
      share of the picture frame (222px wide in a 528px frame, shifted 117px and
@@ -222,6 +243,7 @@
   --container-width-520: 520px;
   --container-width-540: 540px;
   --container-width-580: 580px;
+  --container-width-360: 360px;
   --container-width-1200: 1200px;
   --container-width-1280: 1280px;
   --container-width-1312: 1312px;
@@ -239,6 +261,7 @@
   --rotate-tilt-right: 3deg;
   --rotate-polaroid-left: -5deg;
   --rotate-polaroid-right: 5deg;
+  --rotate-polaroid-portrait: -4deg;
 
   /* Shadow */
   --shadow-sticker: 6px 7px 0 0 var(--color-grey-10);
@@ -247,9 +270,6 @@
   --shadow-image: 0 2px 8px 0 rgb(0 0 0 / 0.08);
   --shadow-phone: 0 2.2px 8.8px 0 color-mix(in oklab, var(--color-grey-10) 16%, transparent);
   --shadow-status-dot: 0 0 0 3px color-mix(in oklab, var(--color-green-500) 25%, transparent);
-  --drop-shadow-polaroid:
-    0 2px 1px color-mix(in oklab, var(--color-grey-10) 8%, transparent),
-    0 12px 7px color-mix(in oklab, var(--color-grey-10) 12%, transparent);
 
   /* Motion */
   --animate-marquee: marquee 40s linear infinite;
@@ -307,6 +327,8 @@ body {
 @media (max-width: 63.99rem) {
   :root {
     --text-heading-fraunces-hero: 3rem;
+    --text-heading-fraunces-name: 3.5rem;
+    --text-heading-inter-section: 2rem;
     --text-heading-inter-xl: 2.25rem;
     --text-heading-fraunces-italic-xl: 2.25rem;
   }
@@ -315,6 +337,9 @@ body {
 @media (max-width: 47.99rem) {
   :root {
     --text-heading-fraunces-hero: 2.5rem;
+    --text-heading-fraunces-name: 2.75rem;
+    --text-heading-fraunces-italic-md: 1.5rem;
+    --text-heading-inter-section: 1.75rem;
     --text-heading-inter-xl: 2rem;
     --text-heading-fraunces-italic-xl: 1.875rem;
     --text-heading-fraunces-xl: 1.75rem;
@@ -332,4 +357,19 @@ html {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/*
+ * Polaroid shadows are two stacked drop-shadows. A theme drop-shadow token cannot
+ * hold two, because Tailwind wraps it in a single drop-shadow(), so these are
+ * utilities. The -lg one is the 260px polaroid scaled up 1.23x for the portrait.
+ */
+@utility drop-shadow-polaroid {
+  filter: drop-shadow(0 2px 1px color-mix(in oklab, var(--color-grey-10) 8%, transparent))
+    drop-shadow(0 12px 7px color-mix(in oklab, var(--color-grey-10) 12%, transparent));
+}
+
+@utility drop-shadow-polaroid-lg {
+  filter: drop-shadow(0 2.46px 1.23px color-mix(in oklab, var(--color-grey-10) 8%, transparent))
+    drop-shadow(0 14.77px 8.62px color-mix(in oklab, var(--color-grey-10) 12%, transparent));
 }
