@@ -115,6 +115,10 @@
   --text-label-sm--line-height: 1.225rem;
   --text-label-sm--font-weight: 400;
 
+  --text-tag: 0.875rem;
+  --text-tag--line-height: 1.25rem;
+  --text-tag--font-weight: 400;
+
   --text-label-link: 0.875rem;
   --text-label-link--line-height: 1.21;
   --text-label-link--font-weight: 500;

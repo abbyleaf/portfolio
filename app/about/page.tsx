@@ -165,7 +165,7 @@ export default function AboutPage() {
                 </h3>
                 <ul className="flex flex-wrap gap-item-8">
                   {group.skills.map((skill) => (
-                    <Tag key={skill} size="md">
+                    <Tag key={skill}>
                       {skill}
                     </Tag>
                   ))}
