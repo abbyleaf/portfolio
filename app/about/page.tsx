@@ -26,7 +26,11 @@ const sideColumn = "w-item-320 max-w-width-360 shrink-0 max-lg:w-full";
 export default function AboutPage() {
   return (
     <PageFrame topLabel="Abi / ABOUT" bottomLabel="ABOUT / END">
-      <section aria-labelledby="about-title" className={sectionPadding}>
+      <section
+        aria-labelledby="about-title"
+        data-ruler-section="About"
+        className={sectionPadding}
+      >
         <div className="mx-auto flex w-full max-w-width-1200 items-start gap-item-80 max-lg:flex-col max-lg:gap-item-40">
           <div className={`flex flex-col gap-item-16 ${sideColumn}`}>
             <div className="flex flex-wrap items-center gap-item-12">
@@ -94,6 +98,7 @@ export default function AboutPage() {
 
       <section
         aria-labelledby="experience-title"
+        data-ruler-section="Experience"
         className={`bg-surface-canvas ${sectionPadding}`}
       >
         <div className="mx-auto flex w-full max-w-width-1200 items-start gap-item-80 max-lg:flex-col max-lg:gap-item-40">
@@ -138,7 +143,11 @@ export default function AboutPage() {
         tone="warm"
       />
 
-      <section aria-labelledby="skills-title" className={sectionPadding}>
+      <section
+        aria-labelledby="skills-title"
+        data-ruler-section="Skills"
+        className={sectionPadding}
+      >
         <div className="mx-auto flex w-full max-w-width-1200 items-start gap-item-40 max-lg:flex-col">
           <div className={sideColumn}>
             <AboutHeading

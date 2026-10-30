@@ -19,6 +19,7 @@ export default function Home() {
     <PageFrame topLabel="Abi / HOME" bottomLabel="HOME / END">
         <section
           id="about"
+          data-ruler-section="Intro"
           aria-labelledby="hero-title"
           className="px-item-120 py-item-64 max-xl:px-item-40 max-md:px-item-24"
         >
@@ -77,6 +78,7 @@ export default function Home() {
 
         <section
           id="work"
+          data-ruler-section="Work"
           aria-labelledby="work-title"
           className="px-item-120 py-item-80 max-xl:px-item-40 max-md:px-item-24"
         >
@@ -95,6 +97,7 @@ export default function Home() {
 
         <section
           id="testimonials"
+          data-ruler-section="Kind words"
           aria-labelledby="testimonials-title"
           className="flex flex-col items-center bg-surface-light-accent-warm py-item-80"
         >

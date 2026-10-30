@@ -14,6 +14,7 @@ export default function WorkPage() {
     <PageFrame topLabel="Abi / Work" bottomLabel="WORK / END">
       <section
         aria-labelledby="work-title"
+        data-ruler-section="All case studies"
         className="px-item-120 py-item-80 max-xl:px-item-40 max-md:px-item-24"
       >
         <div className="mx-auto flex w-full max-w-width-1200 flex-col">

@@ -1,3 +1,4 @@
+import { RulerLabel } from "./RulerLabel";
 import { TickRow } from "./TickRow";
 
 type RulerProps = {
@@ -5,6 +6,8 @@ type RulerProps = {
   edge: "top" | "bottom";
   left: string;
   right: string;
+  /** Shows the ★ before the right label, sized to the Figma ruler. */
+  star?: boolean;
 };
 
 /**
@@ -12,7 +15,7 @@ type RulerProps = {
  * The ticks fill the space between the two labels and drop off from the ends
  * as the strip narrows, so they never run under the text.
  */
-export function Ruler({ edge, left, right }: RulerProps) {
+export function Ruler({ edge, left, right, star }: RulerProps) {
   const isTop = edge === "top";
   return (
     <div
@@ -23,9 +26,16 @@ export function Ruler({ edge, left, right }: RulerProps) {
       }`}
     >
       <div className="mx-auto flex h-full w-full max-w-width-1312 items-center justify-between">
-        <span className="shrink-0">{left}</span>
+        <RulerLabel label={left} hint={isTop} />
         <TickRow isTop={isTop} />
-        <span className="shrink-0">{right}</span>
+        <span className="flex shrink-0 items-center gap-item-6">
+          {star && (
+            <span aria-hidden="true" className="-translate-y-item-2 text-stamp-star">
+              ★
+            </span>
+          )}
+          {right}
+        </span>
       </div>
     </div>
   );

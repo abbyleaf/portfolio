@@ -18,7 +18,7 @@ export function PageFrame({ topLabel, bottomLabel, children }: PageFrameProps) {
     <div className="flex flex-1 flex-col bg-surface-primary">
       <StickyTop>
         <SiteHeader />
-        <Ruler edge="top" left={topLabel} right="★ Folio/26" />
+        <Ruler edge="top" left={topLabel} right="Folio/26" star />
       </StickyTop>
       <main className="flex flex-col">{children}</main>
       <Ruler edge="bottom" left={bottomLabel} right="EST. 2026" />

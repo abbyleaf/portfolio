@@ -192,10 +192,16 @@
   --text-stamp-xs--line-height: 1;
   --text-stamp-xs--letter-spacing: 1.2px;
 
+  --text-stamp-star: 1.0417rem;
+  --text-stamp-star--line-height: 0;
+
   /* Tracking */
   --tracking-marquee: 1.96px;
   --tracking-caption: 0.2px;
   --tracking-date: 0.48px;
+
+  /* Very small phones: `max-xs:` applies below this width. */
+  --breakpoint-xs: 22.5rem;
 
   /* Spacing (Figma "item spacing") */
   --spacing-item-2: 2px;
