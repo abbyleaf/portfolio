@@ -1,4 +1,5 @@
 import { RulerLabel } from "./RulerLabel";
+import { Star } from "./Star";
 import { TickRow } from "./TickRow";
 
 type RulerProps = {
@@ -29,11 +30,7 @@ export function Ruler({ edge, left, right, star }: RulerProps) {
         <RulerLabel label={left} hint={isTop} />
         <TickRow isTop={isTop} />
         <span className="flex shrink-0 items-center gap-item-6">
-          {star && (
-            <span aria-hidden="true" className="-translate-y-item-2 text-stamp-star">
-              ★
-            </span>
-          )}
+          {star && <Star className="size-item-8" />}
           {right}
         </span>
       </div>

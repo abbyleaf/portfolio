@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Star } from "./Star";
 
 type BadgeProps = {
   tone: "neutral" | "warm";
@@ -32,11 +33,7 @@ export function Badge({ tone, tilt, status, star, children }: BadgeProps) {
           className="size-item-7 bg-green-500 shadow-status-dot"
         />
       )}
-      {star && (
-        <span aria-hidden="true" className="-translate-y-item-2 text-mono-badge-star">
-          ★
-        </span>
-      )}
+      {star && <Star className="size-item-9" />}
       {children}
     </span>
   );
