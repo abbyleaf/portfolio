@@ -324,3 +324,11 @@ body {
 html {
   scroll-padding-top: 6rem;
 }
+
+/* Scrolls like normal but without the scrollbar track. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
