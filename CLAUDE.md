@@ -65,12 +65,26 @@ Editorial, sticker-and-stamp, craft-forward. It must not read as a generic portf
 
 ## Deployment workflow
 
-- Always work on the `staging` branch. At the start of every session, check the current branch and switch to `staging` if needed.
-- "Commit" or "push" means commit and push to `staging` only. That updates staging.abigailyeap.com.
-- Never commit to, merge into, or push to `main` unless the user says "push to production".
-- When the user says "push to production":
-  1. Run the build and lint. Stop and tell the user if either fails.
-  2. Show a short list of what changed since the last production release, and wait for the user's OK.
-  3. Merge `staging` into `main`, push `main`, then switch back to `staging`.
-  4. Tell the user when it's done. abigailyeap.com updates within a couple of minutes.
-- After a production release, make sure `staging` and `main` match, so the next round of changes starts clean.
+Branches and links:
+- `test` → test.abigailyeap.com (all work happens here)
+- `staging` → staging.abigailyeap.com (for checking before release)
+- `main` → abigailyeap.com (production; protected on GitHub, pull requests only)
+- `old-site` is an archive of the previous HTML site. Never modify, merge, or delete it.
+
+Default behaviour:
+- Always work on the `test` branch. At the start of every session, check the current branch and switch to `test` if needed.
+- "Commit and push" means commit and push to `test` only.
+- Never push to, merge into, or open pull requests against `staging` or `main` unless the user says "push to staging" or "push to production".
+
+"Push to staging":
+1. Run build and lint. Stop and tell the user if either fails.
+2. Show a short list of what changed since `staging` was last updated, and wait for the user's OK.
+3. Merge `test` into `staging`, push `staging`, then switch back to `test`.
+
+"Push to production":
+1. Run build and lint. Stop and tell the user if either fails.
+2. If `test` has changes that `staging` doesn't, ask the user whether to release everything on `test`, or only what's already on `staging`.
+3. Show a short list of what will change on the live site, and wait for the user's OK.
+4. Open a pull request from the chosen branch into `main` with `gh`, and merge it with a merge commit (`gh pr merge --merge`, never squash).
+5. Pull `main`, merge `main` into `staging` and `test` so all three branches match, push both, then switch back to `test`.
+6. Tell the user it's done. abigailyeap.com and staging.abigailyeap.com both update within a couple of minutes.
