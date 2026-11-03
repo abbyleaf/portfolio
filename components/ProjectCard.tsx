@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { CaseStudySummary } from "@/content/home";
+import { ClickableCard } from "./ClickableCard";
 import { Tag } from "./Tag";
 
 type ProjectCardProps = {
@@ -10,8 +11,12 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ study, media }: ProjectCardProps) {
+  const href = `/case-studies/${study.slug}`;
   return (
-    <article className="group relative flex items-start gap-item-40 has-focus-visible:outline-(length:--stroke-sticker) has-focus-visible:outline-offset-8 has-focus-visible:outline-surface-accent-cool max-lg:flex-col">
+    <ClickableCard
+      href={study.comingSoon ? undefined : href}
+      className="group relative flex items-start gap-item-40 has-focus-visible:outline-(length:--stroke-sticker) has-focus-visible:outline-offset-8 has-focus-visible:outline-surface-accent-cool max-lg:flex-col"
+    >
       <p className="w-item-64 shrink-0 max-lg:w-auto font-mono text-mono-l uppercase text-text-muted">
         № {study.number} · {study.year}
       </p>
@@ -35,17 +40,17 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
             ))}
           </ul>
         </div>
-        {/* The ::after on the link stretches it over the whole card, so the card is one
-            click target without nesting interactive content inside a link. */}
+        {/* The whole card opens the case study (see ClickableCard), and its text stays
+            selectable. This is the real link for keyboards and screen readers. */}
         {study.comingSoon ? (
           <p className="font-sans text-label-link-lg text-text-disabled">
             Coming soon
           </p>
         ) : (
           <Link
-            href={`/case-studies/${study.slug}`}
+            href={href}
             aria-label={`Read case study: ${study.title}`}
-            className="flex items-center gap-item-4 font-sans text-label-link-lg text-text-accent-cool after:absolute after:inset-0 after:z-10 focus-visible:outline-none"
+            className="flex items-center gap-item-4 font-sans text-label-link-lg text-text-accent-cool focus-visible:outline-none"
           >
             Read case study
             <span
@@ -66,6 +71,6 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           className="pointer-events-none absolute inset-0 border-(length:--stroke-hairline) border-border-canvas-subtle"
         />
       </div>
-    </article>
+    </ClickableCard>
   );
 }

@@ -1,6 +1,7 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { notFound } from "next/navigation";
+import { isCaseStudyVisible } from "@/lib/case-studies";
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "case-studies");
 
@@ -11,7 +12,7 @@ export default async function CaseStudy({
   const study = await import(`@/content/case-studies/${slug}.mdx`).catch(
     () => null,
   );
-  if (!study) notFound();
+  if (!study || !(await isCaseStudyVisible(slug))) notFound();
   const Study = study.default;
 
   return (

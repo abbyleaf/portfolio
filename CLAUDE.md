@@ -16,6 +16,7 @@ Personal portfolio: editorial, sticker-and-stamp, craft-forward. Next.js App Rou
 - `app/globals.css` — Tailwind import and the single `@theme` block (all design tokens)
 - `components/` — React components (layout, stickers, stamps, MDX building blocks)
 - `content/case-studies/*.mdx` — case study content, one file per study
+- `lib/` — shared helpers (`lib/case-studies.ts` decides whether a case study is visible)
 - `mdx-components.tsx` — maps MDX elements and custom components to `components/`
 - `public/` — static assets
 
@@ -62,3 +63,42 @@ Editorial, sticker-and-stamp, craft-forward. It must not read as a generic portf
 - Visible focus states on everything interactive. Rotated or overlapping stickers must not hide the focus ring or break tab order.
 - Use semantic headings in order. MDX content maps to real `h1`–`h3`, `figure` and `figcaption`.
 - Honour `prefers-reduced-motion`.
+
+## Draft case studies
+
+Case studies are hidden or shown by **content and an environment variable, never by branch**. The code is identical on `test`, `staging` and `main`, so branches never differ just to hide work.
+
+- Every `content/case-studies/*.mdx` has `status: draft` or `status: published` in its frontmatter.
+- `published` studies always show their real link and page, on every branch.
+- `draft` studies show their real link and page only when the env var `SHOW_DRAFTS` is `"true"`. Otherwise the card shows the "Coming soon" design with no link and `/case-studies/<slug>` returns 404.
+- `SHOW_DRAFTS=true` is set in Vercel for the `test` branch only. `staging` and `main` leave it unset, so drafts stay hidden there.
+- A study with no MDX file is always "Coming soon".
+- Never hide or reveal a study by editing a card, deleting a link or changing branches. To publish one, change its frontmatter to `status: published`. To hide one, set it back to `draft`.
+- Cards read this through `lib/case-studies.ts` and `components/CaseStudyList.tsx`. Do not set `comingSoon` in `content/home.ts` or `content/work.ts`: it is derived.
+- To see drafts locally, run `SHOW_DRAFTS=true npm run dev`, or put `SHOW_DRAFTS=true` in `.env.local` (git-ignored).
+
+## Deployment workflow
+
+Branches and links:
+- `test` → test.abigailyeap.com (all work happens here)
+- `staging` → staging.abigailyeap.com (for checking before release)
+- `main` → abigailyeap.com (production; protected on GitHub, pull requests only)
+- `old-site` is an archive of the previous HTML site. Never modify, merge, or delete it.
+
+Default behaviour:
+- Always work on the `test` branch. At the start of every session, check the current branch and switch to `test` if needed.
+- "Commit and push" means commit and push to `test` only.
+- Never push to, merge into, or open pull requests against `staging` or `main` unless the user says "push to staging" or "push to production".
+
+"Push to staging":
+1. Run build and lint. Stop and tell the user if either fails.
+2. Show a short list of what changed since `staging` was last updated, and wait for the user's OK. List any case studies whose `status` changed from `draft` to `published`, so the user can confirm before they go public.
+3. Merge `test` into `staging`, push `staging`, then switch back to `test`.
+
+"Push to production":
+1. Run build and lint. Stop and tell the user if either fails.
+2. If `test` has changes that `staging` doesn't, ask the user whether to release everything on `test`, or only what's already on `staging`.
+3. Show a short list of what will change on the live site, and wait for the user's OK. List any case studies whose `status` changed from `draft` to `published`, so the user can confirm before they go public.
+4. Open a pull request from the chosen branch into `main` with `gh`, and merge it with a merge commit (`gh pr merge --merge`, never squash).
+5. Pull `main`, merge `main` into `staging` and `test` so all three branches match, push both, then switch back to `test`.
+6. Tell the user it's done. abigailyeap.com and staging.abigailyeap.com both update within a couple of minutes.

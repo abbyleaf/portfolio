@@ -16,7 +16,6 @@ export const workStudies: CaseStudySummary[] = [
       "Facilitation",
       "Cross-functional Collaboration",
     ],
-    comingSoon: true,
   },
   {
     slug: "delivery-plan-editing",
@@ -31,6 +30,5 @@ export const workStudies: CaseStudySummary[] = [
       "Usability Testing",
       "Cross-functional Collaboration",
     ],
-    comingSoon: true,
   },
 ];
