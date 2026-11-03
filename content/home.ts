@@ -37,7 +37,10 @@ export type CaseStudySummary = {
   title: string;
   summary: string;
   tags: string[];
-  /** Listed on the Work page but not written up yet, so it has no page to link to. */
+  /**
+   * Set by CaseStudyList from the study's `status` frontmatter, never in the data below.
+   * True shows the "Coming soon" card with no link.
+   */
   comingSoon?: boolean;
 };
 
@@ -49,7 +52,7 @@ export const caseStudies: CaseStudySummary[] = [
     category: "Passenger transport · mobile app",
     title: "Bringing shuttle and on-demand rides together",
     summary:
-      "Integrated a fixed-route shuttle service into an existing university ride app. Over 80% of dormitory students who used the shuttle took another ride, while over 85% of shuttle journeys started or ended at the dormitory.",
+      "Integrated a fixed-route shuttle service into an existing university ride app. Within four months of launch, over 80% of dormitory students who tried the shuttle used it again.",
     tags: [
       "Product Thinking",
       "Product Evolution",
