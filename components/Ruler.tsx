@@ -9,6 +9,8 @@ type RulerProps = {
   right: string;
   /** Shows the ★ before the right label, sized to the Figma ruler. */
   star?: boolean;
+  /** Set false on pages with no sections, so the strip does not hint "Click to jump". */
+  jump?: boolean;
 };
 
 /**
@@ -16,7 +18,7 @@ type RulerProps = {
  * The ticks fill the space between the two labels and drop off from the ends
  * as the strip narrows, so they never run under the text.
  */
-export function Ruler({ edge, left, right, star }: RulerProps) {
+export function Ruler({ edge, left, right, star, jump = true }: RulerProps) {
   const isTop = edge === "top";
   return (
     <div
@@ -27,7 +29,7 @@ export function Ruler({ edge, left, right, star }: RulerProps) {
       }`}
     >
       <div className="mx-auto flex h-full w-full max-w-width-1312 items-center justify-between">
-        <RulerLabel label={left} hint={isTop} />
+        <RulerLabel label={left} hint={isTop && jump} />
         <TickRow isTop={isTop} />
         <span className="flex shrink-0 items-center gap-item-6">
           {star && <Star className="size-item-8" />}

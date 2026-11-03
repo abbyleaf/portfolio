@@ -16,6 +16,7 @@ Personal portfolio: editorial, sticker-and-stamp, craft-forward. Next.js App Rou
 - `app/globals.css` — Tailwind import and the single `@theme` block (all design tokens)
 - `components/` — React components (layout, stickers, stamps, MDX building blocks)
 - `content/case-studies/*.mdx` — case study content, one file per study
+- `proxy.ts` — coming-soon gate for the live site (see "Coming-soon mode")
 - `lib/` — shared helpers (`lib/case-studies.ts` decides whether a case study is visible)
 - `mdx-components.tsx` — maps MDX elements and custom components to `components/`
 - `public/` — static assets
@@ -76,6 +77,16 @@ Case studies are hidden or shown by **content and an environment variable, never
 - Never hide or reveal a study by editing a card, deleting a link or changing branches. To publish one, change its frontmatter to `status: published`. To hide one, set it back to `draft`.
 - Cards read this through `lib/case-studies.ts` and `components/CaseStudyList.tsx`. Do not set `comingSoon` in `content/home.ts` or `content/work.ts`: it is derived.
 - To see drafts locally, run `SHOW_DRAFTS=true npm run dev`, or put `SHOW_DRAFTS=true` in `.env.local` (git-ignored).
+
+## Coming-soon mode
+
+While the portfolio is unfinished, the live site (abigailyeap.com) shows only `app/coming-soon/page.tsx`. Like drafts, this is controlled by an environment variable, **never by branch**: `test`, `staging` and `main` hold identical code.
+
+- `proxy.ts` turns it on when Vercel's `VERCEL_ENV` is `production`, so only abigailyeap.com is affected. `test` and `staging` are preview deployments and keep the full site.
+- While on, every page on the live site shows the coming-soon page, and `/images`, `/videos`, `/resume.pdf` and `/_next/image` return 404.
+- To launch the real site, set `COMING_SOON=false` for Production in Vercel and redeploy. No code change or branch change is needed. Never delete `proxy.ts` or edit pages to launch or to hide the site.
+- `COMING_SOON=true` forces it on anywhere, e.g. `COMING_SOON=true npm run dev` to preview it locally. The page is also always reachable at `/coming-soon`.
+- The page uses no images, so nothing unfinished is exposed. Keep it that way, and keep it in the portfolio style (tokens, stickers, rulers) like every other page.
 
 ## Deployment workflow
 
