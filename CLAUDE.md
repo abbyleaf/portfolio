@@ -20,6 +20,7 @@ Personal portfolio: editorial, sticker-and-stamp, craft-forward. Next.js App Rou
 - `lib/` — shared helpers (`lib/case-studies.ts` decides whether a case study is visible)
 - `mdx-components.tsx` — maps MDX elements and custom components to `components/`
 - `public/` — static assets
+  - `public/icons/` — favicons: `favicon-light.svg` and `favicon-dark.svg` (chosen by the browser's colour scheme), `favicon.ico` and `apple-icon.png`, wired in `app/layout.tsx`. `proxy.ts` leaves `/icons/` reachable in coming-soon mode.
 
 ## Design tokens
 

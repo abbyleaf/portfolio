@@ -27,6 +27,6 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Everything except the built CSS, JS and fonts the page itself needs, and the favicon.
-  matcher: ["/((?!_next/static|favicon.ico).*)"],
+  // Everything except the built CSS, JS and fonts the page itself needs, and the favicons.
+  matcher: ["/((?!_next/static|icons/).*)"],
 };
