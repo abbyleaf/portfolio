@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { comingSoonOnLiveSite } from "@/content/site";
 
 /**
  * Coming-soon mode. On the live site (Vercel's production environment) every page shows
- * /coming-soon, and pictures, videos and the resume return 404, until COMING_SOON=false
- * is set for Production. Preview deployments (test, staging) are unaffected. Set
+ * /coming-soon, and pictures, videos and the resume return 404, while `comingSoonOnLiveSite`
+ * in content/site.ts is true. Preview deployments (test, staging) are unaffected. Set
  * COMING_SOON=true to try it locally. The code is the same on every branch.
  */
 function comingSoonOn() {
-  const flag = process.env.COMING_SOON;
-  if (flag === "true") return true;
-  return process.env.VERCEL_ENV === "production" && flag !== "false";
+  if (process.env.COMING_SOON === "true") return true;
+  return process.env.VERCEL_ENV === "production" && comingSoonOnLiveSite;
 }
 
 const HIDDEN_FILES = ["/images", "/videos", "/resume.pdf", "/_next/image"];
