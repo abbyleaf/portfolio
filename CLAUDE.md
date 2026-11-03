@@ -62,3 +62,15 @@ Editorial, sticker-and-stamp, craft-forward. It must not read as a generic portf
 - Visible focus states on everything interactive. Rotated or overlapping stickers must not hide the focus ring or break tab order.
 - Use semantic headings in order. MDX content maps to real `h1`–`h3`, `figure` and `figcaption`.
 - Honour `prefers-reduced-motion`.
+
+## Deployment workflow
+
+- Always work on the `staging` branch. At the start of every session, check the current branch and switch to `staging` if needed.
+- "Commit" or "push" means commit and push to `staging` only. That updates staging.abigailyeap.com.
+- Never commit to, merge into, or push to `main` unless the user says "push to production".
+- When the user says "push to production":
+  1. Run the build and lint. Stop and tell the user if either fails.
+  2. Show a short list of what changed since the last production release, and wait for the user's OK.
+  3. Merge `staging` into `main`, push `main`, then switch back to `staging`.
+  4. Tell the user when it's done. abigailyeap.com updates within a couple of minutes.
+- After a production release, make sure `staging` and `main` match, so the next round of changes starts clean.
