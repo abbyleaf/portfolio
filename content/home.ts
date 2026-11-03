@@ -44,6 +44,7 @@ export type CaseStudySummary = {
 export const caseStudies: CaseStudySummary[] = [
   {
     slug: "campus-ride-booking",
+    comingSoon: true,
     number: "01",
     year: "2026",
     category: "Passenger transport · mobile app",
@@ -59,6 +60,7 @@ export const caseStudies: CaseStudySummary[] = [
   },
   {
     slug: "order-splitting",
+    comingSoon: true,
     number: "02",
     year: "2026",
     category: "Logistics · web",
@@ -74,6 +76,7 @@ export const caseStudies: CaseStudySummary[] = [
   },
   {
     slug: "manual-route-planning",
+    comingSoon: true,
     number: "03",
     year: "2025",
     category: "Logistics · web",
