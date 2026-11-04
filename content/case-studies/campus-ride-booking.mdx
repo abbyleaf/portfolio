@@ -1,8 +1,333 @@
 ---
-title: Bringing shuttle and on-demand rides together
+title: Adding a fixed-route shuttle service to a university travel app
 status: draft
+number: "01"
+badges:
+  - Shipped · 2026
+  - Senior PD · 3 months
+category: Passenger transport / Mobile app · 2026
+summary: Incorporated a new fixed-route shuttle service into an existing university travel app that previously offered only on-demand rides.
+hero:
+  src: /images/case-studies/campus-ride-booking/hero.jpg
+  alt: Two phones on an orange gradient. The left shows the On Demand tab with a Where to? field and suggested drop-offs. The right shows the Shuttle tab with two routes between the dormitory and a faculty.
+  width: 1680
+  height: 1000
+platform: Mobile App
+timeline: Feb – Apr 2026
+role: Senior Product Designer
+team: 1 Product Manager, 2 Product Designers (including myself), 2 Software Engineers, 1 Quality Analysis Engineer, 1 Solution Delivery Specialist
+contribution:
+  - Product Thinking
+  - User Experience Design
+  - User Interface Design
+  - Cross-functional Collaboration
+  - Data-informed Design
+responsibilities: I owned the flow that every university student must pass through to access existing on-demand ride services, alongside a newly introduced fixed-route shuttle service. This included the home landing page, service selection page and refining the existing flow of on-demand services. Separately, another designer finalised the date, time and booking summary screens for the new fixed-route service. Together, we consolidated a seamless end-to-end experience across both travel services.
+toc:
+  - id: overview
+    label: Overview
+  - id: results
+    label: Results
+  - id: problem
+    label: Problem
+  - id: design-challenge
+    label: Design Challenge
+  - id: shipped-experience
+    label: The Shipped Experience
+  - id: how-i-got-there
+    label: How I Got There
+  - id: modifying-approach
+    label: Modifying my Approach
+  - id: decision-1
+    label: Product Decision 01
+  - id: decision-2
+    label: Product Decision 02
+  - id: reflection
+    label: Reflection
+next: order-splitting
 ---
 
-# Bringing shuttle and on-demand rides together
+<Section
+  eyebrow="Overview"
+  title="The university introduced a new fixed-route shuttle service for its travel app"
+  intro="The fixed-route shuttle service aimed to ferry students at regular intervals between the student dormitory and other campus locations. I led the design process to ensure this new travel service was properly integrated into the university’s travel app without compromising the existing flow of on-demand ride services."
+>
+  <Figure
+    src="/images/case-studies/campus-ride-booking/map-overview.png"
+    alt="Map of the campus with stops numbered 01 to 18. Shuttle route 1 runs from stop 04 to stop 17 at the student dormitory, and route 2 runs the same way in reverse."
+    width={1680}
+    height={1024}
+    scroll
+  />
+</Section>
 
-This case study is still being written.
+<Section
+  id="results"
+  eyebrow="Results"
+  title="Students returned to the shuttle for dormitory journeys"
+  intro="Within four months of the new service launch, students used the fixed-route shuttle service repeatedly, with most journeys starting or ending at the student dormitory. These usage patterns validated the new service’s intended purpose."
+>
+  <Stats>
+    <Stat value="80%+" label="Repeat usage">
+      Of dormitory students who used the fixed-route shuttle service, more than 80% used it more than once.
+    </Stat>
+    <Stat value="85%+" label="Dormitory journeys">
+      More than 85% of fixed-route shuttle journeys started or ended at the student dormitory.
+    </Stat>
+  </Stats>
+</Section>
+
+<Section
+  id="problem"
+  eyebrow="The problem"
+  title="Existing on-demand ride services struggled to accommodate peak-hour travel patterns"
+  intro="On-demand ride services provided flexibility for travel route selection, but travel patterns showed campus travel peaked at certain timings and concentrated around a few key stops (including the student dormitory)."
+>
+  <Figure
+    src="/images/case-studies/campus-ride-booking/map-problem.png"
+    alt="Map of the campus under the existing on-demand-only service. Stops 03, 12 and 17 (the student dormitory) are highlighted as the top three stops, with dotted lines marking frequent travel routes between them."
+    width={1680}
+    height={986}
+    scroll
+  />
+  <Quote>
+    <p><Mark>~50% of travel usage alone concentrated around 3 key stops</Mark>, with recurring journeys between the student dormitory and faculty areas around class times.</p>
+    <p>The university saw an opportunity to <Mark>schedule shuttle buses to ferry students more efficiently for predictable routes</Mark>, while retaining the flexibility provided by on-demand ride services.</p>
+  </Quote>
+</Section>
+
+<Section
+  id="design-challenge"
+  eyebrow="Design challenge"
+  title="Helping students choose the right service while keeping the booking experience familiar"
+  intro="For peak hours, the university introduced a new fixed-route shuttle service alongside its existing on-demand ride service. Fixed-route shuttles followed predefined routes and departure times, while on-demand rides continued to provide flexibility in routes and timings but now excluded the student dormitory."
+>
+  <ServiceCompare
+    services={[
+      {
+        title: "Fixed-Route Shuttle Service",
+        image: {
+          src: "/images/case-studies/campus-ride-booking/challenge-shuttle-map.png",
+          alt: "Campus map for shuttle route 2: a one-way route from stop 17 at the dormitory, the pick-up, down to stop 04, with stop 12 marked as the drop-off.",
+          width: 743,
+          height: 440,
+        },
+        rows: [
+          ["Where", "Any 2 points along the route"],
+          ["When", "Scheduled departure times"],
+          ["Route", "One way per route: 17 → 04 or 04 → 17"],
+          ["Dormitory", "✓ Served"],
+        ],
+      },
+      {
+        title: "On-Demand Ride Service",
+        image: {
+          src: "/images/case-studies/campus-ride-booking/challenge-ondemand-map.png",
+          alt: "Campus map for on-demand rides: a curved route from pick-up at stop 08 to drop-off at stop 12. The dormitory at stop 17 is greyed out as not served.",
+          width: 743,
+          height: 440,
+        },
+        rows: [
+          ["Where", "Between any 2 points from location list"],
+          ["When", "Whenever the rider requests for it"],
+          ["Route", "Varies with pick-up and drop-off points"],
+          ["Dormitory", "✗ Not served"],
+        ],
+      },
+    ]}
+  />
+
+Students needed to know which service was better suited for their journey and how to book it. My challenge was to make the distinction between both travel services clear within the existing travel app, while preserving the familiarity of the on-demand ride booking flow experience.
+
+</Section>
+
+<Section
+  id="shipped-experience"
+  eyebrow="The shipped experience"
+  title="One home screen for both travel services"
+  intro="The shipped experience only required a single landing page to access both travel services, while keeping the booking logic for both services distinct from each other."
+>
+  <Showcase
+    title="Choose a service from the home screen"
+    screens={[
+      {
+        src: "/images/case-studies/campus-ride-booking/shipped-1.png",
+        alt: "Home screen with the On Demand tab selected: a Where to? field, a note that rides to dormitories are not available on demand, and suggested drop-offs.",
+      },
+      {
+        src: "/images/case-studies/campus-ride-booking/shipped-2.png",
+        alt: "Home screen with the Shuttle tab selected, listing two routes: Dormitory to Faculty and Faculty to Dormitory.",
+      },
+    ]}
+  >
+    <p>Students could switch between on-demand ride service and fixed-route shuttle service on the home screen.</p>
+  </Showcase>
+  <Showcase
+    title="Booking flow differs according to travel service"
+    screens={[
+      {
+        src: "/images/case-studies/campus-ride-booking/shipped-3.png",
+        alt: "The On Demand home screen, where passengers go on to enter pick-up and drop-off points.",
+      },
+      {
+        src: "/images/case-studies/campus-ride-booking/shipped-4.png",
+        alt: "The Shuttle home screen, where passengers go on to choose a route and a scheduled departure.",
+      },
+    ]}
+  >
+    <p>On-demand ride passengers selected pick-up and drop-off points. Shuttle passengers chose from predefined routes and scheduled departures.</p>
+  </Showcase>
+  <Showcase
+    title="Consistent booking confirmation interface"
+    screens={[
+      {
+        src: "/images/case-studies/campus-ride-booking/shipped-5.png",
+        alt: "On-demand booking confirmation: a map with drop-off and pick-up pins, departure time, one passenger and a Request ride button.",
+      },
+      {
+        src: "/images/case-studies/campus-ride-booking/shipped-6.png",
+        alt: "Shuttle booking confirmation: a map with pick-up at Dormitory 17 and drop-off at Faculty 12, departure time, one passenger, a free fare and a Book button.",
+      },
+    ]}
+  >
+    <p>Regardless of travel service selected, passengers are directed to the same booking confirmation screen.</p>
+  </Showcase>
+</Section>
+
+<Section
+  id="how-i-got-there"
+  eyebrow="How I got there"
+  title="I started off by asking whether students needed to choose a travel service at all"
+  intro="I explored a journey-first approach instead of the existing service-first flow. The idea was to let students find suitable rides without needing to understand the differences between services upfront."
+>
+  <Quote>
+    <p><Mark>Tell us where you want to go, and we’ll show you suitable ways to get there.</Mark></p>
+  </Quote>
+  <Figure
+    src="/images/case-studies/campus-ride-booking/journey-first-example.png"
+    alt="Example of a journey-first booking flow: a home screen that asks Where are you headed? with a search field, popular stops, and a list of next departures mixing fixed routes and flex rides."
+    width={1680}
+    height={1200}
+  />
+
+I used AI as a thought partner to prototype different journey-first booking concepts. Each explored how students could enter their pick-up and drop-off points before comparing available on-demand rides and fixed-route shuttles.
+
+  <Figure
+    src="/images/case-studies/campus-ride-booking/journey-first-ai.png"
+    alt="Two overviews of journey-first booking flows explored with AI. The left, made in Figma Make, shows two rows of connected screens. The right, made with v0 by Vercel, shows two more rows of connected screens."
+    width={1680}
+    height={880}
+    scroll
+  />
+  <Subhead title="Roadblock: Showing options across services required more engineering work than the timeline allowed">
+    <p>The journey-first approach would require the app to show suitable on-demand rides and shuttle options based on where students wanted to travel. However, the developers advised that building this would take more time than we had before launch. I therefore focused on improving the existing booking flow, including adding a message to explain which service students should use to reach the dormitory.</p>
+  </Subhead>
+</Section>
+
+<Section
+  id="modifying-approach"
+  eyebrow="Modifying my approach"
+  title="I explored three ways to refine the existing booking flow"
+  intro="I looked at how other transport apps let users book different types of rides. Keeping the existing approach of choosing a service first, I explored three options:"
+>
+  <Figure
+    src="/images/case-studies/campus-ride-booking/option-1.png"
+    alt="Option 1, guided destination-first. Five screens: home screen search, search for a destination, confirm or search for a pick-up location, set departure time and passengers, wait for a ride offer."
+    width={1680}
+    height={640}
+    scroll
+  />
+  <Figure
+    src="/images/case-studies/campus-ride-booking/option-2.png"
+    alt="Option 2, destination-first using the existing flow. Five screens: home screen search, search for a destination, review or edit pick-up and drop-off locations, set departure time and passengers, wait for a ride offer."
+    width={1680}
+    height={674}
+    scroll
+  />
+  <Figure
+    src="/images/case-studies/campus-ride-booking/option-3.png"
+    alt="Option 3, keep the existing pick-up-first flow. Five screens: home screen search, search for a pick-up location, review or edit pick-up and drop-off locations, set departure time and passengers, wait for a ride offer."
+    width={1680}
+    height={674}
+    scroll
+  />
+  <Subhead title="The team selected option 2 for the first release">
+    <p>I shared three booking flow options with the developers to discuss what we could build within the timeline. Together, we chose option 2, a destination-first approach that worked with the app’s existing booking system. This allowed us to improve the booking experience for both services without delaying the launch.</p>
+  </Subhead>
+</Section>
+
+<Section
+  id="decision-1"
+  eyebrow="Product decision 01"
+  title="The home screen created a new problem: which service should riders see first?"
+  intro="The fixed-route shuttle service is intended for dormitory students and has limited capacity. On-demand ride services support daily broad campus travel, while fixed-route shuttles only operate on class days."
+>
+  <Pair>
+    <Figure
+      label="Fixed-route shuttle service as default"
+      src="/images/case-studies/campus-ride-booking/default-shuttle.png"
+      alt="Home screen with the Shuttle tab shown first, listing a Dormitory to Faculty route."
+      width={820}
+      height={820}
+      sizes="(min-width: 54rem) 410px, 100vw"
+    />
+    <Figure
+      label="On-demand ride service as default"
+      src="/images/case-studies/campus-ride-booking/default-ondemand.png"
+      alt="Home screen with the On Demand tab shown first, with a Where to? field and a note that rides to dormitories are not available on demand."
+      width={820}
+      height={840}
+      sizes="(min-width: 54rem) 410px, 100vw"
+    />
+  </Pair>
+  <Subhead title="Solution: on-demand ride service was designated as the default service while fixed-route shuttle service was prioritised for dormitory students">
+    <p>I kept on-demand rides as the default service, with fixed-route shuttles just one tap away. This encouraged students to use on-demand rides where possible, while keeping shuttle capacity available for journeys to and from the dormitory.</p>
+  </Subhead>
+  <Figure
+    src="/images/case-studies/campus-ride-booking/default-annotated.png"
+    alt="The on-demand home screen with notes pointing to its parts: start with your destination, the shuttle service is one tap away, the service guidance banner, and suggested drop-offs for quick selection."
+    width={1680}
+    height={1080}
+    scroll
+  />
+</Section>
+
+<Section
+  id="decision-2"
+  eyebrow="Product decision 02"
+  title="Showing departure times earlier undermined the accuracy of available travel options"
+  intro="During the product review, the university requested that students see available shuttle departure times immediately after selecting their pick-up stop. This would help students decide between taking a shuttle or booking an on-demand ride based on departure times."
+>
+  <Figure
+    src="/images/case-studies/campus-ride-booking/departures-requested.png"
+    alt="The requested flow, in five screens: select a route, select a pick-up stop, select a departure time, select a drop-off stop, then review and book a ride."
+    width={1680}
+    height={672}
+    scroll
+  />
+
+However, accurate information on the availability of shuttle seats requires both pick-up and drop-off points to be selected. A shuttle could appear available just based on the selected pick-up point, only to become unavailable once the drop-off is confirmed.
+
+  <Figure
+    src="/images/case-studies/campus-ride-booking/departures-final.png"
+    alt="The final flow, in five screens: select a route, select a pick-up stop, select a drop-off stop, select a pick-up and drop-off time, then review and book a ride."
+    width={1680}
+    height={672}
+    scroll
+  />
+
+**Solution:** We retained the booking flow where students selected their drop-off stop before viewing pick-up and drop-off times. This allowed them to see available departures and arrival times for their chosen journey.
+
+</Section>
+
+<Section
+  id="reflection"
+  eyebrow="Reflection"
+  title="What I learnt and what I’d do next"
+>
+
+<p><strong>Check feasibility earlier</strong><br />The journey-first concept required more development than the timeline allowed. Next time, I would assess feasibility earlier so we can narrow the direction sooner.</p>
+
+<p><strong>Measure whether the flow works</strong><br />I would track booking completion, service switching, drop-off and availability failures to see whether students could find and book the right service.</p>
+
+</Section>

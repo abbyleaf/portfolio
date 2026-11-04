@@ -79,6 +79,16 @@ Case studies are hidden or shown by **content and an environment variable, never
 - Cards read this through `lib/case-studies.ts` and `components/CaseStudyList.tsx`. Do not set `comingSoon` in `content/home.ts` or `content/work.ts`: it is derived.
 - To see drafts locally, run `SHOW_DRAFTS=true npm run dev`, or put `SHOW_DRAFTS=true` in `.env.local` (git-ignored).
 
+## Case study pages
+
+A full case study is one MDX file in `content/case-studies/`; `components/CaseStudyLayout.tsx` draws the page around it. Files with only `title` and `status` stay plain stubs.
+
+- Frontmatter drives the page chrome: `title`, `status`, `number`, `badges`, `category`, `summary`, `hero`, `platform`, `timeline`, `role`, `team`, `contribution`, `responsibilities`, `toc` (each `id` must match a `<Section id>`) and `next` (slug of the following study). The type is `CaseStudyMeta` in `lib/case-studies.ts`.
+- The body uses the blocks in `components/CaseStudyBlocks.tsx`, mapped in `mdx-components.tsx`: `Section`, `Subhead`, `Figure` (set `scroll` for wide diagrams), `Pair`, `Stats`/`Stat`, `Quote`/`Mark`, `ServiceCompare`, `Showcase`. Do not import them in the MDX.
+- Pictures go in `public/images/case-studies/<slug>/`, exported from Figma at 2x. Every `Figure` needs real `alt` text.
+- Link a study only through `isCaseStudyVisible` (draft rules above), including the next-study links and the footer.
+- Dev only: after changing `@theme` tokens or the media blocks in `app/globals.css`, restart `npm run dev` (clear `.next`), or the page keeps the old values.
+
 ## Coming-soon mode
 
 While the portfolio is unfinished, the live site (abigailyeap.com) can show only `app/coming-soon/page.tsx`. It is a switch in code, **never a branch difference**: `test`, `staging` and `main` hold identical code.

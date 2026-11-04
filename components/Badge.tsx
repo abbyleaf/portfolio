@@ -4,8 +4,8 @@ import { Star } from "./Star";
 type BadgeProps = {
   tone: "neutral" | "warm";
   tilt: "left" | "right";
-  /** Shows the green "available" dot before the label. */
-  status?: boolean;
+  /** Shows a status dot before the label: green is "available", blue is "shipped". */
+  status?: boolean | "blue";
   /** Shows the ★ before the label, sized to the Figma badge. */
   star?: boolean;
   children: ReactNode;
@@ -30,7 +30,11 @@ export function Badge({ tone, tilt, status, star, children }: BadgeProps) {
       {status && (
         <span
           aria-hidden="true"
-          className="size-item-7 bg-green-500 shadow-status-dot"
+          className={`size-item-7 ${
+            status === "blue"
+              ? "bg-azure-55 shadow-status-dot-blue"
+              : "bg-green-500 shadow-status-dot"
+          }`}
         />
       )}
       {star && <Star className="size-item-9" />}

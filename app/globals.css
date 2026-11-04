@@ -27,6 +27,7 @@
   --color-grey-10: #1b1a17;
   --color-azure-55: #2e66ed;
   --color-blue-600: #174dcf;
+  --color-blue-300: #8caaf2;
   --color-green-500: #56b388;
   --color-red-200: #f2d0d1;
   --color-red-300: #eaa4a6;
@@ -61,6 +62,8 @@
   --color-border-strong: var(--color-grey-900);
   --color-border-subtle: color-mix(in oklab, var(--color-grey-10) 14%, transparent);
   --color-border-canvas-subtle: #dfdfdf;
+  /* The case study contents rail. */
+  --color-border-rail: #ababab;
 
   /* Type */
   --text-display-fraunces: 5.75rem;
@@ -186,6 +189,33 @@
   --text-mono-marker--letter-spacing: 0.96px;
   --text-mono-marker--font-weight: 400;
 
+  /* Case study pages */
+  --text-display-case: 5.5rem;
+  --text-display-case--line-height: 1;
+  --text-display-case--letter-spacing: -4px;
+  --text-display-case--font-weight: 400;
+
+  --text-paragraph-xl: 1.125rem;
+  --text-paragraph-xl--line-height: 1.5rem;
+  --text-paragraph-xl--font-weight: 400;
+
+  --text-paragraph-quote: 1.25rem;
+  --text-paragraph-quote--line-height: 1.75rem;
+  --text-paragraph-quote--font-weight: 400;
+
+  --text-heading-fraunces-metric: 3.5rem;
+  --text-heading-fraunces-metric--line-height: 1.2;
+  --text-heading-fraunces-metric--letter-spacing: -1.5px;
+  --text-heading-fraunces-metric--font-weight: 400;
+
+  --text-heading-fraunces-band: 3rem;
+  --text-heading-fraunces-band--line-height: 1;
+  --text-heading-fraunces-band--font-weight: 600;
+
+  --text-label-xs: 0.75rem;
+  --text-label-xs--line-height: 1;
+  --text-label-xs--font-weight: 500;
+
   --text-glyph: 1rem;
   --text-glyph--line-height: 1.1875rem;
 
@@ -201,6 +231,8 @@
 
   /* Very small phones: `max-xs:` applies below this width. */
   --breakpoint-xs: 22.5rem;
+  /* Case study pages show the contents rail beside the text from here up. */
+  --breakpoint-toc: 84rem;
 
   /* Spacing (Figma "item spacing") */
   --spacing-item-2: 2px;
@@ -230,10 +262,13 @@
   --spacing-item-54: 54px;
   --spacing-item-150: 150px;
   --spacing-item-56: 56px;
+  --spacing-item-60: 60px;
   --spacing-item-64: 64px;
   --spacing-item-80: 80px;
   --spacing-item-100: 100px;
   --spacing-item-120: 120px;
+  --spacing-item-200: 200px;
+  --spacing-item-210: 210px;
   --spacing-item-260: 260px;
   --spacing-item-320: 320px;
   --spacing-item-400: 400px;
@@ -253,6 +288,9 @@
   --container-width-540: 540px;
   --container-width-580: 580px;
   --container-width-360: 360px;
+  --container-width-640: 640px;
+  --container-width-700: 700px;
+  --container-width-840: 840px;
   --container-width-320: 320px;
   --container-width-1200: 1200px;
   --container-width-1280: 1280px;
@@ -262,6 +300,7 @@
   --radius-pill: 999px;
   --stroke-hairline: 1px;
   --stroke-sticker: 3px;
+  --stroke-rule: 2px;
 
   /* Zoom applied to a project picture while its card is hovered. */
   --scale-media-hover: 1.1;
@@ -279,6 +318,7 @@
   --shadow-button-hover: 4px 4px 0 0 var(--color-azure-55);
   --shadow-image: 0 2px 8px 0 rgb(0 0 0 / 0.08);
   --shadow-phone: 0 2.2px 8.8px 0 color-mix(in oklab, var(--color-grey-10) 16%, transparent);
+  --shadow-status-dot-blue: 0 0 0 3px color-mix(in oklab, var(--color-azure-55) 25%, transparent);
   --shadow-status-dot: 0 0 0 3px color-mix(in oklab, var(--color-green-500) 25%, transparent);
 
   /* Motion */
@@ -317,6 +357,12 @@
   }
 }
 
+/* Hollow lettering: transparent fill, hairline ink outline. */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: var(--stroke-hairline) var(--color-grey-10);
+}
+
 /* Fraunces display setting from the design: SOFT 0, WONK 1. */
 @utility font-wonk {
   font-variation-settings: "SOFT" 0, "WONK" 1;
@@ -337,6 +383,7 @@ body {
 @media (max-width: 63.99rem) {
   :root {
     --text-heading-fraunces-hero: 3rem;
+    --text-heading-fraunces-xxl: 2.75rem;
     --text-heading-fraunces-name: 3.5rem;
     --text-heading-inter-section: 2rem;
     --text-heading-inter-xl: 2.25rem;
@@ -347,6 +394,7 @@ body {
 @media (max-width: 47.99rem) {
   :root {
     --text-heading-fraunces-hero: 2.5rem;
+    --text-heading-fraunces-xxl: 2.25rem;
     --text-heading-fraunces-name: 2.75rem;
     --text-heading-fraunces-italic-md: 1.5rem;
     --text-heading-inter-section: 1.75rem;

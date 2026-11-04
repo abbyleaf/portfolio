@@ -1,5 +1,28 @@
 export type CaseStudyStatus = "draft" | "published";
 
+/** Frontmatter of a full case study page. Stubs only carry `title` and `status`. */
+export type CaseStudyMeta = {
+  title: string;
+  status: CaseStudyStatus;
+  /** "01" in "case 01". */
+  number?: string;
+  /** Badge texts next to the big "case" number: [status, role]. */
+  badges?: [string, string];
+  category?: string;
+  summary?: string;
+  hero?: { src: string; alt: string; width: number; height: number };
+  platform?: string;
+  timeline?: string;
+  role?: string;
+  team?: string;
+  contribution?: string[];
+  responsibilities?: string;
+  /** Entries for the contents rail; each `id` is a `<Section id>` in the body. */
+  toc?: { id: string; label: string }[];
+  /** Slug of the case study the header and the closing band point to. */
+  next?: string;
+};
+
 /**
  * Whether draft case studies are shown. Set SHOW_DRAFTS=true for the `test` branch only
  * (see "Draft case studies" in CLAUDE.md). The code is identical on every branch.

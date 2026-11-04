@@ -1,6 +1,33 @@
 import type { MDXComponents } from "mdx/types";
+import {
+  Figure,
+  Mark,
+  Pair,
+  Quote,
+  Section,
+  ServiceCompare,
+  Showcase,
+  Stat,
+  Stats,
+  Subhead,
+} from "@/components/CaseStudyBlocks";
 
-const components: MDXComponents = {};
+const components: MDXComponents = {
+  p: (props) => (
+    <p className="font-sans text-paragraph-md text-text-muted" {...props} />
+  ),
+  strong: (props) => <strong className="font-semibold text-text-body" {...props} />,
+  Figure,
+  Mark,
+  Pair,
+  Quote,
+  Section,
+  ServiceCompare,
+  Showcase,
+  Stat,
+  Stats,
+  Subhead,
+};
 
 export function useMDXComponents(): MDXComponents {
   return components;
