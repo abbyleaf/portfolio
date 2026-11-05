@@ -399,19 +399,6 @@
   }
 }
 
-/* Dashes that flow along a line, for the route on the on-demand map. They hold still for reduced motion. */
-@keyframes route-flow {
-  to {
-    stroke-dashoffset: -37;
-  }
-}
-@utility route-flow {
-  animation: route-flow 1.1s linear infinite;
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
-
 /* A 3px dashed line in the route colour, like the key for frequent routes on a map. */
 @utility dashed-route {
   background-image: repeating-linear-gradient(
