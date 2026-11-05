@@ -7,6 +7,7 @@ import { CaseStudyNext } from "./CaseStudyNext";
 import { CaseStudyToc } from "./CaseStudyToc";
 import { Ruler } from "./Ruler";
 import { SiteFooter } from "./SiteFooter";
+import { StickyTop } from "./StickyTop";
 
 type CaseStudyLayoutProps = {
   slug: string;
@@ -29,7 +30,7 @@ export async function CaseStudyLayout({
 
   return (
     <div className="flex flex-1 flex-col bg-surface-primary">
-      <div className="sticky top-0 z-30">
+      <StickyTop>
         <CaseStudyHeader
           name={current?.shortTitle ?? meta.title}
           nextHref={next && nextAvailable ? `/case-studies/${next.slug}` : undefined}
@@ -40,7 +41,7 @@ export async function CaseStudyLayout({
           right="Folio/26"
           star
         />
-      </div>
+      </StickyTop>
       <main className="px-item-64 py-item-60 max-xl:px-item-40 max-md:px-item-24 max-md:py-item-40">
         <div className="relative mx-auto flex w-full max-w-width-840 flex-col">
           {meta.toc && <CaseStudyToc items={meta.toc} />}
