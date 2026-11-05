@@ -1,24 +1,19 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 import { CaseStudyLayout } from "@/components/CaseStudyLayout";
 import { isCaseStudyVisible, type CaseStudyMeta } from "@/lib/case-studies";
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "case-studies");
 
-export default function CaseStudyPage(props: PageProps<"/case-studies/[slug]">) {
-  // `params` is read inside Suspense so the page shell can render before the slug is known.
-  return (
-    <Suspense fallback={<div className="min-h-dvh bg-surface-primary" />}>
-      <CaseStudy params={props.params} />
-    </Suspense>
-  );
-}
+// Every study is prerendered by generateStaticParams, so the page is allowed to read
+// `params` directly. Wrapping it in Suspense instead streamed the page in behind a blank
+// placeholder in development, which made a reload lose the scroll position.
+export const instant = false;
 
-async function CaseStudy({
+export default async function CaseStudy({
   params,
-}: Pick<PageProps<"/case-studies/[slug]">, "params">) {
+}: PageProps<"/case-studies/[slug]">) {
   const { slug } = await params;
   const study = await import(`@/content/case-studies/${slug}.mdx`).catch(
     () => null,
