@@ -196,7 +196,7 @@ export function ServiceCompare({ services }: { services: Service[] }) {
           key={title}
           className="flex min-w-0 flex-col gap-item-20 border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas px-item-20 py-item-24"
         >
-          <h3 className="font-heading font-wonk text-heading-fraunces-lg font-normal text-text-body">
+          <h3 className="font-heading font-wonk text-heading-fraunces-md font-normal text-text-body">
             {title}
           </h3>
           <Image
