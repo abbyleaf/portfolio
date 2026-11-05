@@ -234,7 +234,7 @@ export function ServiceCompare({ services }: { services: Service[] }) {
 }
 
 type ShowcaseProps = {
-  /** Two screens shown side by side, each already framed in the design file. */
+  /** Two phone screens, side by side. Each image is the phone alone (transparent); the panel behind it is drawn here. */
   screens: { src: string; alt: string }[];
   title: string;
   children: ReactNode;
@@ -246,15 +246,19 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
     <div className="flex items-end gap-item-20 max-lg:flex-col max-lg:items-start">
       <div className="flex shrink-0 gap-item-20">
         {screens.map(({ src, alt }) => (
-          <Image
+          <div
             key={src}
-            src={src}
-            alt={alt}
-            width={424}
-            height={724}
-            sizes="210px"
-            className="h-auto w-item-210"
-          />
+            className="flex w-item-210 items-center justify-center border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas py-item-18"
+          >
+            <Image
+              src={src}
+              alt={alt}
+              width={312}
+              height={637}
+              sizes="156px"
+              className="h-auto w-item-156"
+            />
+          </div>
         ))}
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-item-12 pb-item-8 pl-item-14 max-lg:pl-0">
