@@ -1,11 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
 type TocItem = { id: string; label: string };
 
 /** A section counts as current once its top passes this far below the viewport top. */
 const READ_LINE = 160;
+
+/**
+ * Scrolls to a section so it lands where a native #anchor jump would (below the pinned
+ * bars), but smoothly like a click on the ruler. Reduced motion jumps instead.
+ */
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+  const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({
+    top: el.getBoundingClientRect().top + window.scrollY - padding - margin,
+    behavior: reduce ? "auto" : "smooth",
+  });
+}
 
 /**
  * "On this page" rail. It lines up with the left edge of the ruler (same gutters, same
@@ -15,6 +31,14 @@ const READ_LINE = 160;
  */
 export function CaseStudyToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState(items[0]?.id);
+
+  const onLinkClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    // Let new-tab and modified clicks behave like normal links.
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
+    scrollToSection(id);
+    window.history.pushState(null, "", `#${id}`);
+  };
 
   useEffect(() => {
     let frame = 0;
@@ -52,6 +76,7 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
                   <li key={id}>
                     <a
                       href={`#${id}`}
+                      onClick={(event) => onLinkClick(event, id)}
                       aria-current={current ? "location" : undefined}
                       className={`block px-item-12 py-item-8 font-sans text-label-sm ${
                         current
