@@ -23,6 +23,7 @@
   /* Palette */
   --color-grey-900: #1f1d1a;
   --color-grey-800: #3a3833;
+  --color-grey-100: #dad4cd;
   --color-grey-44: #74726c;
   --color-grey-10: #1b1a17;
   --color-azure-55: #2e66ed;
@@ -64,7 +65,6 @@
   --color-border-subtle: color-mix(in oklab, var(--color-grey-10) 14%, transparent);
   --color-border-canvas-subtle: #dfdfdf;
   /* The case study contents rail. */
-  --color-border-rail: #ababab;
 
   /* Type */
   --text-display-fraunces: 5.75rem;
