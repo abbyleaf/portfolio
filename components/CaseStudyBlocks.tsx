@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { LoopVideo } from "./LoopVideo";
+import { ZoomImage } from "./ZoomImage";
 
 /*
  * Building blocks for case study MDX (see mdx-components.tsx). Case study text and picture
@@ -92,7 +93,7 @@ export function Figure({
   sizes = "(min-width: 50rem) 780px, 100vw",
 }: FigureProps) {
   const image = (
-    <Image
+    <ZoomImage
       src={src}
       alt={alt}
       width={width}
@@ -181,7 +182,7 @@ export function ImageFigure({ src, alt, width, height, label, selected }: ImageF
         {label}
       </figcaption>
       <div className="p-item-20 pt-0">
-        <Image
+        <ZoomImage
           src={src}
           alt={alt}
           width={width}
