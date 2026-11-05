@@ -10,7 +10,7 @@ const eyebrowClass =
   "font-sans text-heading-inter-sm uppercase text-text-sub-headers";
 const bodyClass = "font-sans text-paragraph-md text-text-muted";
 const titleClass =
-  "font-heading font-wonk text-heading-fraunces-xl text-text-body";
+  "font-heading font-wonk text-heading-fraunces-xl text-text-primary";
 
 type SectionProps = {
   /** Anchor for the contents rail; matches an entry in the frontmatter `toc`. */
