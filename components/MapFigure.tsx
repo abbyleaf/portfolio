@@ -27,7 +27,7 @@ export function MapFigure({ title, label, animated, still, legend }: MapFigurePr
       <figcaption className="border-b-(length:--stroke-rule) border-border-canvas-subtle px-item-20 py-item-16 font-mono text-mono-legend uppercase text-text-primary">
         {title}
       </figcaption>
-      <div className="py-item-20">
+      <div className="px-item-64 py-item-20 max-md:px-item-24 max-xs:px-item-12">
         <picture>
           <source srcSet={still} media="(prefers-reduced-motion: reduce)" />
           <img
