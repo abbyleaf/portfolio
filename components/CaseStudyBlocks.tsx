@@ -195,6 +195,39 @@ export function ImageFigure({ src, alt, width, height, label, selected }: ImageF
   );
 }
 
+type ScreenCompareProps = {
+  items: { label: string; src: string; alt: string }[];
+};
+
+/**
+ * Two phone screens side by side, each on a panel under its own caption. The phone
+ * hangs off the bottom of the panel, so only the top of the screen shows. Stacks below 768px.
+ */
+export function ScreenCompare({ items }: ScreenCompareProps) {
+  return (
+    <div className="grid grid-cols-2 gap-item-20 pb-item-28 max-md:grid-cols-1">
+      {items.map(({ label, src, alt }) => (
+        // Two rows each, shared with the neighbour, so panels line up even when a caption wraps.
+        <figure key={src} className="row-span-2 grid min-w-0 grid-rows-subgrid gap-y-item-12">
+          <figcaption className="font-mono text-mono-m uppercase text-text-sub-headers">
+            {label}
+          </figcaption>
+          <div className="relative aspect-38/41 w-full overflow-hidden border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel max-md:aspect-auto max-md:h-item-410">
+            <Image
+              src={src}
+              alt={alt}
+              width={960}
+              height={1959}
+              sizes="(min-width: 50rem) 320px, 100vw"
+              className="absolute top-item-28 left-1/2 h-auto w-5/6 max-w-item-320 -translate-x-1/2"
+            />
+          </div>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 /** Two pictures side by side, stacked on narrow screens. */
 export function Pair({ children }: { children: ReactNode }) {
   return (

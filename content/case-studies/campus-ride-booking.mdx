@@ -271,24 +271,20 @@ I used AI as a thought partner to prototype different journey-first booking conc
   title="The home screen created a new problem: which service should riders see first?"
   intro="The fixed-route shuttle service is intended for dormitory students and has limited capacity. On-demand ride services support daily broad campus travel, while fixed-route shuttles only operate on class days."
 >
-  <Pair>
-    <Figure
-      label="Fixed-route shuttle service as default"
-      src="/images/case-studies/campus-ride-booking/default-shuttle.png"
-      alt="Home screen with the Shuttle tab shown first, listing a Dormitory to Faculty route."
-      width={820}
-      height={820}
-      sizes="(min-width: 50rem) 380px, 100vw"
-    />
-    <Figure
-      label="On-demand ride service as default"
-      src="/images/case-studies/campus-ride-booking/default-ondemand.png"
-      alt="Home screen with the On Demand tab shown first, with a Where to? field and a note that rides to dormitories are not available on demand."
-      width={820}
-      height={840}
-      sizes="(min-width: 50rem) 380px, 100vw"
-    />
-  </Pair>
+  <ScreenCompare
+    items={[
+      {
+        label: "Fixed-route shuttle service as default",
+        src: "/images/case-studies/campus-ride-booking/default-shuttle-phone.webp",
+        alt: "Home screen with the Shuttle tab shown first, listing a Dormitory to Faculty route.",
+      },
+      {
+        label: "On-demand ride service as default",
+        src: "/images/case-studies/campus-ride-booking/default-ondemand-phone.webp",
+        alt: "Home screen with the On Demand tab shown first, with a Where to? field and a note that rides to dormitories are not available on demand.",
+      },
+    ]}
+  />
   <Subhead title="Solution: on-demand ride service was designated as the default service while fixed-route shuttle service was prioritised for dormitory students">
     <p>I kept on-demand rides as the default service, with fixed-route shuttles just one tap away. This encouraged students to use on-demand rides where possible, while keeping shuttle capacity available for journeys to and from the dormitory.</p>
   </Subhead>
