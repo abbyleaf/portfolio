@@ -11,6 +11,7 @@ import {
   Stat,
   Stats,
   Subhead,
+  VideoFigure,
 } from "@/components/CaseStudyBlocks";
 
 const components: MDXComponents = {
@@ -29,6 +30,7 @@ const components: MDXComponents = {
   Stat,
   Stats,
   Subhead,
+  VideoFigure,
 };
 
 export function useMDXComponents(): MDXComponents {

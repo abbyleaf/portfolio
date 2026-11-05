@@ -124,6 +124,37 @@ export function Figure({
   );
 }
 
+type VideoFigureProps = {
+  video: string;
+  /** Describes the clip for screen readers. */
+  alt: string;
+  /** The clip's pixel size. */
+  size: { width: number; height: number };
+  /** Caption drawn as real text in the panel's top-left corner. */
+  label: string;
+};
+
+/**
+ * A looping screen recording on a panel, with its caption as real text. The clip is an app
+ * screen that runs off the bottom edge of the panel. Pause and replay buttons show on hover.
+ */
+export function VideoFigure({ video, alt, size, label }: VideoFigureProps) {
+  return (
+    <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel">
+      <figcaption className="px-item-16 py-item-16 font-mono text-mono-m uppercase text-text-muted">
+        {label}
+      </figcaption>
+      <LoopVideo
+        src={video}
+        label={alt}
+        size={size}
+        controls
+        className="mx-auto h-auto w-item-210"
+      />
+    </figure>
+  );
+}
+
 /** Two pictures side by side, stacked on narrow screens. */
 export function Pair({ children }: { children: ReactNode }) {
   return (
