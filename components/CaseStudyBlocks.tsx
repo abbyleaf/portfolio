@@ -186,7 +186,8 @@ export function ImageFigure({ src, alt, width, height, label, selected }: ImageF
           alt={alt}
           width={width}
           height={height}
-          sizes="(min-width: 50rem) 740px, 100vw"
+          sizes="(min-width: 80rem) 740px, 100vw"
+          quality={90}
           className="h-auto w-full"
         />
       </div>
