@@ -16,6 +16,14 @@ import {
   VideoFigure,
 } from "@/components/CaseStudyBlocks";
 
+/**
+ * Wraps the part of a case study that needs the password. Visitors with the password see it
+ * as normal; for everyone else the locked page replaces it with the password box.
+ */
+function Locked({ children }: { children?: React.ReactNode }) {
+  return <>{children}</>;
+}
+
 const components: MDXComponents = {
   p: (props) => (
     <p className="font-sans text-paragraph-md text-text-muted" {...props} />
@@ -23,6 +31,7 @@ const components: MDXComponents = {
   strong: (props) => <strong className="font-semibold text-text-muted" {...props} />,
   Figure,
   ImageFigure,
+  Locked,
   MapFigure,
   Mark,
   Pair,

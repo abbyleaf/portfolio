@@ -19,6 +19,8 @@ export type CaseStudyMeta = {
   responsibilities?: string;
   /** Entries for the contents rail; each `id` is a `<Section id>` in the body. */
   toc?: { id: string; label: string }[];
+  /** `id` of the first `toc` entry that sits inside the body's <Locked> block. */
+  lockedFrom?: string;
   /** Slug of the case study the header and the closing band point to. */
   next?: string;
 };

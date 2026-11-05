@@ -13,6 +13,8 @@ type CaseStudyLayoutProps = {
   slug: string;
   meta: CaseStudyMeta;
   children: ReactNode;
+  /** The version a visitor without the password sees: locked rail entries, password box. */
+  locked?: boolean;
 };
 
 /** Frame for a full case study: pinned bar and ruler, hero, text, closing band, footer. */
@@ -20,6 +22,7 @@ export async function CaseStudyLayout({
   slug,
   meta,
   children,
+  locked,
 }: CaseStudyLayoutProps) {
   const current = workStudies.find((study) => study.slug === slug);
   const next = workStudies.find((study) => study.slug === meta.next);
@@ -43,7 +46,9 @@ export async function CaseStudyLayout({
         />
       </StickyTop>
       <main className="relative px-item-64 py-item-60 max-xl:px-item-40 max-md:px-item-24 max-md:py-item-40 toc:px-0">
-        {meta.toc && <CaseStudyToc items={meta.toc} />}
+        {meta.toc && (
+          <CaseStudyToc items={meta.toc} lockedFrom={locked ? meta.lockedFrom : undefined} />
+        )}
         <div className="study-column flex flex-col">
           <CaseStudyHero meta={meta} />
           {children}

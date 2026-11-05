@@ -1,4 +1,4 @@
-import { readdir } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { notFound } from "next/navigation";
 import { CaseStudyLayout } from "@/components/CaseStudyLayout";
@@ -21,6 +21,7 @@ export default async function CaseStudy({
   if (!study || !(await isCaseStudyVisible(slug))) notFound();
   const Study = study.default;
   const meta = study.frontmatter as CaseStudyMeta;
+  if (process.env.NODE_ENV === "development") await warnIfLockMismatch(slug, meta);
 
   // Stubs only have a title and status, so they keep the plain page.
   if (!meta.hero) {
@@ -42,4 +43,27 @@ export async function generateStaticParams() {
   return files
     .filter((file) => file.endsWith(".mdx"))
     .map((file) => ({ slug: file.slice(0, -".mdx".length) }));
+}
+
+/**
+ * Development check: the `lockedFrom` frontmatter (which entries the rail locks) and the
+ * <Locked> block in the body (what is actually hidden) are written separately, so say so
+ * when they disagree.
+ */
+async function warnIfLockMismatch(slug: string, meta: CaseStudyMeta) {
+  const source = await readFile(path.join(CONTENT_DIR, `${slug}.mdx`), "utf8");
+  const start = source.indexOf("<Locked>");
+  const end = source.indexOf("</Locked>");
+  if (start === -1 || end === -1 || end < start) {
+    console.warn(`[${slug}] has no <Locked>…</Locked> block, so the locked page shows only the hero.`);
+    return;
+  }
+  if (!meta.lockedFrom) {
+    console.warn(`[${slug}] has a <Locked> block but no \`lockedFrom\` in its frontmatter.`);
+    return;
+  }
+  const at = source.indexOf(`id="${meta.lockedFrom}"`);
+  if (at === -1 || at < start || at > end) {
+    console.warn(`[${slug}] lockedFrom "${meta.lockedFrom}" is not a section inside <Locked>.`);
+  }
 }

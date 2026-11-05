@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type MouseEvent } from "react";
+import { GATE_ID, GATE_INPUT_ID } from "./PasswordGate";
 
 type TocItem = { id: string; label: string };
 
@@ -29,8 +30,16 @@ function scrollToSection(id: string) {
  * read. Render it inside the full-width `main`, not the centred text column; the
  * `study-column` utility keeps the text clear of it.
  */
-export function CaseStudyToc({ items }: { items: TocItem[] }) {
+export function CaseStudyToc({
+  items,
+  lockedFrom,
+}: {
+  items: TocItem[];
+  /** On the locked page: the first entry the password hides. It and every later one are locked. */
+  lockedFrom?: string;
+}) {
   const [active, setActive] = useState(items[0]?.id);
+  const lockedAt = lockedFrom ? items.findIndex((item) => item.id === lockedFrom) : -1;
 
   const onLinkClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     // Let new-tab and modified clicks behave like normal links.
@@ -40,12 +49,22 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
     window.history.pushState(null, "", `#${id}`);
   };
 
+  // A locked entry leads to the password box, with the cursor in the field.
+  const onLockedClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
+    scrollToSection(GATE_ID);
+    window.history.pushState(null, "", `#${GATE_ID}`);
+    document.getElementById(GATE_INPUT_ID)?.focus({ preventScroll: true });
+  };
+
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
       let current = items[0]?.id;
-      for (const { id } of items) {
+      // Locked entries have no section here, so only the open ones can be current.
+      for (const { id } of lockedAt >= 0 ? items.slice(0, lockedAt) : items) {
         const top = document.getElementById(id)?.getBoundingClientRect().top;
         if (top !== undefined && top <= READ_LINE) current = id;
       }
@@ -62,7 +81,7 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
       window.removeEventListener("resize", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [items]);
+  }, [items, lockedAt]);
 
   return (
     <div className="pointer-events-none absolute inset-x-0 inset-y-item-60 px-item-64 max-xl:px-item-40 max-toc:hidden">
@@ -70,8 +89,32 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
         <div className="pointer-events-auto absolute inset-y-0 left-0 w-item-200">
           <nav aria-label="On this page" className="sticky top-item-120">
             <ul className="flex flex-col">
-              {items.map(({ id, label }) => {
+              {items.map(({ id, label }, index) => {
                 const current = id === active;
+                if (lockedAt >= 0 && index >= lockedAt) {
+                  return (
+                    <li key={id}>
+                      <a
+                        href={`#${GATE_ID}`}
+                        onClick={onLockedClick}
+                        className="flex items-center justify-between gap-item-8 border-l-(length:--stroke-hairline) border-grey-100 px-item-12 py-item-8 font-sans text-label-sm text-text-sub-headers hover:text-text-primary"
+                      >
+                        <span>{label}</span>
+                        <svg
+                          aria-hidden="true"
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="shrink-0"
+                        >
+                          <path d="M12 1.5a5 5 0 0 0-5 5V9H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6.5a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0V9H9V6.5Z" />
+                        </svg>
+                        <span className="sr-only">(locked, needs the password)</span>
+                      </a>
+                    </li>
+                  );
+                }
                 return (
                   <li key={id}>
                     <a
