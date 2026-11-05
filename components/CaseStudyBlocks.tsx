@@ -264,6 +264,7 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
                   label={screen.alt}
                   size={{ width: 1052, height: 2160 }}
                   controls
+                group={title}
                   className="h-auto w-item-156"
                 />
               ) : (
