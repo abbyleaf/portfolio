@@ -87,13 +87,13 @@ export function PasswordGate({
               placeholder="Enter password"
               aria-invalid={state.error ? true : undefined}
               aria-describedby={state.error ? "password-error" : undefined}
-              className="h-item-48 w-item-320 max-w-full border-(length:--stroke-hairline) border-border-strong bg-surface-canvas px-item-16 font-sans text-label-md text-text-primary placeholder:text-text-muted"
+              className="h-item-48 w-item-320 max-w-full border-(length:--stroke-hairline) border-border-strong bg-surface-canvas px-item-16 font-sans text-label-link text-text-primary placeholder:text-text-muted"
             />
             <button
               type="submit"
               onClick={setReturnPath}
               disabled={pending}
-              className="h-item-48 w-item-120 bg-surface-inverted font-sans text-label-md text-text-on-inverted transition-[translate,box-shadow] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:shadow-button-hover disabled:opacity-60"
+              className="h-item-48 w-item-120 bg-surface-inverted font-sans text-label-link text-text-on-inverted transition-[translate,box-shadow] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:shadow-button-hover disabled:opacity-60"
             >
               {pending ? "Checking…" : "Enter"}
             </button>

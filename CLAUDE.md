@@ -62,7 +62,7 @@ Editorial, sticker-and-stamp, craft-forward. It must not read as a generic portf
 
 - Text and UI contrast meets WCAG AA. Check text on the pastel accent surfaces and stickers, not just on the canvas.
 - Meaningful images have descriptive `alt`. Decorative stickers and stamps use `alt=""` or `aria-hidden`.
-- Visible focus states on everything interactive. Rotated or overlapping stickers must not hide the focus ring or break tab order.
+- Visible focus states on everything interactive. Links and buttons get the blue ring; a text field (`input:focus-visible` in globals.css) gets a second 1px ink line against its border instead. Rotated or overlapping stickers must not hide the focus ring or break tab order.
 - Use semantic headings in order. MDX content maps to real `h1`–`h3`, `figure` and `figcaption`.
 - Honour `prefers-reduced-motion`.
 

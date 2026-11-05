@@ -440,6 +440,12 @@ body {
   outline-offset: 3px;
 }
 
+/* A text field shows focus with a second 1px ink line against its own border, not the blue ring. */
+input:focus-visible {
+  outline: var(--stroke-hairline) solid var(--color-border-strong);
+  outline-offset: 0;
+}
+
 /* Display type steps down on smaller screens; the tokens keep their names. */
 @media (max-width: 63.99rem) {
   :root {
