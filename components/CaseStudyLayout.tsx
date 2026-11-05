@@ -30,7 +30,7 @@ export async function CaseStudyLayout({
 
   return (
     <div className="flex flex-1 flex-col bg-surface-primary">
-      <StickyTop>
+      <StickyTop compact>
         <CaseStudyHeader
           name={current?.shortTitle ?? meta.title}
           nextHref={next && nextAvailable ? `/case-studies/${next.slug}` : undefined}
