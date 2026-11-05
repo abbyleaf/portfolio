@@ -16,7 +16,7 @@ export async function SiteFooter() {
           <p className={labelClass}>Work with me</p>
           <a
             href="mailto:abigailyeap@gmail.com"
-            className="font-sans text-heading-inter-lg text-grey-10"
+            className="font-sans text-heading-inter-lg text-text-primary"
           >
             abigailyeap@gmail.com
           </a>
@@ -32,7 +32,7 @@ export async function SiteFooter() {
                     target: "_blank",
                     rel: "noopener noreferrer",
                   })}
-                  className="font-sans text-label-sm text-grey-10 hover:underline"
+                  className="font-sans text-label-sm text-text-primary hover:underline"
                 >
                   {link.label} ↗
                 </a>

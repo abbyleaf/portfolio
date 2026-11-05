@@ -197,7 +197,7 @@ export function ServiceCompare({ services }: { services: Service[] }) {
           key={title}
           className="flex min-w-0 flex-col gap-item-20 border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas px-item-20 py-item-24"
         >
-          <h3 className="font-heading font-wonk text-heading-fraunces-md font-normal text-text-body">
+          <h3 className="font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary">
             {title}
           </h3>
           <Image
@@ -258,7 +258,7 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
         ))}
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-item-12 pb-item-8 pl-item-14 max-lg:pl-0">
-        <h3 className="font-heading font-wonk text-heading-fraunces-lg font-normal text-text-body">
+        <h3 className="font-heading font-wonk text-heading-fraunces-lg font-normal text-text-primary">
           {title}
         </h3>
         <div className={`${bodyClass} flex flex-col gap-item-12`}>{children}</div>
