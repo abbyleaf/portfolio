@@ -53,7 +53,7 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
                     <a
                       href={`#${id}`}
                       aria-current={current ? "location" : undefined}
-                      className={`block px-item-12 py-item-8 font-sans text-label-sm ${
+                      className={`block px-item-12 py-item-8 font-sans text-label-rail ${
                         current
                           ? "border-l-(length:--stroke-rule) border-azure-55 font-medium text-text-accent-cool"
                           : "border-l-(length:--stroke-hairline) border-border-rail text-grey-44 hover:text-text-primary"
