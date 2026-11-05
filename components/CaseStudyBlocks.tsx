@@ -248,39 +248,45 @@ type ShowcaseProps = {
 /** Two phone screens with a short explanation beside them. */
 export function Showcase({ screens, title, children }: ShowcaseProps) {
   return (
-    <div className="flex items-end gap-item-20 max-lg:flex-col max-lg:items-start">
-      <div className="flex shrink-0 gap-item-20">
-        {screens.map((screen) => (
-          <div
-            key={"video" in screen ? screen.video : screen.src}
-            className="group/clip relative flex w-item-210 items-center justify-center border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas py-item-18"
-          >
-            {"video" in screen ? (
-              <LoopVideo
-                src={screen.video}
-                label={screen.alt}
-                size={{ width: 1052, height: 2160 }}
-                controls
-                className="h-auto w-item-156"
-              />
-            ) : (
-              <Image
-                src={screen.src}
-                alt={screen.alt}
-                width={312}
-                height={637}
-                sizes="156px"
-                className="h-auto w-item-156"
-              />
-            )}
+    // The text stacks below the screens once it would be narrower than 244px: two 210px
+    // panels, two 20px gaps and 244px of text is 704px (--container-showcase).
+    <div className="@container">
+      <div className="flex flex-col items-start gap-item-20 @showcase:flex-row @showcase:items-end">
+        <div className="flex shrink-0 flex-wrap gap-item-20">
+          {screens.map((screen) => (
+            <div
+              key={"video" in screen ? screen.video : screen.src}
+              className="group/clip relative flex w-item-210 items-center justify-center border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas py-item-18"
+            >
+              {"video" in screen ? (
+                <LoopVideo
+                  src={screen.video}
+                  label={screen.alt}
+                  size={{ width: 1052, height: 2160 }}
+                  controls
+                  className="h-auto w-item-156"
+                />
+              ) : (
+                <Image
+                  src={screen.src}
+                  alt={screen.alt}
+                  width={312}
+                  height={637}
+                  sizes="156px"
+                  className="h-auto w-item-156"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="flex min-w-0 flex-col gap-item-12 @showcase:flex-1 @showcase:pb-item-8 @showcase:pl-item-14">
+          <h3 className="font-heading font-wonk text-heading-fraunces-lg font-normal text-text-primary">
+            {title}
+          </h3>
+          <div className={`${bodyClass} flex flex-col gap-item-12`}>
+            {children}
           </div>
-        ))}
-      </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-item-12 pb-item-8 pl-item-14 max-lg:pl-0">
-        <h3 className="font-heading font-wonk text-heading-fraunces-lg font-normal text-text-primary">
-          {title}
-        </h3>
-        <div className={`${bodyClass} flex flex-col gap-item-12`}>{children}</div>
+        </div>
       </div>
     </div>
   );
