@@ -42,9 +42,9 @@ export async function CaseStudyLayout({
           star
         />
       </StickyTop>
-      <main className="px-item-64 py-item-60 max-xl:px-item-40 max-md:px-item-24 max-md:py-item-40">
-        <div className="relative mx-auto flex w-full max-w-width-840 flex-col">
-          {meta.toc && <CaseStudyToc items={meta.toc} />}
+      <main className="relative px-item-64 py-item-60 max-xl:px-item-40 max-md:px-item-24 max-md:py-item-40">
+        {meta.toc && <CaseStudyToc items={meta.toc} />}
+        <div className="mx-auto flex w-full max-w-width-840 flex-col">
           <CaseStudyHero meta={meta} />
           {children}
         </div>

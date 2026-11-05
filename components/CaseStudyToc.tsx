@@ -8,8 +8,9 @@ type TocItem = { id: string; label: string };
 const READ_LINE = 160;
 
 /**
- * "On this page" rail. It sits in the left margin beside the text on wide screens, stays
- * in view while scrolling, and marks the section being read.
+ * "On this page" rail. It sits in the page's left margin (64px in, like the header) on
+ * wide screens, stays in view while scrolling, and marks the section being read. Render
+ * it inside the full-width `main`, not the centred text column.
  */
 export function CaseStudyToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState(items[0]?.id);
@@ -39,7 +40,7 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
   }, [items]);
 
   return (
-    <div className="absolute inset-y-0 right-full mr-item-48 w-item-200 max-toc:hidden">
+    <div className="absolute inset-y-item-60 left-item-64 w-item-200 max-toc:hidden">
       <nav aria-label="On this page" className="sticky top-item-120">
         <ul className="flex flex-col">
           {items.map(({ id, label }) => {

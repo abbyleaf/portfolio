@@ -231,8 +231,9 @@
 
   /* Very small phones: `max-xs:` applies below this width. */
   --breakpoint-xs: 22.5rem;
-  /* Case study pages show the contents rail beside the text from here up. */
-  --breakpoint-toc: 84rem;
+  /* Case study pages show the contents rail in the left margin from here up; below it the
+     rail (64px in, 200px wide) would meet the centred 840px text. */
+  --breakpoint-toc: 90rem;
 
   /* Spacing (Figma "item spacing") */
   --spacing-item-2: 2px;
