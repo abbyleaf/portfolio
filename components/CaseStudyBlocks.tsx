@@ -180,7 +180,7 @@ export function ImageFigure({ src, alt, width, height, label }: ImageFigureProps
         role="region"
         tabIndex={0}
         aria-label="Diagram, scrolls sideways"
-        className="overflow-x-auto px-item-20 pt-item-40 pb-item-60"
+        className="overflow-x-auto px-item-20 pt-item-30 pb-item-60"
       >
         <div className="min-w-width-640">
           <Image
