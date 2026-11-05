@@ -29,6 +29,8 @@ const lightboxVars: { [name: `--yarl__${string}`]: string } = {
   "--yarl__color_button_disabled": "var(--color-text-disabled)",
   "--yarl__slide_title_color": "var(--color-text-primary)",
   "--yarl__button_filter": "none",
+  // The close icon is a 14-unit cross in a 24-unit box, so this box makes the cross 16px wide.
+  "--yarl__icon_size": "calc(var(--spacing-item-16) * 24 / 14)",
 };
 
 /** A picture that opens full size in a lightbox when clicked, tapped or activated by keyboard. */
