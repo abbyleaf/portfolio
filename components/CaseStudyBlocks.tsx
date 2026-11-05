@@ -279,7 +279,7 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
             </div>
           ))}
         </div>
-        <div className="flex min-w-0 flex-col gap-item-12 pb-item-20 @showcase:flex-1 @showcase:pb-item-8 @showcase:pl-item-14">
+        <div className="flex min-w-0 flex-col gap-item-12 pb-item-28 @showcase:flex-1 @showcase:pb-item-8 @showcase:pl-item-14">
           <h3 className="font-heading font-wonk text-heading-fraunces-lg font-normal text-text-primary">
             {title}
           </h3>
