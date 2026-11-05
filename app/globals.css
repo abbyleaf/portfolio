@@ -47,6 +47,7 @@
   --color-surface-accent-cool: var(--color-azure-55);
   --color-surface-light-accent-warm: #f5e3e3;
   --color-surface-light-accent-cool: #e0e8fb;
+  --color-surface-panel: #f0eee8;
 
   /* Text */
   --color-text-primary: var(--color-grey-900);
