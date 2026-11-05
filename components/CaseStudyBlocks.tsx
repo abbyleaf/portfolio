@@ -176,7 +176,7 @@ export function ImageFigure({ src, alt, width, height, label }: ImageFigureProps
       <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
         {label}
       </figcaption>
-      <div className="p-item-20">
+      <div className="p-item-20 pt-0">
         <Image
           src={src}
           alt={alt}
