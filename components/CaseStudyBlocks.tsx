@@ -190,7 +190,7 @@ type Service = {
 /** The two travel services side by side: a map of how each runs and a short fact table. */
 export function ServiceCompare({ services }: { services: Service[] }) {
   return (
-    <div className="grid grid-cols-2 gap-item-20 max-lg:grid-cols-1">
+    <div className="grid grid-cols-2 gap-item-20 max-md:grid-cols-1">
       {services.map(({ title, image, rows }) => (
         <div
           key={title}
@@ -204,7 +204,7 @@ export function ServiceCompare({ services }: { services: Service[] }) {
             alt={image.alt}
             width={image.width}
             height={image.height}
-            sizes="(min-width: 64rem) 400px, 100vw"
+            sizes="(min-width: 48rem) 400px, 100vw"
             className="h-auto w-full"
           />
           <dl className="flex flex-col">
