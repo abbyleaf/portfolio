@@ -199,6 +199,9 @@
   --text-display-case--line-height: 1;
   --text-display-case--letter-spacing: -4px;
   --text-display-case--font-weight: 400;
+  --text-display-case-tablet: 4.25rem;
+  --text-display-case-tablet--line-height: 1;
+  --text-display-case-tablet--font-weight: 400;
   --text-display-case-mobile: 3rem;
   --text-display-case-mobile--line-height: 1;
   --text-display-case-mobile--font-weight: 400;
