@@ -18,19 +18,19 @@ export function CaseStudyHeader({ name, nextHref }: CaseStudyHeaderProps) {
       <div className="mx-auto flex h-full w-full max-w-width-1400 items-center justify-between gap-item-16">
         <Link
           href="/"
-          className="-ml-item-14 flex h-item-36 shrink-0 items-center gap-item-10 border-(length:--stroke-hairline) border-transparent px-item-14 font-sans text-label-md text-text-primary transition-[translate,box-shadow,border-color] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:border-border-strong hover:bg-surface-primary hover:shadow-button-hover"
+          className="-ml-item-14 flex h-item-36 shrink-0 items-center gap-item-10 border-(length:--stroke-hairline) border-transparent px-item-14 font-sans text-label-link text-text-primary transition-[translate,box-shadow,border-color] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:border-border-strong hover:bg-surface-primary hover:shadow-button-hover"
         >
           <Image src="/images/case-studies/ui/arrow-back.svg" alt="" width={20} height={20} />
           Back to home
         </Link>
-        <p className="flex min-w-0 items-center justify-center gap-item-12 font-sans text-label-md text-text-primary max-md:hidden">
+        <p className="flex min-w-0 items-center justify-center gap-item-12 font-sans text-label-link text-text-primary max-md:hidden">
           <Image src="/images/case-studies/ui/sparkle.svg" alt="" width={14} height={14} />
           <span className="truncate">{name}</span>
         </p>
         {nextHref ? (
           <Link
             href={nextHref}
-            className="flex h-item-36 shrink-0 items-center bg-surface-inverted px-item-14 font-sans text-label-xs text-text-on-inverted transition-[translate,box-shadow] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:shadow-button-hover"
+            className="flex h-item-36 shrink-0 items-center bg-surface-inverted px-item-14 font-sans text-label-link text-text-on-inverted transition-[translate,box-shadow] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:shadow-button-hover"
           >
             Next case study →
           </Link>
