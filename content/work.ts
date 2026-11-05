@@ -14,7 +14,6 @@ export const workStudies: CaseStudySummary[] = [
       "Product Thinking",
       "Process Design",
       "Information Architecture",
-      "Facilitation",
       "Cross-functional Collaboration",
     ],
   },
