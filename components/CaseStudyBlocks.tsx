@@ -61,7 +61,8 @@ export function Subhead({
   return (
     <div className="flex flex-col gap-item-20">
       <h3 className={titleClass}>{title}</h3>
-      {children}
+      {/* Paragraphs written inside a block are plain HTML, so this sets their text style. */}
+      <div className={`${bodyClass} flex flex-col gap-item-20`}>{children}</div>
     </div>
   );
 }
