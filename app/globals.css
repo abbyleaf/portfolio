@@ -231,9 +231,8 @@
 
   /* Very small phones: `max-xs:` applies below this width. */
   --breakpoint-xs: 22.5rem;
-  /* Case study pages show the contents rail in the left margin from here up; below it the
-     rail (64px in, 200px wide) would meet the centred 840px text. */
-  --breakpoint-toc: 90rem;
+  /* Case study pages show the contents rail in the left margin from here up. */
+  --breakpoint-toc: 68.75rem;
 
   /* Spacing (Figma "item spacing") */
   --spacing-item-2: 2px;
@@ -356,6 +355,29 @@
 @utility marquee-pause-on-hover {
   &:has(figure:hover) {
     animation-play-state: paused;
+  }
+}
+
+/*
+ * The text column of a case study. Below the `toc` breakpoint it is a centred 840px column.
+ * From there up it keeps clear of the contents rail (64px in, 200px wide, 48px gap) and
+ * keeps a 64px gutter on the right, so it narrows to fit and stays centred once there is room.
+ */
+@utility study-column {
+  width: 100%;
+  max-width: var(--container-width-840);
+  margin-inline: auto;
+  @variant toc {
+    width: min(
+      var(--container-width-840),
+      calc(100% - var(--spacing-item-64) - var(--spacing-item-200) - var(--spacing-item-48) - var(--spacing-item-64))
+    );
+    max-width: none;
+    margin-left: max(
+      calc(var(--spacing-item-64) + var(--spacing-item-200) + var(--spacing-item-48)),
+      calc((100% - var(--container-width-840)) / 2)
+    );
+    margin-right: 0;
   }
 }
 
