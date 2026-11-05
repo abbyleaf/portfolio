@@ -55,7 +55,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
               {meta.title}
             </h1>
             {meta.summary && (
-              <p className="font-sans text-paragraph-xl text-text-muted">
+              <p className="font-sans text-paragraph-md text-text-muted">
                 {meta.summary}
               </p>
             )}
