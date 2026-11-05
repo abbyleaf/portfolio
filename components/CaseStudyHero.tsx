@@ -26,7 +26,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
           {meta.number && (
             <p
               aria-hidden="true"
-              className="flex-1 whitespace-nowrap font-heading font-wonk text-display-case italic text-trim-cap text-outline opacity-45 max-md:text-heading-fraunces-xxl"
+              className="flex-1 whitespace-nowrap font-heading font-wonk text-display-case italic text-trim-cap text-outline opacity-45 max-md:text-display-case-mobile"
             >
               case {meta.number}
             </p>
