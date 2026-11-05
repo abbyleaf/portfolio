@@ -283,8 +283,6 @@
 
   /* Aspect ratios */
   --aspect-project-card: 528 / 360;
-  /* The map clip of a case study figure: 640 x 340. */
-  --aspect-map-figure: 640 / 340;
 
   /* Layout widths */
   --container-width-520: 520px;
