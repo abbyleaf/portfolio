@@ -38,7 +38,7 @@ export function SiteHeader() {
             href={resume.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-item-40 items-center bg-surface-inverted px-item-24 font-sans text-label-link text-text-on-inverted transition-[translate,box-shadow] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:shadow-button-hover"
+            className="flex h-item-40 items-center bg-surface-inverted px-item-24 font-sans text-label-link text-text-on-inverted transition-colors duration-150 hover:bg-grey-800"
           >
             {resume.label}
             <span className="sr-only"> (opens PDF in a new tab)</span>
