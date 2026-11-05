@@ -141,7 +141,7 @@ type VideoFigureProps = {
 export function VideoFigure({ video, alt, size, label }: VideoFigureProps) {
   return (
     <figure className="group/clip relative flex h-item-600 min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel">
-      <figcaption className="px-item-16 py-item-16 font-mono text-mono-l font-medium uppercase text-text-sub-headers">
+      <figcaption className="px-item-16 py-item-16 font-mono text-mono-l uppercase text-text-sub-headers">
         {label}
       </figcaption>
       <div className="flex min-h-0 w-full max-w-item-320 flex-1 justify-center self-center">
