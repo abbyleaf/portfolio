@@ -24,6 +24,8 @@ type Section = {
   tick: HTMLElement;
   /** Whether the strip had room to draw this section's numbered mark. */
   drawn: boolean;
+  /** False when the strip has fewer ticks than sections, so this one gets no tick. */
+  hasTick: boolean;
 };
 
 type TickRowProps = {
@@ -88,30 +90,42 @@ export function TickRow({ isTop }: TickRowProps) {
           mark: 0,
           tick: ticks[0],
           drawn: false,
+          hasTick: true,
         }))
         .sort((a, b) => a.ratio - b.ratio);
 
       // Each section mark replaces the ruler tick nearest to its place in the page,
-      // so it sits on the same grid as the other lines.
+      // so it sits on the same grid as the other lines. Ticks are handed out in page
+      // order, so the numerals never swap places even when several sections sit near
+      // the end of the page. While every section can get a tick, each leaves room for
+      // those still to come; with fewer ticks than sections, the later ones go without.
       hidden.forEach((tick) => (tick.style.visibility = ""));
       hidden = [];
-      const taken = new Set<HTMLElement>();
-      for (const section of sections) {
+      let next = 0;
+      sections.forEach((section, index) => {
+        const reserve = sections.length <= ticks.length ? sections.length - index : 1;
+        const last = Math.max(next, ticks.length - reserve);
+        if (next >= ticks.length) {
+          section.hasTick = false;
+          section.mark = -1;
+          return;
+        }
         let best = Infinity;
-        for (const tick of ticks) {
-          if (taken.has(tick)) continue;
-          const rect = tick.getBoundingClientRect();
+        let chosen = next;
+        for (let i = next; i <= Math.min(last, ticks.length - 1); i++) {
+          const rect = ticks[i].getBoundingClientRect();
           const mark = (rect.left + rect.width / 2 - rowRect.left) / rowRect.width;
           if (Math.abs(mark - section.ratio) < best) {
             best = Math.abs(mark - section.ratio);
             section.mark = mark;
-            section.tick = tick;
+            section.tick = ticks[i];
+            chosen = i;
           }
         }
-        taken.add(section.tick);
+        next = chosen + 1;
         section.tick.style.visibility = "hidden";
         hidden.push(section.tick);
-      }
+      });
 
       marks.forEach((mark) => mark.remove());
       // Like the numerals on a printed ruler: a taller tick from the same edge as
@@ -127,6 +141,7 @@ export function TickRow({ isTop }: TickRowProps) {
         !xs.some((x) => x > from && x < to);
       marks = [];
       sections.forEach((section, index) => {
+        if (!section.hasTick) return;
         const x = xs[index];
         const side = fits(x, x + NUMERAL_ROOM)
           ? "right"
