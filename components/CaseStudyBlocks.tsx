@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 
+import { LoopVideo } from "./LoopVideo";
+
 /*
  * Building blocks for case study MDX (see mdx-components.tsx). Case study text and picture
  * choices live in content/case-studies/*.mdx; these only draw them.
@@ -234,8 +236,11 @@ export function ServiceCompare({ services }: { services: Service[] }) {
 }
 
 type ShowcaseProps = {
-  /** Two phone screens, side by side. Each image is the phone alone (transparent); the panel behind it is drawn here. */
-  screens: { src: string; alt: string }[];
+  /**
+   * Two phone screens, side by side. Each is the phone alone: an image with a transparent
+   * background (`src`) or a looping clip (`video`). The panel behind it is drawn here.
+   */
+  screens: ({ src: string; alt: string } | { video: string; alt: string })[];
   title: string;
   children: ReactNode;
 };
@@ -245,19 +250,28 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
   return (
     <div className="flex items-end gap-item-20 max-lg:flex-col max-lg:items-start">
       <div className="flex shrink-0 gap-item-20">
-        {screens.map(({ src, alt }) => (
+        {screens.map((screen) => (
           <div
-            key={src}
+            key={"video" in screen ? screen.video : screen.src}
             className="flex w-item-210 items-center justify-center border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas py-item-18"
           >
-            <Image
-              src={src}
-              alt={alt}
-              width={312}
-              height={637}
-              sizes="156px"
-              className="h-auto w-item-156"
-            />
+            {"video" in screen ? (
+              <LoopVideo
+                src={screen.video}
+                label={screen.alt}
+                size={{ width: 1052, height: 2160 }}
+                className="h-auto w-item-156"
+              />
+            ) : (
+              <Image
+                src={screen.src}
+                alt={screen.alt}
+                width={312}
+                height={637}
+                sizes="156px"
+                className="h-auto w-item-156"
+              />
+            )}
           </div>
         ))}
       </div>
