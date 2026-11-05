@@ -22,11 +22,11 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
       className="flex scroll-mt-item-20 flex-col gap-item-40"
     >
       <div className="flex flex-col gap-item-12">
-        <div className="flex flex-wrap items-end gap-x-item-12 gap-y-item-16">
+        <div className="flex flex-wrap-reverse items-start gap-x-item-12 gap-y-item-16">
           {meta.number && (
             <p
               aria-hidden="true"
-              className="min-w-0 flex-1 font-heading font-wonk text-display-case italic text-trim-cap text-outline opacity-45 max-md:text-heading-fraunces-xxl"
+              className="flex-1 whitespace-nowrap font-heading font-wonk text-display-case italic text-trim-cap text-outline opacity-45 max-md:text-heading-fraunces-xxl"
             >
               case {meta.number}
             </p>
