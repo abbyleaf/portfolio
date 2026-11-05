@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useEffect, useState, type MouseEvent } from "react";
-import { GATE_ID, GATE_INPUT_ID } from "./PasswordGate";
 
 type TocItem = { id: string; label: string };
 
@@ -49,15 +48,6 @@ export function CaseStudyToc({
     window.history.pushState(null, "", `#${id}`);
   };
 
-  // A locked entry leads to the password box, with the cursor in the field.
-  const onLockedClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
-    event.preventDefault();
-    scrollToSection(GATE_ID);
-    window.history.pushState(null, "", `#${GATE_ID}`);
-    document.getElementById(GATE_INPUT_ID)?.focus({ preventScroll: true });
-  };
-
   useEffect(() => {
     let frame = 0;
     const update = () => {
@@ -96,7 +86,7 @@ export function CaseStudyToc({
                     <Fragment key={id}>
                       {/* One lock for the whole group, so the list stays quiet. */}
                       {index === lockedAt && (
-                        <li className="flex items-center gap-item-6 border-l-(length:--stroke-hairline) border-grey-100 px-item-12 pt-item-14 pb-item-4 font-mono text-mono-m uppercase text-text-sub-headers">
+                        <li className="flex items-center gap-item-6 border-l-(length:--stroke-hairline) border-grey-100 px-item-12 pt-item-14 pb-item-12 font-mono text-mono-m uppercase text-text-sub-headers">
                           <svg
                             aria-hidden="true"
                             width="12"
@@ -110,14 +100,11 @@ export function CaseStudyToc({
                           Locked
                         </li>
                       )}
+                      {/* Not a link: a locked entry does nothing until the password is entered. */}
                       <li>
-                        <a
-                          href={`#${GATE_ID}`}
-                          onClick={onLockedClick}
-                          className="block border-l-(length:--stroke-hairline) border-grey-100 px-item-12 py-item-8 font-sans text-label-sm text-text-sub-headers hover:text-text-primary"
-                        >
+                        <span className="block cursor-default border-l-(length:--stroke-hairline) border-grey-100 px-item-12 py-item-8 font-sans text-label-sm text-text-sub-headers">
                           {label}
-                        </a>
+                        </span>
                       </li>
                     </Fragment>
                   );
