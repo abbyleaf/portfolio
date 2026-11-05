@@ -82,7 +82,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
               value && (
                 <div key={label} className="flex flex-col gap-item-8">
                   <dt className={labelClass}>{label}</dt>
-                  <dd className="font-sans text-paragraph-md text-text-body">
+                  <dd className="font-sans text-paragraph-md text-text-primary">
                     {value}
                   </dd>
                 </div>
@@ -92,7 +92,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
         {meta.team && (
           <div className="flex flex-col gap-item-12">
             <h2 className={labelClass}>Team</h2>
-            <p className="font-sans text-paragraph-md text-text-body">
+            <p className="font-sans text-paragraph-md text-text-primary">
               {meta.team}
             </p>
           </div>
@@ -112,7 +112,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
         {meta.responsibilities && (
           <div className="flex flex-col gap-item-12">
             <h2 className={labelClass}>Responsibilities</h2>
-            <p className="font-sans text-paragraph-md text-text-body">
+            <p className="font-sans text-paragraph-md text-text-primary">
               {meta.responsibilities}
             </p>
           </div>
