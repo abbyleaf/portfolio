@@ -110,6 +110,10 @@
   --text-paragraph-md--line-height: 1.5rem;
   --text-paragraph-md--font-weight: 400;
 
+  --text-paragraph-sm: 0.8125rem;
+  --text-paragraph-sm--line-height: 1.5;
+  --text-paragraph-sm--font-weight: 400;
+
   --text-label-md: 0.8125rem;
   --text-label-md--line-height: 1;
   --text-label-md--font-weight: 500;
@@ -183,6 +187,11 @@
   --text-mono-polaroid: 0.9231rem;
   --text-mono-polaroid--line-height: 1.22;
   --text-mono-polaroid--font-weight: 400;
+
+  --text-mono-s: 0.6875rem;
+  --text-mono-s--line-height: 1;
+  --text-mono-s--letter-spacing: 0.66px;
+  --text-mono-s--font-weight: 400;
 
   --text-mono-marker: 0.75rem;
   --text-mono-marker--line-height: 1.25rem;
