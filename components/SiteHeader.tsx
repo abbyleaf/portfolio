@@ -29,7 +29,7 @@ export function SiteHeader() {
             <Link
               key={link.label}
               href={link.href}
-              className="font-sans text-label-link text-text-muted underline-offset-4 hover:text-text-primary hover:underline"
+              className="font-sans text-label-link text-text-primary underline-offset-4 hover:underline"
             >
               {link.label}
             </Link>
