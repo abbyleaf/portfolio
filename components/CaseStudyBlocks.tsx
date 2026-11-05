@@ -211,7 +211,7 @@ export function ServiceCompare({ services }: { services: Service[] }) {
             {rows.map(([label, value], index) => (
               <div
                 key={label}
-                className={`grid grid-cols-[1fr_3fr] items-center gap-x-item-20 py-item-16 first:pt-0 last:pb-0 ${
+                className={`grid grid-cols-[1fr_3fr] items-center gap-x-item-16 py-item-16 first:pt-0 last:pb-0 ${
                   index < rows.length - 1
                     ? "border-b-(length:--stroke-hairline) border-border-subtle"
                     : ""
