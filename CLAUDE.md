@@ -84,7 +84,7 @@ Case studies are hidden or shown by **content and an environment variable, never
 A full case study is one MDX file in `content/case-studies/`; `components/CaseStudyLayout.tsx` draws the page around it. Files with only `title` and `status` stay plain stubs.
 
 - Frontmatter drives the page chrome: `title`, `status`, `number`, `badges`, `category`, `summary`, `hero`, `platform`, `timeline`, `role`, `team`, `contribution`, `responsibilities`, `toc` (each `id` must match a `<Section id>`) and `next` (slug of the following study). The type is `CaseStudyMeta` in `lib/case-studies.ts`.
-- The body uses the blocks in `components/CaseStudyBlocks.tsx`, mapped in `mdx-components.tsx`: `Section`, `Subhead`, `Figure` (set `scroll` for wide diagrams), `Pair`, `Stats`/`Stat`, `Quote`/`Mark`, `ServiceCompare`, `Showcase`. Do not import them in the MDX.
+- The body uses the blocks in `components/CaseStudyBlocks.tsx`, mapped in `mdx-components.tsx`: `Section`, `Subhead`, `Figure` (set `scroll` for wide diagrams), `Pair`, `Stats`/`Stat`, `Quote`/`Mark`, `ServiceCompare`, `Showcase`, `MapFigure` (a framed map; pass `video` for the looping clip, kept in `public/videos/case-studies/<slug>/`, and `still` for the picture shown until then). Do not import them in the MDX.
 - Pictures go in `public/images/case-studies/<slug>/`, exported from Figma at 2x. Every `Figure` needs real `alt` text.
 - Link a study only through `isCaseStudyVisible` (draft rules above), including the next-study links and the footer.
 - Dev only: after changing `@theme` tokens or the media blocks in `app/globals.css`, restart `npm run dev` (clear `.next`), or the page keeps the old values.

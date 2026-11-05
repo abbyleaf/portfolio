@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types";
+import { MapFigure } from "@/components/MapFigure";
 import {
   Figure,
   Mark,
@@ -18,6 +19,7 @@ const components: MDXComponents = {
   ),
   strong: (props) => <strong className="font-semibold text-text-body" {...props} />,
   Figure,
+  MapFigure,
   Mark,
   Pair,
   Quote,

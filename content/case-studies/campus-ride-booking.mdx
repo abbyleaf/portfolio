@@ -51,12 +51,18 @@ next: order-splitting
   title="The university introduced a new fixed-route shuttle service for its travel app"
   intro="The fixed-route shuttle service aimed to ferry students at regular intervals between the student dormitory and other campus locations. I led the design work to bring the new shuttle service into the existing app, while refining how students accessed and booked on-demand rides."
 >
-  <Figure
-    src="/images/case-studies/campus-ride-booking/map-overview.png"
-    alt="Map of the campus with stops numbered 01 to 18. Shuttle route 1 runs from stop 04 to stop 17 at the student dormitory, and route 2 runs the same way in reverse."
-    width={1680}
-    height={1024}
-    scroll
+  <MapFigure
+    title="Fixed-route shuttle service for selected stops"
+    label="Map of the campus with stops numbered 01 to 18. Shuttle route 1 runs from stop 04 to stop 17 at the student dormitory, and route 2 runs the same way in reverse."
+    still={{
+      src: "/images/case-studies/campus-ride-booking/map-overview-still.png",
+      width: 1672,
+      height: 800,
+    }}
+    legend={[
+      { colour: "orange", label: "Route 1: Stops 04 to 17" },
+      { colour: "blue", label: "Route 2: Stops 17 to 04 (Reverse)" },
+    ]}
   />
 </Section>
 

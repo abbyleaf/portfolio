@@ -29,6 +29,7 @@
   --color-blue-600: #174dcf;
   --color-blue-300: #8caaf2;
   --color-green-500: #56b388;
+  --color-vermilion-500: #d75939;
   --color-red-200: #f2d0d1;
   --color-red-300: #eaa4a6;
   --color-red-400: #dd7e81;
@@ -184,6 +185,10 @@
   --text-mono-polaroid--line-height: 1.22;
   --text-mono-polaroid--font-weight: 400;
 
+  --text-mono-legend: 0.875rem;
+  --text-mono-legend--line-height: 1.1429;
+  --text-mono-legend--font-weight: 400;
+
   --text-mono-marker: 0.75rem;
   --text-mono-marker--line-height: 1.25rem;
   --text-mono-marker--letter-spacing: 0.96px;
@@ -278,6 +283,8 @@
 
   /* Aspect ratios */
   --aspect-project-card: 528 / 360;
+  /* The map area of a case study figure, between its title bar and its legend. */
+  --aspect-map-figure: 1672 / 800;
 
   /* Layout widths */
   --container-width-520: 520px;
