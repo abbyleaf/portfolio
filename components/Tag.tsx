@@ -1,7 +1,7 @@
 const tones = {
   canvas: "bg-surface-canvas text-text-body text-tag",
-  // The contribution list on a case study: larger, tinted azure.
-  cool: "bg-surface-light-accent-cool text-blue-600 text-paragraph-md",
+  // The contribution list on a case study: the same neutral look, at body size.
+  neutral: "bg-surface-canvas text-text-body text-paragraph-md",
 };
 
 export function Tag({

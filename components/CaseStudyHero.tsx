@@ -102,7 +102,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
             <h2 className={labelClass}>My contribution</h2>
             <ul className="flex flex-wrap gap-item-8">
               {meta.contribution.map((item) => (
-                <Tag key={item} tone="cool">
+                <Tag key={item} tone="neutral">
                   {item}
                 </Tag>
               ))}
