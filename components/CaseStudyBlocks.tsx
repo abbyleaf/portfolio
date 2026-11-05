@@ -167,21 +167,37 @@ type ImageFigureProps = {
   label: string;
   /** Marks the option that was chosen: the caption turns blue. */
   selected?: boolean;
+  /**
+   * For a picture that carries its own canvas-coloured background: it runs edge to edge
+   * under the caption, on the canvas colour, instead of floating inside the panel padding.
+   */
+  bleed?: boolean;
 };
 
 /**
  * A wide diagram (a transparent image) on a panel, with its caption as real text. The
- * diagram scales down with the panel and never overflows it.
+ * diagram scales down with the panel and never overflows it. Pictures with their own canvas
+ * background use `bleed`, which runs them edge to edge on a canvas-coloured panel.
  */
-export function ImageFigure({ src, alt, width, height, label, selected }: ImageFigureProps) {
+export function ImageFigure({
+  src,
+  alt,
+  width,
+  height,
+  label,
+  selected,
+  bleed,
+}: ImageFigureProps) {
   return (
-    <figure className="flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel">
+    <figure
+      className={`flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle ${bleed ? "bg-surface-canvas" : "bg-surface-panel"}`}
+    >
       <figcaption
         className={`px-item-20 py-item-20 font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
       >
         {label}
       </figcaption>
-      <div className="p-item-20 pt-0">
+      <div className={bleed ? undefined : "p-item-20 pt-0"}>
         <ZoomImage
           src={src}
           alt={alt}
