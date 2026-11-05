@@ -253,13 +253,14 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
         {screens.map((screen) => (
           <div
             key={"video" in screen ? screen.video : screen.src}
-            className="flex w-item-210 items-center justify-center border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas py-item-18"
+            className="group/clip relative flex w-item-210 items-center justify-center border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas py-item-18"
           >
             {"video" in screen ? (
               <LoopVideo
                 src={screen.video}
                 label={screen.alt}
                 size={{ width: 1052, height: 2160 }}
+                controls
                 className="h-auto w-item-156"
               />
             ) : (

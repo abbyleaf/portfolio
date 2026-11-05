@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type LoopVideoProps = {
   src: string;
@@ -8,11 +8,21 @@ type LoopVideoProps = {
   className?: string;
   /** The clip's pixel size, so its box is reserved before it loads. */
   size?: { width: number; height: number };
+  /**
+   * Adds pause/play and replay buttons in the top-right corner of the nearest ancestor
+   * that is `relative` and has the `group/clip` class. They show on hover and keyboard
+   * focus, and always on touch screens.
+   */
+  controls?: boolean;
 };
 
+const buttonClass =
+  "flex size-item-28 items-center justify-center rounded-pill border-(length:--stroke-hairline) border-border-strong bg-surface-primary text-text-primary shadow-badge transition-colors duration-150 hover:bg-surface-inverted hover:text-text-on-inverted";
+
 /** A silent looping clip that holds on its first frame for reduced-motion users. */
-export function LoopVideo({ src, label, className, size }: LoopVideoProps) {
+export function LoopVideo({ src, label, className, size, controls }: LoopVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(true);
 
   useEffect(() => {
     const video = ref.current;
@@ -21,18 +31,62 @@ export function LoopVideo({ src, label, className, size }: LoopVideoProps) {
     }
   }, []);
 
+  function toggle() {
+    const video = ref.current;
+    if (!video) return;
+    if (video.paused) void video.play();
+    else video.pause();
+  }
+
+  function replay() {
+    const video = ref.current;
+    if (!video) return;
+    video.currentTime = 0;
+    void video.play();
+  }
+
   return (
-    <video
-      ref={ref}
-      src={src}
-      aria-label={label}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      className={className}
-      style={size ? { aspectRatio: `${size.width} / ${size.height}` } : undefined}
-    />
+    <>
+      <video
+        ref={ref}
+        src={src}
+        aria-label={label}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className={className}
+        style={size ? { aspectRatio: `${size.width} / ${size.height}` } : undefined}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      />
+      {controls && (
+        <div className="absolute top-item-8 right-item-8 flex gap-item-6 opacity-0 transition-opacity duration-200 group-focus-within/clip:opacity-100 group-hover/clip:opacity-100 pointer-coarse:opacity-100">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={playing ? "Pause video" : "Play video"}
+            className={buttonClass}
+          >
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              {playing ? (
+                <>
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </>
+              ) : (
+                <path d="M7 4l13 8-13 8z" />
+              )}
+            </svg>
+          </button>
+          <button type="button" onClick={replay} aria-label="Replay video" className={buttonClass}>
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,5V1L7,6L12,11V7A6,6 0 0,1 18,13A6,6 0 0,1 12,19A6,6 0 0,1 6,13H4A8,8 0 0,0 12,21A8,8 0 0,0 20,13A8,8 0 0,0 12,5Z" />
+            </svg>
+          </button>
+        </div>
+      )}
+    </>
   );
 }
