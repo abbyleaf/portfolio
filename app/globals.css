@@ -286,7 +286,7 @@
   --container-width-360: 360px;
   --container-width-640: 640px;
   --container-width-700: 700px;
-  --container-width-800: 800px;
+  --container-width-780: 780px;
   --container-width-320: 320px;
   --container-width-1200: 1200px;
   --container-width-1280: 1280px;
@@ -355,7 +355,7 @@
 }
 
 /*
- * The text column of a case study. Below the `toc` breakpoint it is a centred 800px column.
+ * The text column of a case study. Below the `toc` breakpoint it is a centred 780px column.
  * From there up it keeps clear of the contents rail, which lines up with the left edge of
  * the ruler (--rail-left: the page gutter, or further in once the ruler hits its 1400px
  * cap), and stays inside the ruler's right edge. It narrows to fit and re-centres once
@@ -363,20 +363,20 @@
  */
 @utility study-column {
   width: 100%;
-  max-width: var(--container-width-800);
+  max-width: var(--container-width-780);
   margin-inline: auto;
   @variant toc {
     --study-pad: var(--spacing-item-40);
     --rail-left: max(var(--study-pad), calc((100% - var(--container-width-1400)) / 2));
     --rail-clear: calc(var(--spacing-item-200) + var(--spacing-item-48));
     width: min(
-      var(--container-width-800),
+      var(--container-width-780),
       calc(100% - var(--rail-left) - var(--rail-left) - var(--rail-clear))
     );
     max-width: none;
     margin-left: max(
       calc(var(--rail-left) + var(--rail-clear)),
-      calc((100% - var(--container-width-800)) / 2)
+      calc((100% - var(--container-width-780)) / 2)
     );
     margin-right: 0;
   }

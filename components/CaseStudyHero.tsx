@@ -69,7 +69,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
           alt={meta.hero.alt}
           width={meta.hero.width}
           height={meta.hero.height}
-          sizes="(min-width: 64rem) 800px, 100vw"
+          sizes="(min-width: 64rem) 780px, 100vw"
           preload
           className="h-auto w-full"
         />
