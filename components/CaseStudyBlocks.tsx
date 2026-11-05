@@ -217,10 +217,10 @@ export function ServiceCompare({ services }: { services: Service[] }) {
                     : ""
                 }`}
               >
-                <dt className="font-mono text-mono-s uppercase text-text-muted">
+                <dt className="font-mono text-mono-m uppercase text-text-muted">
                   {label}
                 </dt>
-                <dd className="font-sans text-paragraph-sm text-text-primary">
+                <dd className="font-sans text-label-sm text-text-primary">
                   {value}
                 </dd>
               </div>
