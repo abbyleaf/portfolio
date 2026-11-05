@@ -213,7 +213,7 @@ export function ScreenCompare({ items }: ScreenCompareProps) {
           <figcaption className="font-mono text-mono-m uppercase text-text-sub-headers">
             {label}
           </figcaption>
-          <div className="relative aspect-38/41 w-full overflow-hidden border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel max-md:aspect-auto max-md:h-item-410">
+          <div className="relative aspect-38/41 w-full overflow-hidden border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas max-md:aspect-auto max-md:h-item-410">
             <Image
               src={src}
               alt={alt}
