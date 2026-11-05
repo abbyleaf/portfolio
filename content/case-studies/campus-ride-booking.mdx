@@ -56,9 +56,10 @@ next: order-splitting
     animated="/images/case-studies/campus-ride-booking/map-route.svg"
     still="/images/case-studies/campus-ride-booking/map-static.svg"
     label="Campus shuttle map: the bus runs from stop 04 to stop 17 on the orange route and returns on the blue route"
+    size={{ width: 640, height: 342 }}
     legend={[
-      { colour: "orange", label: "Route 1: Stops 04 to 17" },
-      { colour: "blue", label: "Route 2: Stops 17 to 04 (Reverse)" },
+      { marker: "orange", label: "Route 1: Stops 04 to 17" },
+      { marker: "blue", label: "Route 2: Stops 17 to 04 (Reverse)" },
     ]}
   />
 </Section>
@@ -85,12 +86,17 @@ next: order-splitting
   title="Existing on-demand ride services struggled to accommodate peak-hour travel patterns"
   intro="On-demand ride services provided flexibility for travel route selection, but travel patterns showed campus travel peaked at certain timings and concentrated around a few key stops (including the student dormitory)."
 >
-  <Figure
-    src="/images/case-studies/campus-ride-booking/map-problem.png"
-    alt="Map of the campus under the existing on-demand-only service. Stops 03, 12 and 17 (the student dormitory) are highlighted as the top three stops, with dotted lines marking frequent travel routes between them."
-    width={1680}
-    height={986}
-    scroll
+  <MapFigure
+    title="Existing service model"
+    note="On-demand ride service only"
+    animated="/images/case-studies/campus-ride-booking/map-problem-still.png"
+    still="/images/case-studies/campus-ride-booking/map-problem-still.png"
+    label="Map of the campus under the existing on-demand-only service. Stops 03, 12 and 17 (the student dormitory) are highlighted as the top three stops, with dotted lines marking frequent travel routes between them."
+    size={{ width: 1414, height: 760 }}
+    legend={[
+      { marker: "dot", label: "Top three stops" },
+      { marker: "dashed", label: "Frequent travel routes" },
+    ]}
   />
   <Quote>
     <p><Mark>~50% of travel usage alone concentrated around 3 key stops</Mark>, with recurring journeys between the student dormitory and faculty areas around class times.</p>

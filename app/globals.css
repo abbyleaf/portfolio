@@ -237,6 +237,7 @@
 
   /* Spacing (Figma "item spacing") */
   --spacing-item-2: 2px;
+  --spacing-item-3: 3px;
   --spacing-item-4: 4px;
   --spacing-item-6: 6px;
   --spacing-item-7: 7px;
@@ -388,6 +389,15 @@
   @variant xl {
     --study-pad: var(--spacing-item-64);
   }
+}
+
+/* A 3px dashed line in the route colour, like the key for frequent routes on a map. */
+@utility dashed-route {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-vermilion-500) -2.667px 2.667px,
+    transparent 2.667px 8px
+  );
 }
 
 /* Trims the space above the capitals and below the baseline, so a line's box hugs its letters. */
