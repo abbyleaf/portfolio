@@ -63,7 +63,7 @@
   /* Border. border-subtle is grey-10 at 14%. */
   --color-border-strong: var(--color-grey-900);
   --color-border-subtle: color-mix(in oklab, var(--color-grey-10) 14%, transparent);
-  --color-border-canvas-subtle: #dfdfdf;
+  --color-border-canvas-subtle: #d8d3ce;
   /* The case study contents rail. */
 
   /* Type */
