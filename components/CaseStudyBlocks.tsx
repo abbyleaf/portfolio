@@ -167,8 +167,8 @@ type ImageFigureProps = {
 };
 
 /**
- * A wide diagram (a transparent image) on a panel, with its caption as real text. Like
- * `Figure scroll`, the diagram keeps a readable size and scrolls sideways on narrow screens.
+ * A wide diagram (a transparent image) on a panel, with its caption as real text. The
+ * diagram scales down with the panel and never overflows it.
  */
 export function ImageFigure({ src, alt, width, height, label }: ImageFigureProps) {
   return (
@@ -176,22 +176,15 @@ export function ImageFigure({ src, alt, width, height, label }: ImageFigureProps
       <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
         {label}
       </figcaption>
-      <div
-        role="region"
-        tabIndex={0}
-        aria-label="Diagram, scrolls sideways"
-        className="overflow-x-auto px-item-20 pt-item-30 pb-item-50"
-      >
-        <div className="min-w-width-640">
-          <Image
-            src={src}
-            alt={alt}
-            width={width}
-            height={height}
-            sizes="(min-width: 50rem) 740px, 100vw"
-            className="h-auto w-full"
-          />
-        </div>
+      <div className="px-item-20 pt-item-30 pb-item-50">
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          sizes="(min-width: 50rem) 740px, 100vw"
+          className="h-auto w-full"
+        />
       </div>
     </figure>
   );
