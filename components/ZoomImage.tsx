@@ -19,7 +19,7 @@ type ZoomImageProps = {
 /*
  * The lightbox follows the artylope.com case study pages: a plain paper-coloured backdrop,
  * a single close button (no shadow), with the full-size original shown instead of the
- * resized copy. Zoom still works by scroll wheel, pinch or double-click. Colours come from
+ * resized copy. Zoom works by scroll wheel or pinch (double-click zoom is off). Colours come from
  * the theme tokens in app/globals.css.
  */
 const lightboxVars: { [name: `--yarl__${string}`]: string } = {
@@ -63,6 +63,7 @@ export function ZoomImage({ src, alt, width, height, sizes, quality, className }
         close={() => setOpen(false)}
         slides={[{ src, alt, width, height }]}
         plugins={[Zoom]}
+        zoom={{ scrollToZoom: true, doubleClickMaxStops: 0 }}
         carousel={{ finite: true }}
         controller={{ closeOnBackdropClick: true }}
         animation={reducedMotion ? { fade: 0, swipe: 0, zoom: 0 } : undefined}
