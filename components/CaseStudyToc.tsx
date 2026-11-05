@@ -8,9 +8,10 @@ type TocItem = { id: string; label: string };
 const READ_LINE = 160;
 
 /**
- * "On this page" rail. It sits in the page's left margin (64px in, like the header) on
- * wide screens, stays in view while scrolling, and marks the section being read. Render
- * it inside the full-width `main`, not the centred text column.
+ * "On this page" rail. It lines up with the left edge of the ruler (same gutters, same
+ * 1400px cap) on wide screens, stays in view while scrolling, and marks the section being
+ * read. Render it inside the full-width `main`, not the centred text column; the
+ * `study-column` utility keeps the text clear of it.
  */
 export function CaseStudyToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState(items[0]?.id);
@@ -40,29 +41,33 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
   }, [items]);
 
   return (
-    <div className="absolute inset-y-item-60 left-item-64 w-item-200 max-toc:hidden">
-      <nav aria-label="On this page" className="sticky top-item-120">
-        <ul className="flex flex-col">
-          {items.map(({ id, label }) => {
-            const current = id === active;
-            return (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  aria-current={current ? "location" : undefined}
-                  className={`block px-item-12 py-item-8 font-sans text-label-sm ${
-                    current
-                      ? "border-l-(length:--stroke-rule) border-azure-55 font-medium text-text-accent-cool"
-                      : "border-l-(length:--stroke-hairline) border-border-rail text-grey-44 hover:text-text-primary"
-                  }`}
-                >
-                  {label}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+    <div className="pointer-events-none absolute inset-x-0 inset-y-item-60 px-item-64 max-xl:px-item-40 max-toc:hidden">
+      <div className="relative mx-auto h-full w-full max-w-width-1400">
+        <div className="pointer-events-auto absolute inset-y-0 left-0 w-item-200">
+          <nav aria-label="On this page" className="sticky top-item-120">
+            <ul className="flex flex-col">
+              {items.map(({ id, label }) => {
+                const current = id === active;
+                return (
+                  <li key={id}>
+                    <a
+                      href={`#${id}`}
+                      aria-current={current ? "location" : undefined}
+                      className={`block px-item-12 py-item-8 font-sans text-label-sm ${
+                        current
+                          ? "border-l-(length:--stroke-rule) border-azure-55 font-medium text-text-accent-cool"
+                          : "border-l-(length:--stroke-hairline) border-border-rail text-grey-44 hover:text-text-primary"
+                      }`}
+                    >
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+      </div>
     </div>
   );
 }

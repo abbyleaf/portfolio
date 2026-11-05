@@ -360,24 +360,32 @@
 
 /*
  * The text column of a case study. Below the `toc` breakpoint it is a centred 840px column.
- * From there up it keeps clear of the contents rail (64px in, 200px wide, 48px gap) and
- * keeps a 64px gutter on the right, so it narrows to fit and stays centred once there is room.
+ * From there up it keeps clear of the contents rail, which lines up with the left edge of
+ * the ruler (--rail-left: the page gutter, or further in once the ruler hits its 1400px
+ * cap), and stays inside the ruler's right edge. It narrows to fit and re-centres once
+ * there is room. The gutter matches Ruler: 40px below xl, 64px from xl.
  */
 @utility study-column {
   width: 100%;
   max-width: var(--container-width-840);
   margin-inline: auto;
   @variant toc {
+    --study-pad: var(--spacing-item-40);
+    --rail-left: max(var(--study-pad), calc((100% - var(--container-width-1400)) / 2));
+    --rail-clear: calc(var(--spacing-item-200) + var(--spacing-item-48));
     width: min(
       var(--container-width-840),
-      calc(100% - var(--spacing-item-64) - var(--spacing-item-200) - var(--spacing-item-48) - var(--spacing-item-64))
+      calc(100% - var(--rail-left) - var(--rail-left) - var(--rail-clear))
     );
     max-width: none;
     margin-left: max(
-      calc(var(--spacing-item-64) + var(--spacing-item-200) + var(--spacing-item-48)),
+      calc(var(--rail-left) + var(--rail-clear)),
       calc((100% - var(--container-width-840)) / 2)
     );
     margin-right: 0;
+  }
+  @variant xl {
+    --study-pad: var(--spacing-item-64);
   }
 }
 
