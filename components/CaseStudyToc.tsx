@@ -81,7 +81,7 @@ export function CaseStudyToc({ items }: { items: TocItem[] }) {
                       className={`block px-item-12 py-item-8 font-sans text-label-sm ${
                         current
                           ? "border-l-(length:--stroke-rule) border-azure-55 font-medium text-text-accent-cool"
-                          : "border-l-(length:--stroke-hairline) border-grey-100 text-grey-44 hover:text-text-primary"
+                          : "border-l-(length:--stroke-hairline) border-grey-100 text-text-sub-headers hover:text-text-primary"
                       }`}
                     >
                       {label}
