@@ -16,8 +16,10 @@ type LoopVideoProps = {
   controls?: boolean;
 };
 
+// Deliberately a translucent black "glass" button over the video (copied from rachelchen.tech
+// at the owner's request), an exception to the no-pure-black / no-blur rules in CLAUDE.md.
 const buttonClass =
-  "flex size-item-28 items-center justify-center rounded-pill border-(length:--stroke-hairline) border-border-strong bg-surface-primary text-text-primary shadow-badge transition-colors duration-150 hover:bg-surface-inverted hover:text-text-on-inverted";
+  "rounded-pill bg-black/50 p-item-8 text-white backdrop-blur-xs transition-colors duration-200 hover:bg-black/90";
 
 /** A silent looping clip that holds on its first frame for reduced-motion users. */
 export function LoopVideo({ src, label, className, size, controls }: LoopVideoProps) {
@@ -62,14 +64,14 @@ export function LoopVideo({ src, label, className, size, controls }: LoopVideoPr
         onPause={() => setPlaying(false)}
       />
       {controls && (
-        <div className="absolute top-item-8 right-item-8 flex gap-item-6 opacity-0 transition-opacity duration-200 group-focus-within/clip:opacity-100 group-hover/clip:opacity-100 pointer-coarse:opacity-100">
+        <div className="absolute top-item-12 right-item-12 flex gap-item-8 opacity-0 transition-opacity duration-200 group-focus-within/clip:opacity-100 group-hover/clip:opacity-100 pointer-coarse:opacity-100">
           <button
             type="button"
             onClick={toggle}
             aria-label={playing ? "Pause video" : "Play video"}
             className={buttonClass}
           >
-            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               {playing ? (
                 <>
                   <rect x="6" y="4" width="4" height="16" />
@@ -81,7 +83,7 @@ export function LoopVideo({ src, label, className, size, controls }: LoopVideoPr
             </svg>
           </button>
           <button type="button" onClick={replay} aria-label="Replay video" className={buttonClass}>
-            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12,5V1L7,6L12,11V7A6,6 0 0,1 18,13A6,6 0 0,1 12,19A6,6 0 0,1 6,13H4A8,8 0 0,0 12,21A8,8 0 0,0 20,13A8,8 0 0,0 12,5Z" />
             </svg>
           </button>
