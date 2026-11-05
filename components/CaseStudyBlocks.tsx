@@ -323,7 +323,7 @@ export function ServiceCompare({ services }: { services: Service[] }) {
           <h3 className="font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary">
             {title}
           </h3>
-          <Image
+          <ZoomImage
             src={image.src}
             alt={image.alt}
             width={image.width}
