@@ -11,7 +11,7 @@ export async function SiteFooter() {
   );
   return (
     <footer id="contact" data-ruler-section="Contact" className="flex flex-col items-center gap-item-m bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24 pb-item-m pt-item-56">
-      <div className="grid min-h-item-117_4 w-full max-w-width-1280 grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] gap-item-40 max-md:grid-cols-1">
+      <div className="grid min-h-item-117_4 w-full max-w-width-1400 grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] gap-item-40 max-md:grid-cols-1">
         <div className="flex flex-col gap-item-9">
           <p className={labelClass}>Work with me</p>
           <a
@@ -66,7 +66,7 @@ export async function SiteFooter() {
           </ol>
         </nav>
       </div>
-      <p className="w-full max-w-width-1312 border-t-(length:--stroke-hairline) border-grey-10/10 pt-item-33 text-center font-sans text-label-caption uppercase text-text-sub-headers">
+      <p className="w-full max-w-width-1400 border-t-(length:--stroke-hairline) border-grey-10/10 pt-item-33 text-center font-sans text-label-caption uppercase text-text-sub-headers">
         © Copyright 2026 Abigail Yeap · Singapore
       </p>
     </footer>

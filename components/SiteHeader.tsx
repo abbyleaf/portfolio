@@ -12,7 +12,7 @@ const navLinks = [
 export function SiteHeader() {
   return (
     <header className="relative h-item-80 shrink-0 motion-safe:transition-[height] motion-safe:duration-200 group-data-scrolled/bar:h-item-54 border-b-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24">
-      <div className="mx-auto flex h-full w-full max-w-width-1312 items-center justify-between">
+      <div className="mx-auto flex h-full w-full max-w-width-1400 items-center justify-between">
         <Link href="/" className="flex items-center gap-item-12">
           <span
             aria-hidden="true"
