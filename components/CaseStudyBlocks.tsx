@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 
+import { CampusMap } from "./CampusMap";
 import { LoopVideo } from "./LoopVideo";
 import { ZoomImage } from "./ZoomImage";
 
@@ -307,7 +308,8 @@ export function Mark({ children }: { children: ReactNode }) {
 
 type Service = {
   title: string;
-  image: { src: string; alt: string; width: number; height: number };
+  /** Which animated campus map to draw, and how to describe it. */
+  map: { variant: "on-demand" | "shuttle"; alt: string };
   rows: [label: string, value: string][];
 };
 
@@ -315,7 +317,7 @@ type Service = {
 export function ServiceCompare({ services }: { services: Service[] }) {
   return (
     <div className="grid grid-cols-2 gap-item-20 max-md:grid-cols-1">
-      {services.map(({ title, image, rows }) => (
+      {services.map(({ title, map, rows }) => (
         <div
           key={title}
           className="flex min-w-0 flex-col gap-item-20 border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas px-item-20 py-item-24"
@@ -323,14 +325,7 @@ export function ServiceCompare({ services }: { services: Service[] }) {
           <h3 className="font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary">
             {title}
           </h3>
-          <Image
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            sizes="(min-width: 48rem) 400px, 100vw"
-            className="h-auto w-full"
-          />
+          <CampusMap variant={map.variant} label={map.alt} />
           <dl className="flex flex-col">
             {rows.map(([label, value], index) => (
               <div
