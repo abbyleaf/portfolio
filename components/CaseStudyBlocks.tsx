@@ -86,7 +86,7 @@ export function Figure({
   height,
   label,
   scroll,
-  sizes = "(min-width: 54rem) 840px, 100vw",
+  sizes = "(min-width: 50rem) 800px, 100vw",
 }: FigureProps) {
   const image = (
     <Image
