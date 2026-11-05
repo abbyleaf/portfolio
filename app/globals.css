@@ -357,6 +357,11 @@
   }
 }
 
+/* Trims the space above the capitals and below the baseline, so a line's box hugs its letters. */
+@utility text-trim-cap {
+  text-box: trim-both cap alphabetic;
+}
+
 /* Hollow lettering: transparent fill, hairline ink outline. */
 @utility text-outline {
   color: transparent;
