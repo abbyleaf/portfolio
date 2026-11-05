@@ -362,10 +362,15 @@
   text-box: trim-both cap alphabetic;
 }
 
-/* Hollow lettering: transparent fill, hairline ink outline. */
+/*
+ * Hollow lettering with a hairline ink outline that sits outside the letters. CSS strokes
+ * are centred on the edge, so the stroke is twice the width and drawn under a fill that
+ * matches the page (surface-primary), which hides the inner half.
+ */
 @utility text-outline {
-  color: transparent;
-  -webkit-text-stroke: var(--stroke-hairline) var(--color-grey-10);
+  color: var(--color-surface-primary);
+  -webkit-text-stroke: calc(var(--stroke-hairline) * 2) var(--color-grey-10);
+  paint-order: stroke fill;
 }
 
 /* Fraunces display setting from the design: SOFT 0, WONK 1. */
