@@ -28,7 +28,7 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           <h3 className={`font-heading font-wonk text-heading-fraunces-xl text-text-primary underline-offset-4 ${study.comingSoon ? "" : "group-hover:underline"}`}>
             {study.title}
           </h3>
-          <p className="font-sans text-paragraph-md text-text-body">
+          <p className="font-sans text-paragraph-md text-text-muted">
             {study.summary}
           </p>
           <ul
