@@ -157,6 +157,46 @@ export function VideoFigure({ video, alt, size, label }: VideoFigureProps) {
   );
 }
 
+type ImageFigureProps = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Caption drawn as real text in the panel's top-left corner. */
+  label: string;
+};
+
+/**
+ * A wide diagram (a transparent image) on a panel, with its caption as real text. Like
+ * `Figure scroll`, the diagram keeps a readable size and scrolls sideways on narrow screens.
+ */
+export function ImageFigure({ src, alt, width, height, label }: ImageFigureProps) {
+  return (
+    <figure className="flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel">
+      <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
+        {label}
+      </figcaption>
+      <div
+        role="region"
+        tabIndex={0}
+        aria-label="Diagram, scrolls sideways"
+        className="overflow-x-auto px-item-20 pt-item-40 pb-item-60"
+      >
+        <div className="min-w-width-640">
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            sizes="(min-width: 50rem) 740px, 100vw"
+            className="h-auto w-full"
+          />
+        </div>
+      </div>
+    </figure>
+  );
+}
+
 /** Two pictures side by side, stacked on narrow screens. */
 export function Pair({ children }: { children: ReactNode }) {
   return (
