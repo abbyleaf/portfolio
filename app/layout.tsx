@@ -39,20 +39,11 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "Portfolio",
   description: "Case studies and craft.",
-  // Light and dark tabs get different SVGs; the .ico is for browsers without SVG favicons.
+  // One SVG for every tab colour; the .ico is for browsers without SVG favicons.
   icons: {
     icon: [
-      { url: "/icons/favicon.ico", sizes: "48x48" },
-      {
-        url: "/icons/favicon-light.svg",
-        type: "image/svg+xml",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icons/favicon-dark.svg",
-        type: "image/svg+xml",
-        media: "(prefers-color-scheme: dark)",
-      },
+      { url: "/icons/favicon.ico", sizes: "16x16 32x32 48x48" },
+      { url: "/icons/favicon.svg", type: "image/svg+xml" },
     ],
     apple: "/icons/apple-icon.png",
   },
