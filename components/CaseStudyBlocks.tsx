@@ -135,22 +135,24 @@ type VideoFigureProps = {
 };
 
 /**
- * A looping screen recording on a panel, with its caption as real text. The clip is an app
- * screen that runs off the bottom edge of the panel. Pause and replay buttons show on hover.
+ * A looping screen recording on a panel, with its caption as real text. The panel is 600px high; the clip is an app
+ * screen that fills the height under the caption and runs off the bottom edge. Pause and replay buttons show on hover.
  */
 export function VideoFigure({ video, alt, size, label }: VideoFigureProps) {
   return (
-    <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel">
+    <figure className="group/clip relative flex h-item-600 min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel">
       <figcaption className="px-item-16 py-item-16 font-mono text-mono-m uppercase text-text-muted">
         {label}
       </figcaption>
-      <LoopVideo
-        src={video}
-        label={alt}
-        size={size}
-        controls
-        className="mx-auto h-auto w-item-210"
-      />
+      <div className="flex min-h-0 w-full max-w-item-320 flex-1 justify-center self-center">
+        <LoopVideo
+          src={video}
+          label={alt}
+          size={size}
+          controls
+          className="h-full w-auto max-w-full"
+        />
+      </div>
     </figure>
   );
 }
