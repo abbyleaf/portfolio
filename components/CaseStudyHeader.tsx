@@ -18,7 +18,7 @@ export function CaseStudyHeader({ name, nextHref }: CaseStudyHeaderProps) {
       <div className="mx-auto flex h-full w-full max-w-width-1312 items-center justify-between gap-item-16">
         <Link
           href="/"
-          className="flex h-item-36 shrink-0 items-center gap-item-10 font-sans text-label-md text-text-primary hover:underline"
+          className="-ml-item-14 flex h-item-36 shrink-0 items-center gap-item-10 border-(length:--stroke-hairline) border-transparent px-item-14 font-sans text-label-md text-text-primary transition-[translate,box-shadow,border-color] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:border-border-strong hover:bg-surface-primary hover:shadow-button-hover"
         >
           <Image src="/images/case-studies/ui/arrow-back.svg" alt="" width={20} height={20} />
           Back to home
