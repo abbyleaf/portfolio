@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { Fragment, useEffect, useState, type MouseEvent } from "react";
 import { GATE_ID, GATE_INPUT_ID } from "./PasswordGate";
 
 type TocItem = { id: string; label: string };
@@ -93,26 +93,33 @@ export function CaseStudyToc({
                 const current = id === active;
                 if (lockedAt >= 0 && index >= lockedAt) {
                   return (
-                    <li key={id}>
-                      <a
-                        href={`#${GATE_ID}`}
-                        onClick={onLockedClick}
-                        className="flex items-center justify-between gap-item-8 border-l-(length:--stroke-hairline) border-grey-100 px-item-12 py-item-8 font-sans text-label-sm text-text-sub-headers hover:text-text-primary"
-                      >
-                        <span>{label}</span>
-                        <svg
-                          aria-hidden="true"
-                          width="12"
-                          height="12"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="shrink-0"
+                    <Fragment key={id}>
+                      {/* One lock for the whole group, so the list stays quiet. */}
+                      {index === lockedAt && (
+                        <li className="flex items-center gap-item-6 border-l-(length:--stroke-hairline) border-grey-100 px-item-12 pt-item-14 pb-item-4 font-mono text-mono-m uppercase text-text-sub-headers">
+                          <svg
+                            aria-hidden="true"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="shrink-0"
+                          >
+                            <path d="M12 1.5a5 5 0 0 0-5 5V9H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6.5a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0V9H9V6.5Z" />
+                          </svg>
+                          Locked
+                        </li>
+                      )}
+                      <li>
+                        <a
+                          href={`#${GATE_ID}`}
+                          onClick={onLockedClick}
+                          className="block border-l-(length:--stroke-hairline) border-grey-100 px-item-12 py-item-8 font-sans text-label-sm text-text-sub-headers hover:text-text-primary"
                         >
-                          <path d="M12 1.5a5 5 0 0 0-5 5V9H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6.5a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0V9H9V6.5Z" />
-                        </svg>
-                        <span className="sr-only">(locked, needs the password)</span>
-                      </a>
-                    </li>
+                          {label}
+                        </a>
+                      </li>
+                    </Fragment>
                   );
                 }
                 return (
