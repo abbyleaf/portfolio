@@ -26,7 +26,8 @@ export function MapFigure({ title, label, video, still, legend }: MapFigureProps
       <figcaption className="border-b-(length:--stroke-rule) border-border-canvas-subtle px-item-20 py-item-16 font-mono text-mono-legend uppercase text-text-primary">
         {title}
       </figcaption>
-      <div className="relative aspect-map-figure w-full">
+      <div className="flex justify-center px-item-20 py-item-20">
+        <div className="relative aspect-map-figure w-full max-w-width-640">
         {video ? (
           <LoopVideo
             src={video}
@@ -40,10 +41,11 @@ export function MapFigure({ title, label, video, still, legend }: MapFigureProps
             alt={label}
             width={still.width}
             height={still.height}
-            sizes="(min-width: 50rem) 780px, 100vw"
+            sizes="(min-width: 40rem) 640px, 100vw"
             className="size-full object-contain"
           />
         )}
+        </div>
       </div>
       <ul className="flex flex-wrap gap-x-item-40 gap-y-item-12 border-t-(length:--stroke-rule) border-border-canvas-subtle px-item-20 py-item-16">
         {legend.map(({ colour, label: text }) => (
