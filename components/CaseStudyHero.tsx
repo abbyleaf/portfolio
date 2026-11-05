@@ -21,43 +21,45 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
       data-ruler-section="Overview"
       className="flex scroll-mt-item-20 flex-col gap-item-40"
     >
-      <div className="flex flex-wrap items-end gap-x-item-12 gap-y-item-16 pb-item-12">
-        {meta.number && (
-          <p
-            aria-hidden="true"
-            className="min-w-0 flex-1 font-heading font-wonk text-display-case italic text-trim-cap text-outline opacity-45 max-md:text-heading-fraunces-xxl"
-          >
-            case {meta.number}
-          </p>
-        )}
-        {meta.badges && (
-          <div className="flex flex-wrap items-center gap-item-12">
-            <Badge tone="neutral" tilt="left" status="blue">
-              {meta.badges[0]}
-            </Badge>
-            <Badge tone="warm" tilt="right" star>
-              {meta.badges[1]}
-            </Badge>
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col gap-item-20">
-        {meta.category && (
-          <p className={labelClass}>{meta.category}</p>
-        )}
-        <div className="flex flex-col gap-item-16">
-          <h1
-            id="study-title"
-            className="font-heading font-wonk text-heading-fraunces-xxl text-text-primary"
-          >
-            {meta.title}
-          </h1>
-          {meta.summary && (
-            <p className="font-sans text-paragraph-xl text-text-body">
-              {meta.summary}
+      <div className="flex flex-col gap-item-12">
+        <div className="flex flex-wrap items-end gap-x-item-12 gap-y-item-16">
+          {meta.number && (
+            <p
+              aria-hidden="true"
+              className="min-w-0 flex-1 font-heading font-wonk text-display-case italic text-trim-cap text-outline opacity-45 max-md:text-heading-fraunces-xxl"
+            >
+              case {meta.number}
             </p>
           )}
+          {meta.badges && (
+            <div className="flex flex-wrap items-center gap-item-12">
+              <Badge tone="neutral" tilt="left" status="blue">
+                {meta.badges[0]}
+              </Badge>
+              <Badge tone="warm" tilt="right" star>
+                {meta.badges[1]}
+              </Badge>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-item-20">
+          {meta.category && (
+            <p className={labelClass}>{meta.category}</p>
+          )}
+          <div className="flex flex-col gap-item-16">
+            <h1
+              id="study-title"
+              className="font-heading font-wonk text-heading-fraunces-xxl text-text-primary"
+            >
+              {meta.title}
+            </h1>
+            {meta.summary && (
+              <p className="font-sans text-paragraph-xl text-text-body">
+                {meta.summary}
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
