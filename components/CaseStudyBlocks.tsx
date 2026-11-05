@@ -164,16 +164,20 @@ type ImageFigureProps = {
   height: number;
   /** Caption drawn as real text in the panel's top-left corner. */
   label: string;
+  /** Marks the option that was chosen: the caption turns blue. */
+  selected?: boolean;
 };
 
 /**
  * A wide diagram (a transparent image) on a panel, with its caption as real text. The
  * diagram scales down with the panel and never overflows it.
  */
-export function ImageFigure({ src, alt, width, height, label }: ImageFigureProps) {
+export function ImageFigure({ src, alt, width, height, label, selected }: ImageFigureProps) {
   return (
     <figure className="flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel">
-      <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
+      <figcaption
+        className={`px-item-20 py-item-20 font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
+      >
         {label}
       </figcaption>
       <div className="p-item-20 pt-0">
