@@ -4,7 +4,7 @@ import { Badge } from "./Badge";
 import { Tag } from "./Tag";
 
 const labelClass =
-  "font-sans text-heading-inter-sm uppercase text-text-sub-headers";
+  "font-sans text-heading-inter-label uppercase text-text-sub-headers";
 
 /** Title block, cover picture and facts at the top of a case study. */
 export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {

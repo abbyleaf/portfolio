@@ -10,7 +10,7 @@ import { ZoomImage } from "./ZoomImage";
  */
 
 const eyebrowClass =
-  "font-sans text-heading-inter-sm uppercase text-text-sub-headers";
+  "font-sans text-heading-inter-label uppercase text-text-sub-headers";
 const bodyClass = "font-sans text-paragraph-md text-text-muted";
 const sectionTitleClass =
   "font-heading font-wonk text-heading-fraunces-section text-text-primary";

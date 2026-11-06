@@ -49,7 +49,7 @@ export function PasswordGate({
         className="flex scroll-mt-item-20 flex-col gap-item-20"
       >
         <header className="flex flex-col gap-item-12">
-          <p className="font-sans text-heading-inter-sm uppercase text-text-sub-headers">
+          <p className="font-sans text-heading-inter-label uppercase text-text-sub-headers">
             Confidential work
           </p>
           <h2

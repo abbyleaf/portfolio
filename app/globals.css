@@ -98,6 +98,11 @@
   --text-heading-fraunces-lg--line-height: 1;
   --text-heading-fraunces-lg--font-weight: 600;
 
+  --text-heading-inter-label: 0.8125rem;
+  --text-heading-inter-label--line-height: 1;
+  --text-heading-inter-label--letter-spacing: 0.88px;
+  --text-heading-inter-label--font-weight: 500;
+
   --text-heading-inter-sm: 0.875rem;
   --text-heading-inter-sm--line-height: 1;
   --text-heading-inter-sm--letter-spacing: 0.88px;
