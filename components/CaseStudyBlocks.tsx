@@ -12,8 +12,6 @@ import { ZoomImage } from "./ZoomImage";
 const eyebrowClass =
   "font-sans text-heading-inter-sm uppercase text-text-sub-headers";
 const bodyClass = "font-sans text-paragraph-md text-text-muted";
-const titleClass =
-  "font-heading font-wonk text-heading-fraunces-xl text-text-primary";
 const sectionTitleClass =
   "font-heading font-wonk text-heading-fraunces-section text-text-primary";
 
@@ -73,7 +71,7 @@ export function Subhead({
 }) {
   return (
     <div className="flex flex-col gap-item-20">
-      <h3 className={titleClass}>{title}</h3>
+      <h3 className={sectionTitleClass}>{title}</h3>
       {/* Paragraphs written inside a block are plain HTML, so this sets their text style. */}
       <div className={`${bodyClass} flex flex-col gap-item-20`}>{children}</div>
     </div>
