@@ -572,7 +572,7 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
                   size={{ width: 1052, height: 2160 }}
                   controls
                 group={title}
-                  className="h-auto w-item-156 rounded-image-phone"
+                  className="h-auto w-item-156"
                 />
               ) : (
                 <Image
