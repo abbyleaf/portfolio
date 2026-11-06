@@ -146,8 +146,9 @@ lockedFrom: outcome
   <Subhead title="Make the result of each change clear">
     <p>I designed the processing, success and failure states so planners could tell whether their changes had taken effect. The tables and map updated only after the system confirmed the changes. If a request failed, the original plan remained unchanged. For bulk assignments, either all selected orders were moved or none were.</p>
   </Subhead>
-  <Pair cols={3}>
+  <Pair cols={3} tight>
     <ImageFigure
+      compact
       label="Action"
       framed
       src="/images/case-studies/manual-route-planning/locked/state-action-4.webp"
@@ -156,6 +157,7 @@ lockedFrom: outcome
       height={800}
     />
     <VideoPanel
+      compact
       controls={false}
       cover
       label="Processing"
@@ -164,6 +166,7 @@ lockedFrom: outcome
       size={{ width: 869, height: 800 }}
     />
     <ImageFigure
+      compact
       label="Result"
       framed
       src="/images/case-studies/manual-route-planning/locked/state-result-4.webp"
