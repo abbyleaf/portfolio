@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { Children, type ReactNode } from "react";
 
 import { LoopVideo } from "./LoopVideo";
 import { ZoomImage } from "./ZoomImage";
@@ -19,7 +19,8 @@ type SectionProps = {
   /** Anchor for the contents rail; matches an entry in the frontmatter `toc`. */
   id?: string;
   eyebrow: string;
-  title: string;
+  /** Left out when the eyebrow is the only heading (the eyebrow then becomes the h2). */
+  title?: string;
   /** The paragraph under the title. */
   intro?: string;
   children?: ReactNode;
@@ -39,12 +40,18 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
         className="flex scroll-mt-item-20 flex-col gap-item-28"
       >
         <header className="flex flex-col gap-item-20">
-          <div className="flex flex-col gap-item-12">
-            <p className={eyebrowClass}>{eyebrow}</p>
-            <h2 id={id ? `${id}-title` : undefined} className={titleClass}>
-              {title}
+          {title ? (
+            <div className="flex flex-col gap-item-12">
+              <p className={eyebrowClass}>{eyebrow}</p>
+              <h2 id={id ? `${id}-title` : undefined} className={titleClass}>
+                {title}
+              </h2>
+            </div>
+          ) : (
+            <h2 id={id ? `${id}-title` : undefined} className={eyebrowClass}>
+              {eyebrow}
             </h2>
-          </div>
+          )}
           {intro && <p className={bodyClass}>{intro}</p>}
         </header>
         {children}
@@ -172,6 +179,8 @@ type ImageFigureProps = {
    * under the caption, on the canvas colour, instead of floating inside the panel padding.
    */
   bleed?: boolean;
+  /** For a screenshot: rounded corners and the soft image shadow. */
+  framed?: boolean;
 };
 
 /**
@@ -187,6 +196,7 @@ export function ImageFigure({
   label,
   selected,
   bleed,
+  framed,
 }: ImageFigureProps) {
   return (
     <figure
@@ -205,10 +215,86 @@ export function ImageFigure({
           height={height}
           sizes="(min-width: 80rem) 740px, 100vw"
           quality={90}
-          className="h-auto w-full"
+          className={`h-auto w-full ${framed ? "rounded-image shadow-image" : ""}`}
         />
       </div>
     </figure>
+  );
+}
+
+/** A picture with a mono caption underneath, inside a 300px-high frame (cropped to fill). */
+export function Shot({
+  src,
+  alt,
+  width,
+  height,
+  label,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  label: string;
+}) {
+  return (
+    <figure className="flex min-w-0 flex-col gap-item-8">
+      <div className="h-item-300 overflow-clip border-(length:--stroke-rule) border-border-canvas-subtle">
+        <ZoomImage
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          sizes="(min-width: 80rem) 380px, 100vw"
+          quality={90}
+          className="h-item-300 w-full object-cover"
+        />
+      </div>
+      <figcaption className="font-mono text-mono-l uppercase text-text-sub-headers">
+        {label}
+      </figcaption>
+    </figure>
+  );
+}
+
+/**
+ * A picture on a panel (cropped to a 440 by 400 box) with a short titled note beside it, level
+ * with the panel's bottom edge. Stacks below 768px.
+ */
+export function ImageText({
+  src,
+  alt,
+  width,
+  height,
+  title,
+  children,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex items-end gap-item-32 max-md:flex-col max-md:items-stretch">
+      <div className="h-item-400 w-width-440 max-w-full shrink-0 overflow-clip border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel max-md:w-full">
+        <ZoomImage
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          sizes="(min-width: 50rem) 440px, 100vw"
+          quality={90}
+          className="h-item-400 w-full object-cover"
+        />
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col gap-item-8">
+        <h3 className="font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary">
+          {title}
+        </h3>
+        <div className={bodyClass}>{children}</div>
+      </div>
+    </div>
   );
 }
 
@@ -245,19 +331,23 @@ export function ScreenCompare({ items }: ScreenCompareProps) {
   );
 }
 
-/** Two pictures side by side, stacked on narrow screens. */
-export function Pair({ children }: { children: ReactNode }) {
+/** Two pictures side by side (or three with `cols={3}`), stacked on narrow screens. */
+export function Pair({ children, cols = 2 }: { children: ReactNode; cols?: 2 | 3 }) {
   return (
-    <div className="grid grid-cols-2 items-start gap-item-20 max-md:grid-cols-1">
+    <div
+      className={`grid items-start gap-item-20 max-md:grid-cols-1 ${cols === 3 ? "grid-cols-3" : "grid-cols-2"}`}
+    >
       {children}
     </div>
   );
 }
 
-/** Metric cards in a row. */
+/** Metric cards in a row: two across, or three when there are three cards. */
 export function Stats({ children }: { children: ReactNode }) {
   return (
-    <div className="grid grid-cols-2 gap-item-20 max-md:grid-cols-1">
+    <div
+      className={`grid gap-item-20 max-md:grid-cols-1 ${Children.count(children) === 3 ? "grid-cols-3" : "grid-cols-2"}`}
+    >
       {children}
     </div>
   );

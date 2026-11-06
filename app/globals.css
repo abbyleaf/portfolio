@@ -285,6 +285,7 @@
   --spacing-item-320: 320px;
   --spacing-item-410: 410px;
   --spacing-item-400: 400px;
+  --spacing-item-300: 300px;
   --spacing-item-117_4: 117.38px;
   /* The two phone screenshots in a project card are sized and staggered as a
      share of the picture frame (222px wide in a 528px frame, shifted 117px and
@@ -297,6 +298,7 @@
   --aspect-project-card: 528 / 360;
 
   /* Layout widths */
+  --container-width-440: 440px;
   --container-width-520: 520px;
   --container-width-540: 540px;
   --container-width-580: 580px;
@@ -313,6 +315,7 @@
 
   /* Shape */
   --radius-pill: 999px;
+  --radius-image: 8px;
   --stroke-hairline: 1px;
   --stroke-sticker: 3px;
   --stroke-rule: 2px;

@@ -12,6 +12,8 @@ export type CaseStudyMeta = {
   summary?: string;
   hero?: { src: string; alt: string; width: number; height: number };
   platform?: string;
+  /** Replaces platform, timeline and role when a study needs different facts (e.g. two timelines). */
+  facts?: { label: string; value: string }[];
   timeline?: string;
   role?: string;
   team?: string;

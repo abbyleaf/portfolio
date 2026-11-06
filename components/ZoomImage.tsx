@@ -56,6 +56,9 @@ export function ZoomImage({ src, alt, width, height, sizes, quality, className }
           height={height}
           sizes={sizes}
           quality={quality}
+          // Next's image optimiser fetches the file itself without the visitor's cookie, so the
+          // proxy would 404 it. Files in a `locked` folder are therefore served as they are.
+          unoptimized={src.includes("/locked/")}
           className={className}
         />
       </button>

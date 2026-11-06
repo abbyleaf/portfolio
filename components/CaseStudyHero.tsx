@@ -8,11 +8,13 @@ const labelClass =
 
 /** Title block, cover picture and facts at the top of a case study. */
 export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
-  const facts = [
-    ["Platform", meta.platform],
-    ["Timeline", meta.timeline],
-    ["Role", meta.role],
-  ] as const;
+  const facts: readonly (readonly [string, string | undefined])[] = meta.facts
+    ? meta.facts.map(({ label, value }) => [label, value] as const)
+    : [
+        ["Platform", meta.platform],
+        ["Timeline", meta.timeline],
+        ["Role", meta.role],
+      ];
 
   return (
     <section
