@@ -123,7 +123,9 @@ export function Figure({
       sizes={sizes}
       // SVGs are not optimised by next/image; files in a `locked` folder must skip the optimiser.
       unoptimized={src.endsWith(".svg") || src.includes("/locked/")}
-      className="h-auto w-full"
+      // Stops the picture being dragged out of the page (it does not hide the file from anyone who looks).
+      draggable={false}
+      className="h-auto w-full select-none"
     />
   );
   return (
