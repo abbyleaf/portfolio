@@ -54,7 +54,7 @@ export function PasswordGate({
           </p>
           <h2
             id="password-title"
-            className="flex items-center gap-item-12 font-heading font-wonk text-heading-fraunces-xl text-text-primary"
+            className="flex items-center gap-item-12 font-heading font-wonk text-heading-fraunces-section text-text-primary"
           >
             <svg
               aria-hidden="true"

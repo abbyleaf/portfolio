@@ -14,6 +14,8 @@ const eyebrowClass =
 const bodyClass = "font-sans text-paragraph-md text-text-muted";
 const titleClass =
   "font-heading font-wonk text-heading-fraunces-xl text-text-primary";
+const sectionTitleClass =
+  "font-heading font-wonk text-heading-fraunces-section text-text-primary";
 
 type SectionProps = {
   /** Anchor for the contents rail; matches an entry in the frontmatter `toc`. */
@@ -44,7 +46,7 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
           {title ? (
             <div className="flex flex-col gap-item-12">
               <p className={eyebrowClass}>{eyebrow}</p>
-              <h2 id={id ? `${id}-title` : undefined} className={titleClass}>
+              <h2 id={id ? `${id}-title` : undefined} className={sectionTitleClass}>
                 {title}
               </h2>
             </div>
