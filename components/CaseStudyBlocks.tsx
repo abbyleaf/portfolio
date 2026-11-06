@@ -262,20 +262,18 @@ export function VideoPanel({
   label: string;
 }) {
   return (
-    <figure className="flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
+    <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
       <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
         {label}
       </figcaption>
       <div className="p-item-20 pt-0">
-        <div className="group/clip relative">
-          <LoopVideo
-            src={video}
-            label={alt}
-            size={size}
-            controls
-            className="h-auto w-full rounded-image shadow-image"
-          />
-        </div>
+        <LoopVideo
+          src={video}
+          label={alt}
+          size={size}
+          controls
+          className="h-auto w-full rounded-image shadow-image"
+        />
       </div>
     </figure>
   );
