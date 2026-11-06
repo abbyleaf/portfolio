@@ -106,7 +106,7 @@ While the portfolio is unfinished, the live site (abigailyeap.com) can show only
 - The switch is `comingSoonOnLiveSite` in `content/site.ts`. `true` means the live site shows the coming-soon page. `false` means it shows the full site.
 - `proxy.ts` applies it only when Vercel's `VERCEL_ENV` is `production`, so `test` and `staging` always keep the full site.
 - While on, every page on the live site shows the coming-soon page, and `/images`, `/videos`, `/resume.pdf` and `/_next/image` return 404.
-- When the user says **"activate coming soon"**, set `comingSoonOnLiveSite` to `true`. When they say **"deactivate coming soon"**, set it to `false`. Commit and push to `test` like any change, then tell the user it goes live only after "push to production". If they asked for it to go live now, follow the "Push to production" steps below, and in the changes list say whether the live site is going to coming soon or back to the full site.
+- When the user says **"activate coming soon"**, set `comingSoonOnLiveSite` to `true`. When they say **"deactivate coming soon"**, set it to `false`. Commit it like any change (do not push until asked), then tell the user it goes live only after "push to test", "push to staging" and "push to production" as they choose. If they asked for it to go live now, follow the "Push to production" steps below, and in the changes list say whether the live site is going to coming soon or back to the full site.
 - Never delete `proxy.ts` or edit pages to turn it on or off.
 - `COMING_SOON=true` forces it on anywhere, e.g. `COMING_SOON=true npm run dev` to preview it locally. The page is also always reachable at `/coming-soon`.
 - The page uses no images, so nothing unfinished is exposed. Keep it that way, and keep it in the portfolio style (tokens, stickers, rulers) like every other page.
@@ -121,7 +121,9 @@ Branches and links:
 
 Default behaviour:
 - Always work on the `test` branch. At the start of every session, check the current branch and switch to `test` if needed.
-- "Commit and push" means commit and push to `test` only.
+- **Never publish on your own.** Every push to GitHub starts a Vercel deployment, and Vercel's free plan allows only 100 a day. Commit changes locally as you go (a commit publishes nothing), and leave them there.
+- Push to `test` only when the user says **"push to test"**. Push to `staging` only when they say **"push to staging"**. Release to production only when they say **"push to production"**. Saying "commit" alone, or finishing a change, never means push. Do not retry or queue a push the user has not asked for.
+- When you finish a change, say whether it is committed only, and how many commits are waiting to be pushed to `test`.
 - Never push to, merge into, or open pull requests against `staging` or `main` unless the user says "push to staging" or "push to production".
 
 "Push to staging":
