@@ -205,6 +205,8 @@ type ImageFigureProps = {
   bleed?: boolean;
   /** For a screenshot: rounded corners, the soft image shadow and a canvas-coloured panel. */
   framed?: boolean;
+  /** 16px of padding all round instead of 20px. */
+  compact?: boolean;
 };
 
 /**
@@ -221,17 +223,18 @@ export function ImageFigure({
   selected,
   bleed,
   framed,
+  compact,
 }: ImageFigureProps) {
   return (
     <figure
       className={`flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle ${bleed || framed ? "bg-surface-canvas" : "bg-surface-panel"}`}
     >
       <figcaption
-        className={`px-item-20 py-item-20 font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
+        className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
       >
         {label}
       </figcaption>
-      <div className={bleed ? undefined : "p-item-20 pt-0"}>
+      <div className={bleed ? undefined : `${compact ? "p-item-16" : "p-item-20"} pt-0`}>
         <ZoomImage
           src={src}
           alt={alt}
