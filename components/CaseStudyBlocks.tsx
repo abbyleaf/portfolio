@@ -258,6 +258,7 @@ export function VideoPanel({
   small,
   controls = true,
   cover,
+  compact,
 }: {
   video: string;
   alt: string;
@@ -269,13 +270,15 @@ export function VideoPanel({
   controls?: boolean;
   /** Crops the clip to fill `size` (its box) instead of showing it whole, to line up with neighbouring panels. */
   cover?: boolean;
+  /** 16px of padding all round instead of 20px. */
+  compact?: boolean;
 }) {
   return (
     <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
-      <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
+      <figcaption className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase text-text-sub-headers`}>
         {label}
       </figcaption>
-      <div className="p-item-20 pt-0">
+      <div className={`${compact ? "p-item-16" : "p-item-20"} pt-0`}>
         <LoopVideo
           src={video}
           label={alt}
