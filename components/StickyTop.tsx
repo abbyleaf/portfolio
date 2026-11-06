@@ -10,14 +10,7 @@ const GROW_AT = 12;
  * placeholder the size of the full-height bars keeps the page from jumping when
  * the header shrinks. Children read the state through `group-data-scrolled/bar`.
  */
-export function StickyTop({
-  children,
-  compact,
-}: {
-  children: ReactNode;
-  /** For a 64px header (case study pages) instead of the 80px site header. */
-  compact?: boolean;
-}) {
+export function StickyTop({ children }: { children: ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -33,7 +26,7 @@ export function StickyTop({
   return (
     <div className="relative shrink-0">
       <div aria-hidden="true" className="invisible">
-        <div className={compact ? "h-item-64" : "h-item-80"} />
+        <div className="h-item-72" />
         <div className="h-item-30" />
       </div>
       <div

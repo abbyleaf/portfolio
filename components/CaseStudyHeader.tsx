@@ -14,7 +14,7 @@ type CaseStudyHeaderProps = {
  */
 export function CaseStudyHeader({ name, nextHref }: CaseStudyHeaderProps) {
   return (
-    <header className="relative h-item-64 shrink-0 motion-safe:transition-[height] motion-safe:duration-200 group-data-scrolled/bar:h-item-54 border-b-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24">
+    <header className="relative h-item-72 shrink-0 motion-safe:transition-[height] motion-safe:duration-200 group-data-scrolled/bar:h-item-54 border-b-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24">
       <div className="mx-auto flex h-full w-full max-w-width-1400 items-center justify-between gap-item-16">
         <Link
           href="/"
