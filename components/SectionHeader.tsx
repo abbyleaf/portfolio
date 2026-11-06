@@ -4,6 +4,8 @@ type SectionHeaderProps = {
   subtitle: string;
   tone?: "cool" | "warm";
   titleId?: string;
+  /** The page title on a page with no other h1; every other header stays an h2. */
+  as?: "h1" | "h2";
 };
 
 export function SectionHeader({
@@ -12,13 +14,14 @@ export function SectionHeader({
   subtitle,
   tone = "cool",
   titleId,
+  as: Heading = "h2",
 }: SectionHeaderProps) {
   return (
     <div className="flex flex-col gap-item-18">
       <p className="font-mono text-mono-marker uppercase text-text-muted">
         {marker}
       </p>
-      <h2 id={titleId} className="flex flex-col">
+      <Heading id={titleId} className="flex flex-col">
         <span className="font-sans text-heading-inter-xl text-text-primary">
           {title}
         </span>
@@ -29,7 +32,7 @@ export function SectionHeader({
         >
           {subtitle}
         </span>
-      </h2>
+      </Heading>
     </div>
   );
 }

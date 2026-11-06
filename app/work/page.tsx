@@ -23,6 +23,7 @@ export default function WorkPage() {
             title="All case studies"
             subtitle="The problems, decisions and outcomes."
             titleId="work-title"
+            as="h1"
           />
           <CaseStudyList studies={workStudies} />
         </div>
