@@ -25,21 +25,16 @@ export async function CaseStudyLayout({
   locked,
 }: CaseStudyLayoutProps) {
   const current = workStudies.find((study) => study.slug === slug);
-  const next = workStudies.find((study) => study.slug === meta.next);
-  const nextAvailable = next ? await isCaseStudyVisible(next.slug) : false;
-  // The header's next link walks the list in order, skips studies that are not visible and
-  // wraps from the last one back to the first.
-  const index = workStudies.findIndex((study) => study.slug === slug);
-  let headerNextHref: string | undefined;
-  for (let step = 1; step < workStudies.length; step++) {
-    const candidate = workStudies[(index + step) % workStudies.length];
-    if (await isCaseStudyVisible(candidate.slug)) {
-      headerNextHref = `/case-studies/${candidate.slug}`;
-      break;
-    }
+  // The next study walks the list in order, skips studies that are not visible and wraps
+  // from the last one back to the first.
+  const visible: typeof workStudies = [];
+  for (const study of workStudies) {
+    if (study.slug === slug || (await isCaseStudyVisible(study.slug))) visible.push(study);
   }
+  const index = visible.findIndex((study) => study.slug === slug);
+  const next = visible.length > 1 ? visible[(index + 1) % visible.length] : undefined;
   const position = next
-    ? `${String(workStudies.indexOf(next) + 1).padStart(2, "0")} / ${String(workStudies.length).padStart(2, "0")}`
+    ? `${String(visible.indexOf(next) + 1).padStart(2, "0")} / ${String(visible.length).padStart(2, "0")}`
     : "";
 
   return (
@@ -47,7 +42,7 @@ export async function CaseStudyLayout({
       <StickyTop compact>
         <CaseStudyHeader
           name={current?.shortTitle ?? meta.title}
-          nextHref={headerNextHref}
+          nextHref={next ? `/case-studies/${next.slug}` : undefined}
         />
         <Ruler
           edge="top"
@@ -65,10 +60,8 @@ export async function CaseStudyLayout({
           {children}
         </div>
       </main>
-      {next && (
-        <CaseStudyNext study={next} position={position} available={nextAvailable} />
-      )}
       <Ruler edge="bottom" left="CASE / END" right="EST. 2026" jump={false} />
+      {next && <CaseStudyNext study={next} position={position} available />}
       <SiteFooter />
     </div>
   );
