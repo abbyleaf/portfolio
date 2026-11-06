@@ -411,10 +411,19 @@ export function ScreenCompare({ items }: ScreenCompareProps) {
 }
 
 /** Two pictures side by side (or three with `cols={3}`), stacked on narrow screens. */
-export function Pair({ children, cols = 2 }: { children: ReactNode; cols?: 2 | 3 }) {
+export function Pair({
+  children,
+  cols = 2,
+  tight,
+}: {
+  children: ReactNode;
+  cols?: 2 | 3;
+  /** A 16px gap between the pictures instead of 20px. */
+  tight?: boolean;
+}) {
   return (
     <div
-      className={`grid items-start gap-item-20 max-md:grid-cols-1 ${cols === 3 ? "grid-cols-3" : "grid-cols-2"}`}
+      className={`grid items-start ${tight ? "gap-item-16" : "gap-item-20"} max-md:grid-cols-1 ${cols === 3 ? "grid-cols-3" : "grid-cols-2"}`}
     >
       {children}
     </div>
