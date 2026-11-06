@@ -88,6 +88,8 @@ type FigureProps = {
   scroll?: boolean;
   /** Keeps the picture at its own width (never enlarged) and centres it, for illustrations. */
   natural?: boolean;
+  /** Set to false for a picture that should not open in the lightbox. */
+  zoom?: boolean;
   sizes?: string;
 };
 
@@ -100,15 +102,27 @@ export function Figure({
   label,
   scroll,
   natural,
+  zoom = true,
   sizes = "(min-width: 50rem) 780px, 100vw",
 }: FigureProps) {
-  const image = (
+  const image = zoom ? (
     <ZoomImage
       src={src}
       alt={alt}
       width={width}
       height={height}
       sizes={sizes}
+      className="h-auto w-full"
+    />
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      sizes={sizes}
+      // SVGs are not optimised by next/image; files in a `locked` folder must skip the optimiser.
+      unoptimized={src.endsWith(".svg") || src.includes("/locked/")}
       className="h-auto w-full"
     />
   );
