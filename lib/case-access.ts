@@ -7,8 +7,8 @@
  */
 
 export const ACCESS_COOKIE = "case-study-access";
-/** How long an unlock lasts: 30 days. */
-export const ACCESS_MAX_AGE = 60 * 60 * 24 * 30;
+/** How long an unlock lasts: 15 days. */
+export const ACCESS_MAX_AGE = 60 * 60 * 24 * 15;
 
 const PHRASE = "case-study-access:v1";
 
