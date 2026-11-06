@@ -319,6 +319,7 @@
   /* Shape */
   --radius-pill: 999px;
   --radius-image: 8px;
+  --radius-image-sm: 4px;
   --stroke-hairline: 1px;
   --stroke-sticker: 3px;
   --stroke-rule: 2px;

@@ -255,11 +255,14 @@ export function VideoPanel({
   alt,
   size,
   label,
+  small,
 }: {
   video: string;
   alt: string;
   size: { width: number; height: number };
   label: string;
+  /** Tighter 4px corners, for a clip shown in a narrow panel. */
+  small?: boolean;
 }) {
   return (
     <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
@@ -272,7 +275,7 @@ export function VideoPanel({
           label={alt}
           size={size}
           controls
-          className="h-auto w-full rounded-image shadow-image"
+          className={`h-auto w-full shadow-image ${small ? "rounded-image-sm" : "rounded-image"}`}
         />
       </div>
     </figure>
