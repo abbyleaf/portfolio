@@ -328,13 +328,16 @@ export function Shot({
  */
 export function ImageText({
   src,
+  video,
   alt,
   width,
   height,
   title,
   children,
 }: {
-  src: string;
+  /** A picture, or a looping `video` in its place (then `width` and `height` are the clip's size). */
+  src?: string;
+  video?: string;
   alt: string;
   width: number;
   height: number;
@@ -343,16 +346,26 @@ export function ImageText({
 }) {
   return (
     <div className="flex items-end gap-item-32 max-md:flex-col max-md:items-stretch">
-      <div className="h-item-400 w-width-440 max-w-full shrink-0 overflow-clip border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel max-md:w-full">
-        <ZoomImage
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          sizes="(min-width: 50rem) 440px, 100vw"
-          quality={90}
-          className="h-item-400 w-full object-cover"
-        />
+      <div className="group/clip relative h-item-400 w-width-440 max-w-full shrink-0 overflow-clip border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-panel max-md:w-full">
+        {video ? (
+          <LoopVideo
+            src={video}
+            label={alt}
+            size={{ width, height }}
+            controls
+            className="h-item-400 w-full object-cover"
+          />
+        ) : (
+          <ZoomImage
+            src={src ?? ""}
+            alt={alt}
+            width={width}
+            height={height}
+            sizes="(min-width: 50rem) 440px, 100vw"
+            quality={90}
+            className="h-item-400 w-full object-cover"
+          />
+        )}
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-item-8">
         <h3 className="font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary">
