@@ -203,7 +203,7 @@ type ImageFigureProps = {
    * under the caption, on the canvas colour, instead of floating inside the panel padding.
    */
   bleed?: boolean;
-  /** For a screenshot: rounded corners and the soft image shadow. */
+  /** For a screenshot: rounded corners, the soft image shadow and a canvas-coloured panel. */
   framed?: boolean;
 };
 
@@ -224,7 +224,7 @@ export function ImageFigure({
 }: ImageFigureProps) {
   return (
     <figure
-      className={`flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle ${bleed ? "bg-surface-canvas" : "bg-surface-panel"}`}
+      className={`flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle ${bleed || framed ? "bg-surface-canvas" : "bg-surface-panel"}`}
     >
       <figcaption
         className={`px-item-20 py-item-20 font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
