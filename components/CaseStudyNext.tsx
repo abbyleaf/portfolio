@@ -18,7 +18,7 @@ export function CaseStudyNext({ study, position, available }: CaseStudyNextProps
       aria-label="Next case study"
       className="flex items-center gap-item-48 bg-surface-light-accent-warm px-item-80 py-item-47 max-xl:px-item-40 max-md:flex-col max-md:items-start max-md:gap-item-24 max-md:px-item-24"
     >
-      <div className="flex min-w-0 flex-1 flex-col gap-item-12">
+      <div className="flex min-w-0 flex-1 flex-col gap-item-20">
         <p className="font-mono text-mono-m uppercase text-text-accent-warm">
           Next case study * {position}
         </p>

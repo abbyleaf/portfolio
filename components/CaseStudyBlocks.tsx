@@ -42,7 +42,7 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
       >
         <header className="flex flex-col gap-item-20">
           {title ? (
-            <div className="flex flex-col gap-item-12">
+            <div className="flex flex-col gap-item-20">
               <p className={eyebrowClass}>{eyebrow}</p>
               <h2 id={id ? `${id}-title` : undefined} className={sectionTitleClass}>
                 {title}
