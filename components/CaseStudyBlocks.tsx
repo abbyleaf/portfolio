@@ -37,7 +37,8 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
         id={id}
         aria-labelledby={id ? `${id}-title` : undefined}
         data-ruler-section={eyebrow}
-        className="flex scroll-mt-item-20 flex-col gap-item-28"
+        // Paragraphs written straight into a section in the MDX are plain HTML, so they get the body style here.
+        className="flex scroll-mt-item-20 flex-col gap-item-28 [&>p]:font-sans [&>p]:text-paragraph-md [&>p]:text-text-muted [&>p>strong]:font-semibold [&>p>strong]:text-text-muted"
       >
         <header className="flex flex-col gap-item-20">
           {title ? (
