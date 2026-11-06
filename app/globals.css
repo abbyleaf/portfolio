@@ -316,6 +316,7 @@
   --stroke-hairline: 1px;
   --stroke-sticker: 3px;
   --stroke-rule: 2px;
+  --stroke-outline-text: 1.5px;
 
   /* Zoom applied to a project picture while its card is hovered. */
   --scale-media-hover: 1.1;
@@ -414,13 +415,13 @@
 }
 
 /*
- * Hollow lettering with a hairline ink outline that sits outside the letters. CSS strokes
+ * Hollow lettering with a 1.5px ink outline that sits outside the letters. CSS strokes
  * are centred on the edge, so the stroke is twice the width and drawn under a fill that
  * matches the page (surface-primary), which hides the inner half.
  */
 @utility text-outline {
   color: var(--color-surface-primary);
-  -webkit-text-stroke: calc(var(--stroke-hairline) * 2) var(--color-grey-10);
+  -webkit-text-stroke: calc(var(--stroke-outline-text) * 2) var(--color-grey-10);
   paint-order: stroke fill;
 }
 
