@@ -404,7 +404,7 @@ export function Stat({
 /** A pulled-out finding, with a blue rule down the left. */
 export function Quote({ children }: { children: ReactNode }) {
   return (
-    <blockquote className="flex flex-col gap-item-28 border-l-(length:--stroke-sticker) border-blue-300 pl-item-36 font-sans text-paragraph-quote text-text-muted">
+    <blockquote className="flex flex-col gap-item-28 border-l-(length:--stroke-sticker) border-blue-300 pl-item-36 font-sans text-paragraph-blockquote text-text-muted">
       {children}
     </blockquote>
   );
