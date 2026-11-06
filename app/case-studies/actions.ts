@@ -19,7 +19,14 @@ export async function unlock(
 ): Promise<UnlockState> {
   const password = process.env.CASE_STUDY_PASSWORD;
   if (!password) {
-    return { error: "Access is not set up yet. Please contact me." };
+    // TEMPORARY diagnostic, to find out why Vercel does not pass the variable on. It shows
+    // where the site is running and whether the variable exists; it never shows the value.
+    // Remove the parenthesis once the password works.
+    const where = `${process.env.VERCEL_ENV ?? "no VERCEL_ENV"}, branch ${process.env.VERCEL_GIT_COMMIT_REF ?? "none"}`;
+    const state = password === undefined ? "missing" : "empty";
+    return {
+      error: `Access is not set up yet. Please contact me. (Diagnostic: ${where}; CASE_STUDY_PASSWORD is ${state}.)`,
+    };
   }
   const typed = formData.get("password");
   if (typeof typed !== "string" || !(await passwordMatches(typed))) {
