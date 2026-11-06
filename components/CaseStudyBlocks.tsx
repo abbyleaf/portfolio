@@ -246,6 +246,41 @@ export function ImageFigure({
   );
 }
 
+/**
+ * A wide screen recording on a canvas panel, with its caption as real text. The clip loops, has
+ * rounded corners and the image shadow, and shows pause and replay buttons on hover.
+ */
+export function VideoPanel({
+  video,
+  alt,
+  size,
+  label,
+}: {
+  video: string;
+  alt: string;
+  size: { width: number; height: number };
+  label: string;
+}) {
+  return (
+    <figure className="flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
+      <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
+        {label}
+      </figcaption>
+      <div className="p-item-20 pt-0">
+        <div className="group/clip relative">
+          <LoopVideo
+            src={video}
+            label={alt}
+            size={size}
+            controls
+            className="h-auto w-full rounded-image shadow-image"
+          />
+        </div>
+      </div>
+    </figure>
+  );
+}
+
 /** A picture with a mono caption underneath, inside a 300px-high frame (cropped to fill). */
 export function Shot({
   src,
