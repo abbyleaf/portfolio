@@ -45,7 +45,7 @@ export async function CaseStudyLayout({
           star
         />
       </StickyTop>
-      <main className="relative px-item-64 py-item-60 max-xl:px-item-40 max-md:px-item-24 max-md:py-item-40 toc:px-0">
+      <main className="relative px-item-64 pt-item-60 pb-item-80 max-xl:px-item-40 max-md:px-item-24 max-md:pt-item-40 toc:px-0">
         {meta.toc && (
           <CaseStudyToc items={meta.toc} lockedFrom={locked ? meta.lockedFrom : undefined} />
         )}
