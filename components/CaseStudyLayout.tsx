@@ -27,6 +27,17 @@ export async function CaseStudyLayout({
   const current = workStudies.find((study) => study.slug === slug);
   const next = workStudies.find((study) => study.slug === meta.next);
   const nextAvailable = next ? await isCaseStudyVisible(next.slug) : false;
+  // The header's next link walks the list in order, skips studies that are not visible and
+  // wraps from the last one back to the first.
+  const index = workStudies.findIndex((study) => study.slug === slug);
+  let headerNextHref: string | undefined;
+  for (let step = 1; step < workStudies.length; step++) {
+    const candidate = workStudies[(index + step) % workStudies.length];
+    if (await isCaseStudyVisible(candidate.slug)) {
+      headerNextHref = `/case-studies/${candidate.slug}`;
+      break;
+    }
+  }
   const position = next
     ? `${String(workStudies.indexOf(next) + 1).padStart(2, "0")} / ${String(workStudies.length).padStart(2, "0")}`
     : "";
@@ -36,7 +47,7 @@ export async function CaseStudyLayout({
       <StickyTop compact>
         <CaseStudyHeader
           name={current?.shortTitle ?? meta.title}
-          nextHref={next && nextAvailable ? `/case-studies/${next.slug}` : undefined}
+          nextHref={headerNextHref}
         />
         <Ruler
           edge="top"
