@@ -2,10 +2,6 @@ import Image from "next/image";
 import { LoopVideo } from "./LoopVideo";
 
 const covers: Record<string, { src: string; alt: string }> = {
-  "order-splitting": {
-    src: "/images/home/case-study-2-cover.png",
-    alt: "Soft green and lilac gradient cover for the order splitting case study",
-  },
   "manual-route-planning": {
     src: "/images/home/case-study-3-cover.png",
     alt: "Route planning interface on a desktop monitor",
@@ -19,6 +15,15 @@ export function ProjectCover({ slug }: { slug: string }) {
       <LoopVideo
         src="/videos/case-study-1-hero.mp4"
         label="Campus ride app showing shuttle and on-demand booking side by side"
+        className="size-full object-cover"
+      />
+    );
+  }
+  if (slug === "order-splitting") {
+    return (
+      <LoopVideo
+        src="/videos/case-study-2-hero.mp4"
+        label="Animated order splitting interface on a soft green and lilac gradient"
         className="size-full object-cover"
       />
     );
