@@ -32,7 +32,9 @@ const groups = new Map<string, Set<HTMLVideoElement>>();
 function playAll(videos: Iterable<HTMLVideoElement>, fromStart: boolean) {
   const list = [...videos];
   if (fromStart) for (const v of list) v.currentTime = 0;
-  for (const v of list) void v.play();
+  // The browser can refuse or interrupt play() (for example when it pauses an off-screen silent video
+  // to save power). That is harmless, so the rejection is swallowed instead of becoming an error.
+  for (const v of list) v.play().catch(() => {});
 }
 
 /** A silent looping clip that holds on its first frame for reduced-motion users. */
