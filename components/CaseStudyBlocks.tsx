@@ -256,6 +256,7 @@ export function VideoPanel({
   size,
   label,
   small,
+  controls = true,
 }: {
   video: string;
   alt: string;
@@ -263,6 +264,8 @@ export function VideoPanel({
   label: string;
   /** Tighter 4px corners, for a clip shown in a narrow panel. */
   small?: boolean;
+  /** Pause and replay buttons on hover; turn off for a very short clip. */
+  controls?: boolean;
 }) {
   return (
     <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
@@ -274,7 +277,7 @@ export function VideoPanel({
           src={video}
           label={alt}
           size={size}
-          controls
+          controls={controls}
           className={`h-auto w-full shadow-image ${small ? "rounded-image-sm" : "rounded-image"}`}
         />
       </div>
