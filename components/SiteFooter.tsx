@@ -5,7 +5,8 @@ import { isCaseStudyVisible } from "@/lib/case-studies";
 const labelClass =
   "font-sans text-label-upper uppercase text-grey-44";
 
-export async function SiteFooter() {
+/** `comingSoon` drops what would lead to hidden pages: the résumé and the case study list. */
+export async function SiteFooter({ comingSoon }: { comingSoon?: boolean } = {}) {
   const visible = await Promise.all(
     caseStudies.map((study) => isCaseStudyVisible(study.slug)),
   );
@@ -24,7 +25,9 @@ export async function SiteFooter() {
         <nav aria-label="My info" className="flex flex-col gap-item-10">
           <p className={labelClass}>My info</p>
           <ul className="flex flex-col gap-item-6">
-            {footerLinks.map((link) => (
+            {footerLinks
+              .filter((link) => !(comingSoon && link.href.endsWith(".pdf")))
+              .map((link) => (
               <li key={link.label}>
                 <a
                   href={link.href}
@@ -40,6 +43,7 @@ export async function SiteFooter() {
             ))}
           </ul>
         </nav>
+        {!comingSoon && (
         <nav
           aria-label="Recommended case studies"
           className="flex flex-col gap-item-10"
@@ -65,6 +69,7 @@ export async function SiteFooter() {
             ))}
           </ol>
         </nav>
+        )}
       </div>
       <p className="w-full max-w-width-1400 border-t-(length:--stroke-hairline) border-grey-10/10 pt-item-33 text-center font-sans text-label-caption uppercase text-text-sub-headers">
         © Copyright 2026 Abigail Yeap · Singapore

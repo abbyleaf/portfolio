@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { Ruler } from "@/components/Ruler";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Star } from "@/components/Star";
 
 export const metadata: Metadata = {
@@ -84,9 +85,7 @@ export default function ComingSoon() {
         </div>
       </main>
       <Ruler edge="bottom" left="COMING SOON / END" right="EST. 2026" jump={false} />
-      <p className="bg-surface-primary px-item-24 py-item-24 text-center font-sans text-label-caption uppercase text-text-sub-headers">
-        © Copyright 2026 Abigail Yeap · Singapore
-      </p>
+      <SiteFooter comingSoon />
     </div>
   );
 }
