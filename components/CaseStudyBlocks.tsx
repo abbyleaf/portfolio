@@ -86,6 +86,8 @@ type FigureProps = {
   label?: string;
   /** Wide diagrams keep their size on narrow screens and scroll sideways instead. */
   scroll?: boolean;
+  /** Keeps the picture at its own width (never enlarged) and centres it, for illustrations. */
+  natural?: boolean;
   sizes?: string;
 };
 
@@ -97,6 +99,7 @@ export function Figure({
   height,
   label,
   scroll,
+  natural,
   sizes = "(min-width: 50rem) 780px, 100vw",
 }: FigureProps) {
   const image = (
@@ -124,6 +127,10 @@ export function Figure({
           className="overflow-x-auto"
         >
           <div className="min-w-width-640">{image}</div>
+        </div>
+      ) : natural ? (
+        <div className="mx-auto w-full" style={{ maxWidth: width }}>
+          {image}
         </div>
       ) : (
         image
