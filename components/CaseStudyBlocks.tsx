@@ -65,12 +65,15 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
 export function Subhead({
   title,
   children,
+  spaced,
 }: {
   title: string;
   children?: ReactNode;
+  /** Adds 28px above, so the space from the block before is 56px instead of the section's 28px. */
+  spaced?: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-item-20">
+    <div className={`flex flex-col gap-item-20 ${spaced ? "mt-item-28" : ""}`}>
       <h3 className={sectionTitleClass}>{title}</h3>
       {/* Paragraphs written inside a block are plain HTML, so this sets their text style. */}
       <div className={`${bodyClass} flex flex-col gap-item-20`}>{children}</div>
