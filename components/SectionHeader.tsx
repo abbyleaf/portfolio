@@ -2,7 +2,7 @@ type SectionHeaderProps = {
   marker: string;
   title: string;
   subtitle: string;
-  tone?: "cool" | "warm";
+  tone?: "cool" | "warm" | "pink";
   titleId?: string;
   /** The page title on a page with no other h1; every other header stays an h2. */
   as?: "h1" | "h2";
@@ -27,7 +27,11 @@ export function SectionHeader({
         </span>
         <span
           className={`font-heading font-wonk text-heading-fraunces-italic-xl italic ${
-            tone === "warm" ? "text-text-accent-warm" : "text-text-accent-cool"
+            tone === "warm"
+              ? "text-text-accent-warm"
+              : tone === "pink"
+                ? "text-red-400"
+                : "text-text-accent-cool"
           }`}
         >
           {subtitle}

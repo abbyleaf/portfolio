@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { AboutHeading } from "@/components/AboutHeading";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { Marquee } from "@/components/Marquee";
 import { PageFrame } from "@/components/PageFrame";
 import { PortraitPolaroid } from "@/components/PortraitPolaroid";
+import { SectionHeader } from "@/components/SectionHeader";
 import { Tag } from "@/components/Tag";
 import { howIWork } from "@/content/home";
 import {
@@ -103,11 +103,12 @@ export default function AboutPage() {
       >
         <div className="mx-auto flex w-full max-w-width-1200 items-start gap-item-80 max-lg:flex-col max-lg:gap-item-40">
           <div className={sideColumn}>
-            <AboutHeading
-              id="experience-title"
+            <SectionHeader
+              titleId="experience-title"
               marker="Experience"
-              lead="Nine years,"
-              accent="two companies."
+              title="Nine years,"
+              subtitle="two companies."
+              tone="pink"
             />
           </div>
           <ol className="flex min-w-0 flex-1 flex-col">
@@ -150,11 +151,12 @@ export default function AboutPage() {
       >
         <div className="mx-auto flex w-full max-w-width-1200 items-start gap-item-40 max-lg:flex-col">
           <div className={sideColumn}>
-            <AboutHeading
-              id="skills-title"
+            <SectionHeader
+              titleId="skills-title"
               marker="Skills"
-              lead="What I bring"
-              accent="to the table"
+              title="What I bring"
+              subtitle="to the table"
+              tone="pink"
             />
           </div>
           <div className="grid min-w-0 flex-1 grid-cols-2 gap-item-36 max-md:grid-cols-1">
