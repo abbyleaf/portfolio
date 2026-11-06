@@ -11,7 +11,7 @@ export async function SiteFooter({ comingSoon }: { comingSoon?: boolean } = {}) 
     caseStudies.map((study) => isCaseStudyVisible(study.slug)),
   );
   return (
-    <footer id="contact" data-ruler-section="Contact" className="flex flex-col border-t-(length:--stroke-rule) border-border-strong items-center gap-item-m bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24 pb-item-m pt-item-56">
+    <footer id="contact" data-ruler-section="Contact" className="flex flex-col items-center gap-item-m bg-surface-primary px-item-64 max-xl:px-item-40 max-md:px-item-24 pb-item-m pt-item-56">
       <div className="grid min-h-item-117_4 w-full max-w-width-1400 grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] gap-item-40 max-md:grid-cols-1">
         <div className="flex flex-col gap-item-9">
           <p className={labelClass}>Work with me</p>
