@@ -3,18 +3,12 @@ import { Button } from "./Button";
 
 type CaseStudyNextProps = {
   study: CaseStudySummary;
-  /** Position of this study in the list, e.g. "02 / 05". */
-  position: string;
   /** False while the study is a hidden draft: shows "Coming soon" instead of a link. */
   available: boolean;
 };
 
 /** Closing band that points to the next case study. */
-export function CaseStudyNext({
-  study,
-  position,
-  available,
-}: CaseStudyNextProps) {
+export function CaseStudyNext({ study, available }: CaseStudyNextProps) {
   const words = study.shortTitle.split(" ");
   const last = words.pop();
   return (
@@ -25,7 +19,7 @@ export function CaseStudyNext({
       <div className="mx-auto flex w-full max-w-width-1400 items-center gap-item-48 max-md:flex-col max-md:items-start max-md:gap-item-24">
         <div className="flex min-w-0 flex-1 flex-col gap-item-20">
           <p className="font-mono text-mono-m uppercase text-text-accent-warm">
-            Next case study * {position}
+            Next case study
           </p>
           <p className="font-heading font-wonk text-heading-fraunces-band text-text-primary max-md:text-heading-fraunces-xl">
             {words.join(" ")}{" "}

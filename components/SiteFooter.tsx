@@ -49,10 +49,9 @@ export async function SiteFooter({ comingSoon }: { comingSoon?: boolean } = {}) 
           className="flex flex-col gap-item-10"
         >
           <p className={labelClass}>Recommended case studies</p>
-          <ol className="flex flex-col gap-item-6">
+          <ul className="flex flex-col gap-item-6">
             {caseStudies.map((study, index) => (
               <li key={study.slug} className="font-sans text-label-sm text-text-primary">
-                {study.number} —{" "}
                 {visible[index] ? (
                   <Link
                     href={`/case-studies/${study.slug}`}
@@ -67,7 +66,7 @@ export async function SiteFooter({ comingSoon }: { comingSoon?: boolean } = {}) 
                 )}
               </li>
             ))}
-          </ol>
+          </ul>
         </nav>
         )}
       </div>

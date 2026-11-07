@@ -29,13 +29,12 @@ export async function CaseStudyLayout({
   // from the last one back to the first.
   const visible: typeof workStudies = [];
   for (const study of workStudies) {
-    if (study.slug === slug || (await isCaseStudyVisible(study.slug))) visible.push(study);
+    if (study.slug === slug || (await isCaseStudyVisible(study.slug)))
+      visible.push(study);
   }
   const index = visible.findIndex((study) => study.slug === slug);
-  const next = visible.length > 1 ? visible[(index + 1) % visible.length] : undefined;
-  const position = next
-    ? `${String(visible.indexOf(next) + 1).padStart(2, "0")} / ${String(visible.length).padStart(2, "0")}`
-    : "";
+  const next =
+    visible.length > 1 ? visible[(index + 1) % visible.length] : undefined;
 
   return (
     <div className="flex flex-1 flex-col bg-surface-primary">
@@ -53,7 +52,10 @@ export async function CaseStudyLayout({
       </StickyTop>
       <main className="relative px-item-64 pt-item-60 pb-item-80 max-xl:px-item-40 max-md:px-item-24 max-md:pt-item-40 toc:px-0">
         {meta.toc && (
-          <CaseStudyToc items={meta.toc} lockedFrom={locked ? meta.lockedFrom : undefined} />
+          <CaseStudyToc
+            items={meta.toc}
+            lockedFrom={locked ? meta.lockedFrom : undefined}
+          />
         )}
         <div className="study-column flex flex-col">
           <CaseStudyHero meta={meta} />
@@ -61,7 +63,7 @@ export async function CaseStudyLayout({
         </div>
       </main>
       <Ruler edge="bottom" left="CASE / END" right="EST. 2026" jump={false} />
-      {next && <CaseStudyNext study={next} position={position} available />}
+      {next && <CaseStudyNext study={next} available />}
       <SiteFooter />
     </div>
   );
