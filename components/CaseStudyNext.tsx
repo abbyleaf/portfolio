@@ -14,7 +14,7 @@ export function CaseStudyNext({ study, available }: CaseStudyNextProps) {
   return (
     <section
       aria-label="Next case study"
-      className="border-b-(length:--stroke-rule) border-border-strong bg-surface-light-accent-warm px-item-80 py-item-47 max-xl:px-item-40 max-md:px-item-24"
+      className="border-b-(length:--stroke-rule) border-border-strong bg-surface-light-accent-warm px-item-64 py-item-47 max-xl:px-item-40 max-md:px-item-24"
     >
       <div className="mx-auto flex w-full max-w-width-1400 items-center gap-item-48 max-md:flex-col max-md:items-start max-md:gap-item-24">
         <div className="flex min-w-0 flex-1 flex-col gap-item-20">
