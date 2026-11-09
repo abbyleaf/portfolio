@@ -120,6 +120,10 @@
   --text-paragraph-md--line-height: 1.5rem;
   --text-paragraph-md--font-weight: 400;
 
+  --text-paragraph-sm: 0.875rem;
+  --text-paragraph-sm--line-height: 1.3125rem;
+  --text-paragraph-sm--font-weight: 400;
+
   --text-label-md: 0.8125rem;
   --text-label-md--line-height: 1;
   --text-label-md--font-weight: 500;
