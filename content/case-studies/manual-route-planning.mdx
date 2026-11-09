@@ -41,9 +41,7 @@ toc:
   - id: route-rules
     label: Rules and Exceptions
   - id: violations-v2
-    label: Violations
-  - id: decision-2
-    label: Information Design
+    label: Understanding Violations
   - id: testing
     label: Testing and Refinement
   - id: outcome
@@ -270,9 +268,9 @@ lockedFrom: solution
 
 <Section
   id="violations-v2"
-  eyebrow="Violations"
-  title="Give planners enough context to investigate a warning"
-  intro="The first release placed violation indicators in the planning tables, using icons to identify recognisable categories. The second iteration explored a review window with more detailed descriptions and links back to the affected planning rows."
+  eyebrow="Understanding violations"
+  title="Give planners enough context to investigate a violation warning"
+  intro="The team kept the first version of the violation warning feature compact so it could ship sooner. Icons in the planning tables show which rules have been broken. For the second version, I designed a movable window with more detail about each warning and links to the affected rows."
 >
   <Pair tight>
     <ImageFigure
@@ -296,21 +294,9 @@ lockedFrom: solution
       height={684}
     />
   </Pair>
-  <p>An interview with an experienced client planner showed that violation review depended on both type and severity. The planner described relying heavily on the Trips table’s violation column in their previous software, using icons to identify issues and opening descriptions to understand their causes.</p>
-  <Figure
-    src="/images/case-studies/manual-route-planning/locked/interview-5.webp"
-    alt="A video call recording of the Violation Usability Research Session. A slide on screen asks: What’s the first thing you usually do when a violation shows up? It shows the planner’s previous software, with the trips, action and order grids marked up in green."
-    width={1680}
-    height={929}
-  />
-</Section>
-
-<Section
-  id="decision-2"
-  eyebrow="Information design"
-  title="Group violations by type to bring repeated issues together"
-  intro="After exploring different ways to organise the review window, I decided to group the violations by type rather than stop number to help planners review repeated issues together. Within each group, violations were sorted by stop sequence."
->
+  <Subhead title="Group repeated issues by type">
+    <p>Route Details table already showed the full stop sequence, so I decided to group warnings by type to help planners review repeated issues together. The trade-off is that warnings for the same stop will appear in different groups. Within each group, I kept the warnings sorted by stop order.</p>
+  </Subhead>
   <Pair tight>
     <ImageFigure
       compact
