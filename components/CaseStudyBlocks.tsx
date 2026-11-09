@@ -76,7 +76,7 @@ export function Subhead({
   return (
     // A subhead always follows a picture or video block, so the extra 28px above the section's
     // 28px gap leaves 56px between them.
-    <div className="mt-item-28 flex flex-col gap-item-20">
+    <div className={`mt-item-28 flex flex-col ${small ? "gap-item-16" : "gap-item-20"}`}>
       <h3
         className={
           small
@@ -87,7 +87,7 @@ export function Subhead({
         {title}
       </h3>
       {/* Paragraphs written inside a block are plain HTML, so this sets their text style. */}
-      <div className={`${bodyClass} flex flex-col gap-item-20`}>{children}</div>
+      <div className={`${bodyClass} flex flex-col ${small ? "gap-item-16" : "gap-item-20"}`}>{children}</div>
     </div>
   );
 }
