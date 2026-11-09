@@ -208,7 +208,7 @@ lockedFrom: solution
   title="When to block a move or show a warning"
   intro="I designed how the interface responds to route edits based on the planning rules, blocking invalid moves while allowing others to proceed with a warning. This helped planners make changes without breaking essential route rules."
 >
-  <Subhead title="Prevent invalid stop sequences">
+  <Subhead small title="Prevent invalid stop sequences">
     <p>Vehicles must collect goods before delivering them. The interface prevents planners from moving a delivery before its corresponding pick-up, or a pick-up after its delivery.</p>
   </Subhead>
   <Pair tight>
@@ -229,7 +229,7 @@ lockedFrom: solution
       size={{ width: 2160, height: 2160 }}
     />
   </Pair>
-  <Subhead title="Keep stops within fixed route boundaries">
+  <Subhead small title="Keep stops within fixed route boundaries">
     <p>Each route has fixed start and end locations that cannot be moved. Planners can only reorder stops between these boundaries.</p>
   </Subhead>
   <Pair tight>
@@ -250,7 +250,7 @@ lockedFrom: solution
       size={{ width: 2160, height: 2160 }}
     />
   </Pair>
-  <Subhead title="Warn when planning limits are exceeded">
+  <Subhead small title="Warn when planning limits are exceeded">
     <p>Planners can still make edits that exceed planning limits, such as a vehicle’s load capacity. The interface displays violation warnings to identify which limits have been exceeded and where they occur in the route.</p>
   </Subhead>
   <VideoPanel

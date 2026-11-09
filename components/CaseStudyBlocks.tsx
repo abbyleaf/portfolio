@@ -65,16 +65,27 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
 /** A heading inside a section that opens a new point, with the text that follows it. */
 export function Subhead({
   title,
+  small,
   children,
 }: {
   title: string;
+  /** The smaller 20px heading style (h4) for a point inside a section that already has subheads; still an h3 for the outline. */
+  small?: boolean;
   children?: ReactNode;
 }) {
   return (
     // A subhead always follows a picture or video block, so the extra 28px above the section's
     // 28px gap leaves 56px between them.
     <div className="mt-item-28 flex flex-col gap-item-20">
-      <h3 className={sectionTitleClass}>{title}</h3>
+      <h3
+        className={
+          small
+            ? "font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary"
+            : sectionTitleClass
+        }
+      >
+        {title}
+      </h3>
       {/* Paragraphs written inside a block are plain HTML, so this sets their text style. */}
       <div className={`${bodyClass} flex flex-col gap-item-20`}>{children}</div>
     </div>
