@@ -115,7 +115,15 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
           <div className="flex flex-col gap-item-12">
             <h2 className={labelClass}>Responsibilities</h2>
             <p className="font-sans text-paragraph-md text-text-primary">
-              {meta.responsibilities}
+              {meta.responsibilities.split("***").map((part, i) =>
+                i % 2 === 1 ? (
+                  <strong key={i} className="font-semibold italic">
+                    {part}
+                  </strong>
+                ) : (
+                  part
+                ),
+              )}
             </p>
           </div>
         )}
