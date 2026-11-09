@@ -40,8 +40,6 @@ toc:
     label: Interaction Design
   - id: route-rules
     label: Route Rules and Exceptions
-  - id: operational-exceptions
-    label: Operational Exceptions
   - id: violations-v2
     label: Violations
   - id: decision-2
@@ -210,85 +208,64 @@ lockedFrom: solution
   title="When to block a move or show a warning"
   intro="I designed how the interface responds to route edits based on the planning rules, blocking invalid moves while allowing others to proceed with a warning. This helped planners make changes without breaking essential route rules."
 >
-  <ImageText
-    title="Pickup before delivery"
-    video="/videos/case-studies/manual-route-planning/locked/rule-1.mp4"
-    alt="A looping screen recording of a pick-up stop being dragged below its related delivery in the route details table."
-    width={2160}
-    height={2160}
-  >
-    <p>A pickup could not move after its related delivery because the vehicle needed to collect the goods first.</p>
-  </ImageText>
-  <ImageText
-    title="Delivery after Pickup"
-    video="/videos/case-studies/manual-route-planning/locked/rule-2.mp4"
-    alt="A looping screen recording of a delivery stop being dragged above its related pick-up in the route details table."
-    width={2160}
-    height={2160}
-  >
-    <p>A delivery could not move before its related pickup because the goods would not yet be on the vehicle.</p>
-  </ImageText>
-  <ImageText
-    title="Fixed start and end"
-    video="/videos/case-studies/manual-route-planning/locked/rule-3.mp4"
-    alt="A looping screen recording of a stop being dragged onto the fixed start or end of a route in the route details table."
-    width={2160}
-    height={2160}
-  >
-    <p>These locations defined where the vehicle began and finished its route, so they could not be moved during resequencing.</p>
-  </ImageText>
-  <ImageText
-    title="Stops within route boundaries"
-    video="/videos/case-studies/manual-route-planning/locked/rule-4.mp4"
-    alt="A looping screen recording of a stop being dragged to a position before the route's start or after its end in the route details table."
-    width={2160}
-    height={2160}
-  >
-    <p>The vehicle’s start and end locations were defined by planning rules, so pickups and deliveries could not be placed before the start or after the end.</p>
-  </ImageText>
-</Section>
-
-<Section
-  id="operational-exceptions"
-  eyebrow="Operational exceptions"
-  title="Allow changes while showing their consequences"
-  intro="Planners could still make exceptions, such as scheduling a delivery outside its original time window. I designed warnings that showed which rule had been broken and helped planners find the affected orders, stops or routes."
->
-  <Pair tight>
-    <VideoPanel
-      compact
-      label="Block action"
-      video="/videos/case-studies/manual-route-planning/locked/exception-block.mp4"
-      alt="A looping screen recording of a move that is not allowed: the route stays as it was and a message beside the map explains why."
-      size={{ width: 3812, height: 2160 }}
-    />
-    <VideoPanel
-      compact
-      label="Allow action but show warning"
-      video="/videos/case-studies/manual-route-planning/locked/exception-warn.mp4"
-      alt="A looping screen recording of a move that is allowed but breaks a constraint: the change is made and a warning appears beside the map."
-      size={{ width: 3812, height: 2160 }}
-    />
-  </Pair>
-  <Subhead title="Show what changed, and why a move was blocked">
-    <p>Valid changes recalculated the route timings. Invalid changes left the route unchanged and explained why the move could not be completed.</p>
+  <Subhead title="Prevent invalid stop sequences">
+    <p>Vehicles must collect goods before delivering them. The interface prevents planners from moving a delivery before its corresponding pick-up, or a pick-up after its delivery.</p>
   </Subhead>
   <Pair tight>
     <VideoPanel
+      small
       compact
-      label="Valid changes"
-      video="/videos/case-studies/manual-route-planning/locked/change-valid.mp4"
-      alt="A looping screen recording of a valid move: the route details table shows the recalculated timings and the map shows the new route."
-      size={{ width: 3812, height: 2160 }}
+      label="Blocking pick-up after delivery"
+      video="/videos/case-studies/manual-route-planning/locked/rule-1.mp4"
+      alt="A looping screen recording of a pick-up stop being dragged below its related delivery in the route details table; the move is blocked."
+      size={{ width: 2160, height: 2160 }}
     />
     <VideoPanel
+      small
       compact
-      label="Invalid changes"
-      video="/videos/case-studies/manual-route-planning/locked/change-invalid.mp4"
-      alt="A looping screen recording of an invalid move: the route details table and the map are unchanged."
-      size={{ width: 3812, height: 2160 }}
+      label="Blocking delivery before pick-up"
+      video="/videos/case-studies/manual-route-planning/locked/rule-2.mp4"
+      alt="A looping screen recording of a delivery stop being dragged above its related pick-up in the route details table; the move is blocked."
+      size={{ width: 2160, height: 2160 }}
     />
   </Pair>
+  <Subhead title="Keep stops within fixed route boundaries">
+    <p>Each route has fixed start and end locations that cannot be moved. Planners can only reorder stops between these boundaries.</p>
+  </Subhead>
+  <Pair tight>
+    <VideoPanel
+      small
+      compact
+      label="No moving of start and end points"
+      video="/videos/case-studies/manual-route-planning/locked/rule-3.mp4"
+      alt="A looping screen recording of a stop being dragged onto the fixed start or end of a route in the route details table."
+      size={{ width: 2160, height: 2160 }}
+    />
+    <VideoPanel
+      small
+      compact
+      label="Move stops between start and end points"
+      video="/videos/case-studies/manual-route-planning/locked/rule-4.mp4"
+      alt="A looping screen recording of a stop being dragged to a position before the route's start or after its end in the route details table."
+      size={{ width: 2160, height: 2160 }}
+    />
+  </Pair>
+  <Subhead title="Warn when planning limits are exceeded">
+    <p>Planners can still make edits that exceed planning limits, such as a vehicle’s load capacity. The interface displays violation warnings to identify which limits have been exceeded and where they occur in the route.</p>
+  </Subhead>
+  <VideoPanel
+    small
+    compact
+    label="Allow edits but show corresponding warning"
+    video="/videos/case-studies/manual-route-planning/locked/exception-warn.mp4"
+    alt="A looping screen recording of a move that is allowed but breaks a constraint: the change is made and a warning appears beside the map."
+    size={{ width: 3812, height: 2160 }}
+  />
+  <p>While designing these warnings, I raised an edge case with product managers:</p>
+  <Quote>
+    <p><Mark>What should happen when a vehicle has no capacity limit defined for an order’s unit of measurement?</Mark></p>
+  </Quote>
+  <p>The team decided to allow the assignment but adopted my recommendation to display a violation warning. I also proposed showing the assigned load even when the system could not calculate its capacity utilisation.</p>
 </Section>
 
 <Section
