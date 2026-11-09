@@ -212,6 +212,8 @@ type ImageFigureProps = {
   framed?: boolean;
   /** 16px of padding all round instead of 20px. */
   compact?: boolean;
+  /** With `framed`: 4px corners instead of 8px. */
+  small?: boolean;
 };
 
 /**
@@ -230,6 +232,7 @@ export function ImageFigure({
   inset,
   framed,
   compact,
+  small,
 }: ImageFigureProps) {
   return (
     <figure
@@ -248,7 +251,7 @@ export function ImageFigure({
           height={height}
           sizes="(min-width: 80rem) 740px, 100vw"
           quality={90}
-          className={`h-auto w-full ${framed ? "rounded-image shadow-image" : ""}`}
+          className={`h-auto w-full ${framed ? `${small ? "rounded-image-sm" : "rounded-image"} shadow-image` : ""}`}
         />
       </div>
     </figure>
