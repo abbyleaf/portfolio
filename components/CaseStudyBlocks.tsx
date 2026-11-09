@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Children, type ReactNode } from "react";
 
 import { LoopVideo } from "./LoopVideo";
+import { TimedCaption, type TimedCaptionStep } from "./TimedCaption";
 import { ZoomImage } from "./ZoomImage";
 
 /*
@@ -264,11 +265,14 @@ export function VideoPanel({
   controls = true,
   cover,
   compact,
+  captions,
 }: {
   video: string;
   alt: string;
   size: { width: number; height: number };
   label: string;
+  /** Changes the caption as the clip plays: each step shows from its `at` second. The first step replaces `label`. */
+  captions?: TimedCaptionStep[];
   /** Tighter 4px corners, for a clip shown in a narrow panel. */
   small?: boolean;
   /** Pause and replay buttons on hover; turn off for a very short clip. */
@@ -280,9 +284,16 @@ export function VideoPanel({
 }) {
   return (
     <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
-      <figcaption className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase text-text-sub-headers`}>
-        {label}
-      </figcaption>
+      {captions ? (
+        <TimedCaption
+          steps={captions}
+          className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase text-text-sub-headers`}
+        />
+      ) : (
+        <figcaption className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase text-text-sub-headers`}>
+          {label}
+        </figcaption>
+      )}
       <div className={`${compact ? "p-item-16" : "p-item-20"} pt-0`}>
         <LoopVideo
           src={video}
