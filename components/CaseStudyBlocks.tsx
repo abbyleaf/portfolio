@@ -12,7 +12,7 @@ import { ZoomImage } from "./ZoomImage";
 
 const eyebrowClass =
   "font-sans text-heading-inter-label uppercase text-text-sub-headers";
-const bodyClass = "font-sans text-paragraph-sm text-text-muted";
+const bodyClass = "font-sans text-paragraph-md text-text-muted";
 const sectionTitleClass =
   "font-heading font-wonk text-heading-fraunces-section text-text-primary";
 
@@ -39,7 +39,7 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
         aria-labelledby={id ? `${id}-title` : undefined}
         data-ruler-section={eyebrow}
         // Paragraphs written straight into a section in the MDX are plain HTML, so they get the body style here.
-        className="flex scroll-mt-item-20 flex-col gap-item-28 [&>p]:font-sans [&>p]:text-paragraph-sm [&>p]:text-text-muted [&>p>strong]:font-semibold [&>p>strong]:text-text-muted"
+        className="flex scroll-mt-item-20 flex-col gap-item-28 [&>p]:font-sans [&>p]:text-paragraph-md [&>p]:text-text-muted [&>p>strong]:font-semibold [&>p>strong]:text-text-muted"
       >
         <header className="flex flex-col gap-item-20">
           {title ? (
