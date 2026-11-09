@@ -325,15 +325,22 @@ lockedFrom: solution
   id="testing"
   eyebrow="Testing and refinement"
   title="Stop numbers alone did not explain the affected activity"
-  intro="I tested the prototype with an experienced client planner, covering entry from both the Trips table and Route Details table."
+  intro="In one session with an experienced client planner, I asked how they reviewed violation warnings in their previous tool and validated the prototype with them. They described spotting warnings in the Vehicles table, using the icons to identify the issue and opening the descriptions to understand what caused it. They used both type and severity to prioritise what to address."
 >
+  <Figure
+    src="/images/case-studies/manual-route-planning/locked/interview-5.webp"
+    alt="A video call recording of the Violation Usability Research Session. A slide on screen asks: What’s the first thing you usually do when a violation shows up? It shows the planner’s previous software, with the trips, action and order grids marked up in green."
+    width={1680}
+    height={929}
+  />
+  <p>The planner tried opening the prototype from both Vehicles and Route Details table. Grouping by type matched their expectations, but stop numbers alone did not tell them whether a violation warning pertained to a pickup, delivery or another activity.</p>
   <Figure
     src="/images/case-studies/manual-route-planning/locked/usability-test-6.webp"
     alt="A video call recording of the usability test, with the violations prototype shared on screen."
     width={1680}
     height={929}
   />
-  <p>The test supported grouping violations by type, but revealed that stop numbers needed more context. I added an Action column to clarify the affected activity and removed the Location Code column and placed location information into the relevant descriptions.</p>
+  <p>In response, I added an Action column, removed the Location Code column and moved location details into the descriptions where relevant. Version 2 remains a tested prototype.</p>
   <ImageFigure
     label="Refined violation window design"
     bleed
