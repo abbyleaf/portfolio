@@ -206,6 +206,8 @@ type ImageFigureProps = {
    * under the caption, on the canvas colour, instead of floating inside the panel padding.
    */
   bleed?: boolean;
+  /** With `bleed`: keeps 20px of canvas on the left and right of the picture. */
+  inset?: boolean;
   /** For a screenshot: rounded corners, the soft image shadow and a canvas-coloured panel. */
   framed?: boolean;
   /** 16px of padding all round instead of 20px. */
@@ -225,6 +227,7 @@ export function ImageFigure({
   label,
   selected,
   bleed,
+  inset,
   framed,
   compact,
 }: ImageFigureProps) {
@@ -237,7 +240,7 @@ export function ImageFigure({
       >
         {label}
       </figcaption>
-      <div className={bleed ? undefined : `${compact ? "p-item-16" : "p-item-20"} pt-0`}>
+      <div className={bleed ? (inset ? "px-item-20" : undefined) : `${compact ? "p-item-16" : "p-item-20"} pt-0`}>
         <ZoomImage
           src={src}
           alt={alt}
