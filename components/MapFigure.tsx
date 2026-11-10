@@ -40,8 +40,8 @@ export function MapFigure({
   legend,
 }: MapFigureProps) {
   return (
-    <figure className="flex flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-raised">
-      <figcaption className="flex items-center justify-between gap-item-20 border-b-(length:--stroke-rule) border-border-canvas-subtle px-item-20 py-item-16 font-mono text-mono-legend uppercase">
+    <figure className="flex flex-col border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-raised">
+      <figcaption className="flex items-center justify-between gap-item-20 border-b-(length:--stroke-hairline) border-border-canvas-subtle px-item-20 py-item-16 font-mono text-mono-legend uppercase">
         <span className="text-text-primary">{title}</span>
         {note && <span className="text-right text-text-muted">{note}</span>}
       </figcaption>
@@ -57,7 +57,7 @@ export function MapFigure({
           />
         </picture>
       </div>
-      <ul className="flex flex-wrap gap-x-item-40 gap-y-item-12 border-t-(length:--stroke-rule) border-border-canvas-subtle px-item-20 py-item-16">
+      <ul className="flex flex-wrap gap-x-item-40 gap-y-item-12 border-t-(length:--stroke-hairline) border-border-canvas-subtle px-item-20 py-item-16">
         {legend.map(({ marker, label: text }) => (
           <li
             key={text}

@@ -186,7 +186,7 @@ type VideoFigureProps = {
  */
 export function VideoFigure({ video, alt, size, label }: VideoFigureProps) {
   return (
-    <figure className="group/clip relative flex h-item-600 min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
+    <figure className="group/clip relative flex h-item-600 min-w-0 flex-col border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas">
       <figcaption className="px-item-20 py-item-20 font-mono text-mono-l uppercase text-text-sub-headers">
         {label}
       </figcaption>
@@ -247,7 +247,7 @@ export function ImageFigure({
 }: ImageFigureProps) {
   return (
     <figure
-      className={`flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle ${bleed || framed ? "bg-surface-canvas" : "bg-surface-canvas"}`}
+      className={`flex min-w-0 flex-col border-(length:--stroke-hairline) border-border-canvas-subtle ${bleed || framed ? "bg-surface-canvas" : "bg-surface-canvas"}`}
     >
       <figcaption
         className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
@@ -300,7 +300,7 @@ export function VideoPanel({
   compact?: boolean;
 }) {
   return (
-    <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas">
+    <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas">
       {captions ? (
         <TimedCaption
           steps={captions}
@@ -340,7 +340,7 @@ export function Shot({
 }) {
   return (
     <figure className="flex min-w-0 flex-col gap-item-8">
-      <div className="h-item-300 overflow-clip border-(length:--stroke-rule) border-border-canvas-subtle">
+      <div className="h-item-300 overflow-clip border-(length:--stroke-hairline) border-border-canvas-subtle">
         <ZoomImage
           src={src}
           alt={alt}
@@ -382,7 +382,7 @@ export function ImageText({
 }) {
   return (
     <div className="flex items-end gap-item-32 max-md:flex-col max-md:items-stretch">
-      <div className="group/clip relative h-item-400 w-width-440 max-w-full shrink-0 overflow-clip border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas max-md:w-full">
+      <div className="group/clip relative h-item-400 w-width-440 max-w-full shrink-0 overflow-clip border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas max-md:w-full">
         {video ? (
           <LoopVideo
             src={video}
@@ -430,7 +430,7 @@ export function ScreenCompare({ items }: ScreenCompareProps) {
           <figcaption className="font-mono text-mono-m uppercase text-text-sub-headers">
             {label}
           </figcaption>
-          <div className="relative aspect-38/41 w-full overflow-hidden border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas max-md:aspect-auto max-md:h-item-410">
+          <div className="relative aspect-38/41 w-full overflow-hidden border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas max-md:aspect-auto max-md:h-item-410">
             <Image
               src={src}
               alt={alt}
@@ -591,7 +591,7 @@ export function Showcase({ screens, title, children }: ShowcaseProps) {
           {screens.map((screen) => (
             <div
               key={"video" in screen ? screen.video : screen.src}
-              className="group/clip relative flex w-item-210 items-center justify-center border-(length:--stroke-rule) border-border-canvas-subtle bg-surface-canvas py-item-18"
+              className="group/clip relative flex w-item-210 items-center justify-center border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas py-item-18"
             >
               {"video" in screen ? (
                 <LoopVideo
