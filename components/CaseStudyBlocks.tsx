@@ -176,8 +176,8 @@ type VideoFigureProps = {
   alt: string;
   /** The clip's pixel size. */
   size: { width: number; height: number };
-  /** Caption drawn as real text in the panel's top-left corner. */
-  label: string;
+  /** Caption drawn as real text in the panel's top-left corner. Leave out for a picture that carries its own labels: it then gets 20px of padding all round. */
+  label?: string;
 };
 
 /**
@@ -249,12 +249,26 @@ export function ImageFigure({
     <figure
       className={`flex min-w-0 flex-col border-(length:--stroke-hairline) border-border-canvas-subtle ${bleed || framed ? "bg-surface-canvas" : "bg-surface-canvas"}`}
     >
-      <figcaption
-        className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
+      {label !== undefined && (
+        <figcaption
+          className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
+        >
+          {label}
+        </figcaption>
+      )}
+      <div
+        className={
+          bleed
+            ? inset
+              ? "px-item-20 pb-item-20"
+              : undefined
+            : label === undefined
+              ? compact
+                ? "p-item-16"
+                : "p-item-20"
+              : `${compact ? "p-item-16" : "p-item-20"} pt-0`
+        }
       >
-        {label}
-      </figcaption>
-      <div className={bleed ? (inset ? "px-item-20 pb-item-20" : undefined) : `${compact ? "p-item-16" : "p-item-20"} pt-0`}>
         <ZoomImage
           src={src}
           alt={alt}
