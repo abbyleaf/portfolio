@@ -184,7 +184,10 @@ lockedFrom: solution
   id="route-rules"
   eyebrow="Rules and exceptions"
   title="When to block a move or show a warning"
-  intro="I designed how the interface responds to route edits based on the planning rules, blocking invalid moves while allowing others to proceed with a warning. This helped planners make changes without breaking essential route rules."
+  intro={[
+    "Some route changes were blocked because they violated essential operational rules, such as delivering goods before collecting them, or because the system could not support them. Others were allowed with warnings based on the client's operational requirements.",
+    "I designed how these rules appeared in the interface, including valid drop positions, blocked actions, and warnings when planning limits were exceeded.",
+  ]}
 >
   <Subhead small title="Prevent invalid stop sequences">
     <p>Vehicles must collect goods before delivering them. The interface prevents planners from moving a delivery before its corresponding pick-up, or a pick-up after its delivery.</p>
