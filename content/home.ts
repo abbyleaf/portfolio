@@ -84,7 +84,7 @@ export const caseStudies: CaseStudySummary[] = [
     number: "03",
     year: "2025",
     category: "Logistics · web",
-    title: "Giving transport planners more control over automated routes",
+    title: "Giving planners control over automated routes",
     shortTitle: "Manual route planning",
     summary:
       "Designed manual planning and violation review features that gave transport planners control over automated routes. Shipped as part of a logistics platform supporting 30+ planners and a median of 11,000 orders daily.",
