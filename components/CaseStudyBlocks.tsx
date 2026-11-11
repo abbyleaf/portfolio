@@ -22,8 +22,8 @@ type SectionProps = {
   eyebrow: string;
   /** Left out when the eyebrow is the only heading (the eyebrow then becomes the h2). */
   title?: string;
-  /** The paragraph under the title. */
-  intro?: string;
+  /** The paragraph under the title; pass an array for several paragraphs. */
+  intro?: string | string[];
   children?: ReactNode;
 };
 
@@ -54,7 +54,12 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
               {eyebrow}
             </h2>
           )}
-          {intro && <p className={bodyClass}>{intro}</p>}
+          {intro &&
+            (Array.isArray(intro) ? intro : [intro]).map((text) => (
+              <p key={text} className={bodyClass}>
+                {text}
+              </p>
+            ))}
         </header>
         {children}
       </section>
