@@ -70,6 +70,11 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 border-(length:--stroke-hairline) border-border-canvas-subtle"
         />
+        {study.confidential && (
+          <p className="pointer-events-none absolute top-item-12 left-item-12 rounded-pill bg-surface-raised px-item-10 py-item-4 font-sans text-label-sm text-text-muted">
+            Confidential
+          </p>
+        )}
       </div>
     </ClickableCard>
   );

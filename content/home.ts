@@ -44,6 +44,8 @@ export type CaseStudySummary = {
    * True shows the "Coming soon" card with no link.
    */
   comingSoon?: boolean;
+  /** Shows a "Confidential" badge on the card's picture. */
+  confidential?: boolean;
 };
 
 export const caseStudies: CaseStudySummary[] = [
@@ -70,6 +72,7 @@ export const caseStudies: CaseStudySummary[] = [
     category: "Logistics · web",
     title: "Helping planners split orders to fit the space left on a truck",
     shortTitle: "Order splitting",
+    confidential: true,
     summary:
       "Redesigned how transport planners split orders across vehicles based on available capacity, with the aim of supporting 25+ planners handling 2,000 to 3,000 orders daily.",
     tags: [
