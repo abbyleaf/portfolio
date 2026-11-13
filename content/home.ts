@@ -68,7 +68,7 @@ export const caseStudies: CaseStudySummary[] = [
     number: "02",
     year: "2026",
     category: "Logistics · web",
-    title: "Helping planners split orders across vehicles",
+    title: "Helping planners split orders to fit the space left on a truck",
     shortTitle: "Order splitting",
     summary:
       "Redesigned how transport planners split orders across vehicles based on available capacity, with the aim of supporting 25+ planners handling 2,000 to 3,000 orders daily.",
