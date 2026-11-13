@@ -71,7 +71,9 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           className="pointer-events-none absolute inset-0 border-(length:--stroke-hairline) border-border-canvas-subtle"
         />
         {study.confidential && (
-          <p className="pointer-events-none absolute top-item-12 left-item-12 rounded-pill bg-surface-raised px-item-10 py-item-4 font-sans text-label-sm text-text-muted">
+          // The same translucent black "glass" look as the pause and replay buttons on the case
+          // study videos (see LoopVideo), the same documented exception to the no-blur rule.
+          <p className="pointer-events-none absolute top-item-12 left-item-12 rounded-pill bg-black/50 px-item-12 py-item-4 font-sans text-label-sm text-white backdrop-blur-xs">
             Confidential
           </p>
         )}
