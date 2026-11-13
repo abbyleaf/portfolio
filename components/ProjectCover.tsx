@@ -23,7 +23,7 @@ export function ProjectCover({ slug }: { slug: string }) {
     return (
       <LoopVideo
         src="/videos/case-study-2-hero.mp4"
-        label="Animated order splitting interface on a soft green and lilac gradient"
+        label="Animated order splitting interface on a soft pink and lilac gradient"
         className="size-full object-cover"
       />
     );
