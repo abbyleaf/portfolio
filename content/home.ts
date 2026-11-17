@@ -74,7 +74,7 @@ export const caseStudies: CaseStudySummary[] = [
     shortTitle: "Order splitting",
     confidential: true,
     summary:
-      "Redesigned how transport planners split orders across vehicles based on available capacity, with the aim of supporting 25+ planners handling 2,000 to 3,000 orders daily.",
+      "Designed for a delivery operation handling 2,000 to 3,000 orders daily, with a planned rollout to 25+ planners.",
     tags: [
       "Workflow Research",
       "Product Framing",
