@@ -53,6 +53,8 @@
   /* Panels that hold a picture: cool grey for neutral and solution figures, amber for a problem. */
   --color-surface-info: #ebedf3;
   --color-surface-warning: #f5ebd6;
+  /* A panel for a dark screenshot, such as a video call. */
+  --color-surface-dark: #121212;
 
   /* Text */
   --color-text-primary: var(--color-grey-900);

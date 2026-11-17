@@ -237,15 +237,17 @@ type ImageFigureProps = {
   small?: boolean;
   /**
    * Panel colour. `info` is cool grey for a neutral figure, `problem` amber for something that
-   * went wrong, `solution` cool grey with a blue caption for the fix. Left out, the panel is canvas.
+   * went wrong, `solution` cool grey with a blue caption for the fix, `dark` near-black for a dark
+   * screenshot. Left out, the panel is canvas.
    */
-  tone?: "info" | "problem" | "solution";
+  tone?: "info" | "problem" | "solution" | "dark";
 };
 
 const panelTone = {
   info: { panel: "border-border-info bg-surface-info", label: "text-text-muted" },
   problem: { panel: "border-border-warning bg-surface-warning", label: "text-text-warning" },
   solution: { panel: "border-border-info bg-surface-info", label: "text-text-info" },
+  dark: { panel: "border-border-canvas-subtle bg-surface-dark", label: "text-text-on-inverted" },
 };
 
 /**
@@ -336,7 +338,7 @@ export function VideoPanel({
   /** 16px of padding all round instead of 20px. */
   compact?: boolean;
   /** Panel colour, as on ImageFigure. Left out, the panel is canvas. */
-  tone?: "info" | "problem" | "solution";
+  tone?: "info" | "problem" | "solution" | "dark";
 }) {
   return (
     <figure
