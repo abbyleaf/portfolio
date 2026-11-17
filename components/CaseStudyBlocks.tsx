@@ -241,6 +241,8 @@ type ImageFigureProps = {
    * screenshot. Left out, the panel is canvas.
    */
   tone?: "info" | "problem" | "solution" | "dark";
+  /** No padding under the picture, for one that is cropped to run off the bottom of the panel. */
+  flush?: boolean;
 };
 
 const panelTone = {
@@ -268,6 +270,7 @@ export function ImageFigure({
   compact,
   small,
   tone,
+  flush,
 }: ImageFigureProps) {
   return (
     <figure
@@ -290,7 +293,7 @@ export function ImageFigure({
               ? compact
                 ? "p-item-16"
                 : "p-item-20"
-              : `${compact ? "p-item-16" : "p-item-20"} pt-0`
+              : `${compact ? "p-item-16" : "p-item-20"} pt-0 ${flush ? "pb-0" : ""}`
         }
       >
         <ZoomImage
