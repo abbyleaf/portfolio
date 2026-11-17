@@ -531,12 +531,15 @@ export function Stat({
   label,
   children,
   spaced,
+  smallLabel,
 }: {
   value: string;
   label: string;
   children?: ReactNode;
   /** 16px between the number and its label. */
   spaced?: boolean;
+  /** A 16px label instead of 20px. */
+  smallLabel?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-item-24 border-(length:--stroke-rule) border-border-subtle bg-surface-canvas p-item-24">
@@ -544,7 +547,7 @@ export function Stat({
         <p className="font-heading font-wonk text-heading-fraunces-metric italic text-text-primary">
           {value}
         </p>
-        <p className="font-sans text-paragraph-quote font-medium text-text-body">
+        <p className={`font-sans font-medium text-text-body ${smallLabel ? "text-paragraph-md" : "text-paragraph-quote"}`}>
           {label}
         </p>
       </div>
