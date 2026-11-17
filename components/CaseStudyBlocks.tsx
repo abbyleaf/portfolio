@@ -540,7 +540,7 @@ export function Quote({ children, author }: { children: ReactNode; author?: stri
   if (author) {
     return (
       <blockquote className="flex flex-col gap-item-12 border-l-(length:--stroke-sticker) border-blue-300 bg-surface-canvas py-item-20 pl-item-36 font-sans text-paragraph-blockquote text-text-muted">
-        <Image src="/images/case-studies/ui/quote.svg" alt="" width={16} height={16} aria-hidden="true" />
+        <Image src="/images/case-studies/ui/quote.svg" alt="" width={16} height={16} aria-hidden="true" className="size-item-16 self-start" />
         {children}
         <cite className="font-bold not-italic">{author}</cite>
       </blockquote>
@@ -566,7 +566,7 @@ export function Callout({
 }) {
   return (
     <aside className="flex gap-item-12 border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas p-item-20">
-      <Image src={icon} alt="" width={24} height={24} aria-hidden="true" className="shrink-0" />
+      <Image src={icon} alt="" width={24} height={24} aria-hidden="true" className="size-item-24 shrink-0 self-start" />
       <div className="flex min-w-0 flex-col gap-item-8">
         <p className="font-sans text-paragraph-md font-bold text-text-body">{title}</p>
         <div className={bodyClass}>{children}</div>
@@ -598,7 +598,7 @@ export function Insight({
 }) {
   return (
     <div className="flex min-w-0 flex-col gap-item-20 border-(length:--stroke-hairline) border-border-subtle bg-surface-raised p-item-24">
-      <Image src={icon} alt="" width={24} height={24} aria-hidden="true" />
+      <Image src={icon} alt="" width={24} height={24} aria-hidden="true" className="size-item-24 self-start" />
       <div className="flex flex-col gap-item-8">
         <h4 className="font-heading font-wonk text-heading-fraunces-lg font-normal italic text-text-body">
           {title}
