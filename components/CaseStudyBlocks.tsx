@@ -319,6 +319,7 @@ export function VideoPanel({
   cover,
   compact,
   captions,
+  tone,
 }: {
   video: string;
   alt: string;
@@ -334,16 +335,20 @@ export function VideoPanel({
   cover?: boolean;
   /** 16px of padding all round instead of 20px. */
   compact?: boolean;
+  /** Panel colour, as on ImageFigure. Left out, the panel is canvas. */
+  tone?: "info" | "problem" | "solution";
 }) {
   return (
-    <figure className="group/clip relative flex min-w-0 flex-col border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas">
+    <figure
+      className={`group/clip relative flex min-w-0 flex-col border-(length:--stroke-hairline) ${tone ? panelTone[tone].panel : "border-border-canvas-subtle bg-surface-canvas"}`}
+    >
       {captions ? (
         <TimedCaption
           steps={captions}
-          className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase text-text-sub-headers`}
+          className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${tone ? panelTone[tone].label : "text-text-sub-headers"}`}
         />
       ) : (
-        <figcaption className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase text-text-sub-headers`}>
+        <figcaption className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${tone ? panelTone[tone].label : "text-text-sub-headers"}`}>
           {label}
         </figcaption>
       )}
