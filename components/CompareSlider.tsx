@@ -25,7 +25,8 @@ export function CompareSlider({ before, after, alt, width, height }: CompareSlid
   return (
     <figure className="flex min-w-0 flex-col border-(length:--stroke-hairline) border-border-info bg-surface-info">
       <div className="px-item-20 pt-item-20">
-        <div className="relative has-[input:focus-visible]:outline-(length:--stroke-sticker) has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-azure-55">
+        {/* overflow-hidden: at either end the handle is cut off by the picture's edge instead of hanging over the panel. */}
+        <div className="relative overflow-hidden rounded-image has-[input:focus-visible]:outline-(length:--stroke-sticker) has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-azure-55">
           <Image
             src={after}
             alt=""
