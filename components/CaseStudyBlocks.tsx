@@ -602,7 +602,8 @@ export function Insight({
         <h4 className="font-heading font-wonk text-heading-fraunces-lg font-normal italic text-text-body">
           {title}
         </h4>
-        <div className="font-sans text-label-sm text-text-muted">{children}</div>
+        {/* Text written in the MDX arrives as a paragraph with the body style, so the card's 14px is set on it. */}
+        <div className="font-sans text-label-sm text-text-muted [&>p]:text-label-sm">{children}</div>
       </div>
     </div>
   );
