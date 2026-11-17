@@ -70,7 +70,7 @@ export const caseStudies: CaseStudySummary[] = [
     number: "02",
     year: "2026",
     category: "Logistics · web",
-    title: "Helping planners split orders to fit the space left on a truck",
+    title: "Extending order splitting to suggest product quantities that fit",
     shortTitle: "Order splitting",
     confidential: true,
     summary:
