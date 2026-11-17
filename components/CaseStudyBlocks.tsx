@@ -530,14 +530,17 @@ export function Stat({
   value,
   label,
   children,
+  spaced,
 }: {
   value: string;
   label: string;
-  children: ReactNode;
+  children?: ReactNode;
+  /** 16px between the number and its label. */
+  spaced?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-item-24 border-(length:--stroke-rule) border-border-subtle bg-surface-canvas p-item-24">
-      <div className="flex flex-col">
+      <div className={`flex flex-col ${spaced ? "gap-item-16" : ""}`}>
         <p className="font-heading font-wonk text-heading-fraunces-metric italic text-text-primary">
           {value}
         </p>
