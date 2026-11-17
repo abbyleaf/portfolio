@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Children, type ReactNode } from "react";
 
+import { CountUp } from "./CountUp";
 import { LoopVideo } from "./LoopVideo";
 import { TimedCaption, type TimedCaptionStep } from "./TimedCaption";
 import { ZoomImage } from "./ZoomImage";
@@ -545,7 +546,7 @@ export function Stat({
     <div className="flex flex-col gap-item-24 border-(length:--stroke-rule) border-border-subtle bg-surface-canvas p-item-24">
       <div className={`flex flex-col ${spaced ? "gap-item-16" : ""}`}>
         <p className="font-heading font-wonk text-heading-fraunces-metric italic text-text-primary">
-          {value}
+          <CountUp value={value} />
         </p>
         <p className={`font-sans font-medium text-text-body ${smallLabel ? "text-paragraph-md" : "text-paragraph-quote"}`}>
           {label}
