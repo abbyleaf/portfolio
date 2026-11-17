@@ -578,7 +578,8 @@ export function Callout({
 /** A titled set of white cards, two to a row, each with an icon, an italic name and a short note. */
 export function Insights({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-item-20">
+    // The section's 28px gap plus 32px here leaves 60px between the intro and the heading.
+    <div className="mt-item-32 flex flex-col gap-item-20">
       <h3 className={eyebrowClass}>{title}</h3>
       <div className="grid grid-cols-2 gap-item-20 max-md:grid-cols-1">{children}</div>
     </div>
