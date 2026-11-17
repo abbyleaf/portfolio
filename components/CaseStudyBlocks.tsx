@@ -230,6 +230,17 @@ type ImageFigureProps = {
   compact?: boolean;
   /** With `framed`: 4px corners instead of 8px. */
   small?: boolean;
+  /**
+   * Panel colour. `info` is cool grey for a neutral figure, `problem` amber for something that
+   * went wrong, `solution` cool grey with a blue caption for the fix. Left out, the panel is canvas.
+   */
+  tone?: "info" | "problem" | "solution";
+};
+
+const panelTone = {
+  info: { panel: "border-border-info bg-surface-info", label: "text-text-muted" },
+  problem: { panel: "border-border-warning bg-surface-warning", label: "text-text-warning" },
+  solution: { panel: "border-border-info bg-surface-info", label: "text-text-info" },
 };
 
 /**
@@ -249,14 +260,15 @@ export function ImageFigure({
   framed,
   compact,
   small,
+  tone,
 }: ImageFigureProps) {
   return (
     <figure
-      className={`flex min-w-0 flex-col border-(length:--stroke-hairline) border-border-canvas-subtle ${bleed || framed ? "bg-surface-canvas" : "bg-surface-canvas"}`}
+      className={`flex min-w-0 flex-col border-(length:--stroke-hairline) ${tone ? panelTone[tone].panel : "border-border-canvas-subtle bg-surface-canvas"}`}
     >
       {label !== undefined && (
         <figcaption
-          className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
+          className={`${compact ? "p-item-16" : "p-item-20"} font-mono text-mono-l uppercase ${tone ? panelTone[tone].label : selected ? "text-text-accent-cool" : "text-text-sub-headers"}`}
         >
           {label}
         </figcaption>
@@ -520,12 +532,79 @@ export function Stat({
   );
 }
 
-/** A pulled-out finding, with a blue rule down the left. */
-export function Quote({ children }: { children: ReactNode }) {
+/**
+ * A pulled-out finding, with a blue rule down the left. With `author` it is a spoken quote on a
+ * canvas panel: a blue quotation mark above the words and the speaker's name below.
+ */
+export function Quote({ children, author }: { children: ReactNode; author?: string }) {
+  if (author) {
+    return (
+      <blockquote className="flex flex-col gap-item-12 border-l-(length:--stroke-sticker) border-blue-300 bg-surface-canvas py-item-20 pl-item-36 font-sans text-paragraph-blockquote text-text-muted">
+        <Image src="/images/case-studies/ui/quote.svg" alt="" width={16} height={16} aria-hidden="true" />
+        {children}
+        <cite className="font-bold not-italic">{author}</cite>
+      </blockquote>
+    );
+  }
   return (
     <blockquote className="flex flex-col gap-item-28 border-l-(length:--stroke-sticker) border-blue-300 pl-item-36 font-sans text-paragraph-blockquote text-text-muted">
       {children}
     </blockquote>
+  );
+}
+
+/** A note that sits in the flow of the text on a canvas panel, with a small icon beside its heading. */
+export function Callout({
+  icon,
+  title,
+  children,
+}: {
+  /** Path of an SVG in public/images/case-studies/ui. */
+  icon: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <aside className="flex gap-item-12 border-(length:--stroke-hairline) border-border-canvas-subtle bg-surface-canvas p-item-20">
+      <Image src={icon} alt="" width={24} height={24} aria-hidden="true" className="shrink-0" />
+      <div className="flex min-w-0 flex-col gap-item-8">
+        <p className="font-sans text-paragraph-md font-bold text-text-body">{title}</p>
+        <div className={bodyClass}>{children}</div>
+      </div>
+    </aside>
+  );
+}
+
+/** A titled set of white cards, two to a row, each with an icon, an italic name and a short note. */
+export function Insights({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-item-20">
+      <h3 className={eyebrowClass}>{title}</h3>
+      <div className="grid grid-cols-2 gap-item-20 max-md:grid-cols-1">{children}</div>
+    </div>
+  );
+}
+
+export function Insight({
+  icon,
+  title,
+  children,
+}: {
+  /** Path of an SVG in public/images/case-studies/ui. */
+  icon: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex min-w-0 flex-col gap-item-20 border-(length:--stroke-hairline) border-border-subtle bg-surface-raised p-item-24">
+      <Image src={icon} alt="" width={24} height={24} aria-hidden="true" />
+      <div className="flex flex-col gap-item-8">
+        <h4 className="font-heading font-wonk text-heading-fraunces-lg font-normal italic text-text-body">
+          {title}
+        </h4>
+        <div className="font-sans text-label-sm text-text-muted">{children}</div>
+      </div>
+    </div>
   );
 }
 

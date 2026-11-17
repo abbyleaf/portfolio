@@ -1,9 +1,13 @@
 import type { MDXComponents } from "mdx/types";
 import { MapFigure } from "@/components/MapFigure";
+import { CompareSlider } from "@/components/CompareSlider";
 import {
+  Callout,
   Figure,
   ImageFigure,
   ImageText,
+  Insight,
+  Insights,
   Mark,
   Pair,
   Quote,
@@ -32,9 +36,13 @@ const components: MDXComponents = {
     <p className="font-sans text-paragraph-md text-text-muted" {...props} />
   ),
   strong: (props) => <strong className="font-semibold text-text-muted" {...props} />,
+  Callout,
+  CompareSlider,
   Figure,
   ImageFigure,
   ImageText,
+  Insight,
+  Insights,
   Locked,
   MapFigure,
   Mark,

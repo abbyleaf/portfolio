@@ -29,6 +29,9 @@
   --color-azure-55: #2e66ed;
   --color-blue-600: #174dcf;
   --color-blue-300: #8caaf2;
+  --color-blue-200: #bfd0f7;
+  --color-blue-700: #1540a8;
+  --color-amber-300: #e4c68b;
   --color-green-500: #56b388;
   --color-vermilion-500: #d75939;
   --color-red-200: #f2d0d1;
@@ -47,6 +50,9 @@
   --color-surface-accent-cool: var(--color-azure-55);
   --color-surface-light-accent-warm: #f5e3e3;
   --color-surface-light-accent-cool: #e0e8fb;
+  /* Panels that hold a picture: cool grey for neutral and solution figures, amber for a problem. */
+  --color-surface-info: #ebedf3;
+  --color-surface-warning: #f5ebd6;
 
   /* Text */
   --color-text-primary: var(--color-grey-900);
@@ -59,11 +65,15 @@
   /* azure-55 is 4.7:1 on surface-primary but 4.2:1 on surface-canvas, so keep it
      to large text or text on surface-primary. */
   --color-text-accent-cool: var(--color-azure-55);
+  --color-text-info: var(--color-blue-700);
+  --color-text-warning: #89641a;
 
   /* Border. border-subtle is grey-10 at 14%. */
   --color-border-strong: var(--color-grey-900);
   --color-border-subtle: color-mix(in oklab, var(--color-grey-10) 14%, transparent);
   --color-border-canvas-subtle: #d8d3ce;
+  --color-border-info: var(--color-blue-200);
+  --color-border-warning: var(--color-amber-300);
   /* The case study contents rail. */
 
   /* Type */

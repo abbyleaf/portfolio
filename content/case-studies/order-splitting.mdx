@@ -67,13 +67,16 @@ next: manual-route-planning
   id="problem"
   eyebrow="The problem"
   title="Current order splitting did not help planners keep track of how products and their quantities were split"
-  intro="SWAT Routes split orders by weight or volume alone, so planners had to separately track the products and quantities that went into each vehicle, and update those records whenever the order split changed."
 >
+  <Quote>
+    <p>When an order exceeded a vehicle’s remaining capacity, planners had to split orders and decide which products and how many units of each to load onto each vehicle. However, <Mark>SWAT Routes split orders by weight or volume alone, so planners had to separately track the products and quantities that went into each vehicle, and update those records whenever the order split changed.</Mark></p>
+  </Quote>
   <ImageFigure
+    tone="info"
     framed
     label="Original order split modal"
     src="/images/case-studies/order-splitting/problem-modal.webp"
-    alt="The original Split order modal. A table lists items with their unit of measure, current order quantity, and the quantities in Split order 1 and Split order 2. Each row has a quantity field and a swap button; the total quantity and volume of each split order appear in the footer."
+    alt="The SWAT Routes planning workspace before the change: a vehicles table above an orders table listing order IDs, drop-off addresses, CBM and kg."
     width={3024}
     height={1892}
   />
@@ -85,76 +88,59 @@ next: manual-route-planning
   id="workflow-research"
   eyebrow="Workflow research"
   title="The original brief was to extend SWAT Routes by allowing orders to be split by products and quantities"
-  intro="The first explorations let planners move quantities between two split orders and see the total quantity and volume, in cubic metres (CBM), of each."
+  intro="To improve the interaction flow for SWAT Routes, I asked the PM how the client typically handled large orders. He explained that planners should first enter the quantities for each product, then see the calculated volume of each split order in cubic metres (CBM) to check whether it would fit in its intended vehicle."
 >
   <ImageFigure
+    tone="info"
     label="Exploring designs to split orders by product quantities"
     src="/images/case-studies/order-splitting/locked/explorations.webp"
     alt="Two Split order modal explorations side by side. Exploration 01 has a swap button on each product row that moves that product’s quantity to the other split order. Exploration 02 has a Max button beside each quantity field that moves the product’s full quantity to split order 2 and is disabled when an order already holds the full quantity. In both, the footer shows the total quantity and volume for each split order."
     width={2960}
     height={1208}
   />
-  <Subhead title="Understanding how planners decide what to load">
-    <p>This led me to request a walkthrough with the client to understand when their planners choose to split an order and how they use volume to determine what to load for each vehicle.</p>
-  </Subhead>
+  <p>This led me to request for a walkthrough with the client to understand when their planners choose to split an order and how they use volume to determine what to load for each vehicle.</p>
   <ImageFigure
+    tone="info"
     label="Client’s walkthrough of their order splitting process"
     src="/images/case-studies/order-splitting/locked/walkthrough.webp"
     alt="A flowchart of the client’s planning process. After Auto-plan, planners review unassigned orders and decide whether an order is too large for the largest truck. If so, they split it into smaller loads, split off what fits, and manually edit and assign orders that fit the truck, or set the order aside for later review."
     width={2960}
     height={1810}
   />
-  <Subhead title="Prototype testing: the client planner kept adjusting quantities to see what would fit into the vehicle">
+  <Subhead title="Prototype testing: The client planner kept adjusting quantities to see what would fit into the vehicle">
     <p>I prepared a prototype in Figma Make and asked the planner to fit part of a 20 CBM order into a vehicle with 4 CBM of space left.</p>
   </Subhead>
-  <Pair tight>
-    <ImageFigure
-      small
-      compact
-      label="Remote prototype testing with client planner"
-      src="/images/case-studies/order-splitting/locked/remote-testing.webp"
-      alt="A video call screenshot in which the client planner shares the Split order prototype on screen, with the other participants’ tiles beside it."
-      width={2960}
-      height={1564}
-    />
-    <ImageFigure
-      small
-      compact
-      label="Figma Make prototype being tested"
-      src="/images/case-studies/order-splitting/locked/prototype.webp"
-      alt="The Figma Make prototype: the SWAT Routes planning workspace with a vehicles table above an orders table."
-      width={3024}
-      height={1784}
-    />
-  </Pair>
-  <Subhead title="Finding a split that fit within 4 CBM took several tries">
+  <ImageFigure
+    tone="info"
+    framed
+    label="Remote prototype testing with client planner"
+    src="/images/case-studies/order-splitting/locked/remote-testing.webp"
+    alt="A video call screenshot in which the client planner shares the Split order prototype on screen, with the other participants’ tiles beside it."
+    width={2960}
+    height={1564}
+  />
+  <ImageFigure
+    tone="info"
+    framed
+    label="Figma Make prototype being tested"
+    src="/images/case-studies/order-splitting/locked/prototype.webp"
+    alt="The Figma Make prototype: the SWAT Routes planning workspace with a vehicles table above an orders table."
+    width={3024}
+    height={1784}
+  />
+  <Callout icon="/images/case-studies/ui/eyeglasses.svg" title="Finding a split that fit within 4 CBM took several tries">
     <p>The planner adjusted product quantities in the prototype, checking the total volume after each change. He then asked if he could edit the volume for each product directly instead.</p>
-  </Subhead>
+  </Callout>
   <Subhead title="I shifted the first step from editing quantities to entering available capacity">
     <p>During prototype testing, I saw that the planner already knew the vehicle’s maximum capacity and how much space was left. So I redesigned the interaction flow to let planners enter the available capacity first. The system would then suggest which products and quantities to include in the split.</p>
   </Subhead>
-  <Pair tight>
-    <ImageFigure
-      small
-      compact
-      framed
-      label="Before"
-      src="/images/case-studies/order-splitting/problem-modal.webp"
-      alt="Before: the Split order modal, where planners edit the quantity of every product by hand to move it between two split orders."
-      width={3024}
-      height={1892}
-    />
-    <ImageFigure
-      small
-      compact
-      framed
-      label="After"
-      src="/images/case-studies/order-splitting/locked/after.webp"
-      alt="After: the Split order modal with a Split order selector, a target CBM field and a Preview button above the comparison table, plus a toggle to view in CBM or KG."
-      width={2956}
-      height={2084}
-    />
-  </Pair>
+  <CompareSlider
+    before="/images/case-studies/order-splitting/locked/split-before.webp"
+    after="/images/case-studies/order-splitting/locked/split-after.webp"
+    alt="Before: a Split order modal where planners edit every product’s quantity by hand, with a Max button beside each field. After: the same modal with a Split order selector, a target CBM field and a Preview button above the comparison table, plus a toggle to view in CBM or KG."
+    width={2384}
+    height={1680}
+  />
 </Section>
 
 <Section
@@ -164,6 +150,8 @@ next: manual-route-planning
   intro="I placed the two resulting orders side by side so planners could see the suggested product quantities for one order and the remaining quantities in the other. I also kept the quantity fields editable for every product so planners could adjust the split before confirming."
 >
   <ImageFigure
+    tone="info"
+    framed
     label="Set a volume target, then review and adjust orders"
     src="/images/case-studies/order-splitting/locked/split-review.webp"
     alt="The SWAT Routes planning workspace, with the vehicles table above the orders table, where planners set a volume target and review the two resulting orders."
@@ -174,6 +162,7 @@ next: manual-route-planning
     <p>Calculating a split from a vehicle’s available capacity could produce fractional product quantities, which were impractical to load.</p>
   </Subhead>
   <ImageFigure
+    tone="problem"
     label="Problem: A capacity target can produce fractional quantities"
     src="/images/case-studies/order-splitting/locked/fractional-problem.webp"
     alt="A target of 4 CBM entered for Split order 1. The first product row shows highlighted, unrounded quantities in both split orders, 4022.945744273065 and 3977.054255726935."
@@ -182,6 +171,8 @@ next: manual-route-planning
   />
   <p>The PM and I agreed that the system would suggest whole quantities within the capacity target. It would prioritise the heaviest products for a weight target or the bulkiest for a volume target, then add lighter or smaller products where they fit.</p>
   <ImageFigure
+    tone="solution"
+    framed
     label="Solution: Suggest whole quantities within the capacity target"
     src="/images/case-studies/order-splitting/locked/whole-quantities.webp"
     alt="The Split order modal over the planning workspace, with whole quantities suggested for each product and the total quantity and volume of each split order shown in the footer."
@@ -192,6 +183,7 @@ next: manual-route-planning
     <p>The unit selector initially sat inside a separate preview panel, making it look like switching between weight and volume only affected the preview.</p>
   </Subhead>
   <ImageFigure
+    tone="problem"
     label="Problem: Switching between CBM and kg seemed to affect only the preview"
     src="/images/case-studies/order-splitting/locked/unit-problem.webp"
     alt="Two explorations of the Split order modal. Exploration 01 puts the unit selector inside a separate preview panel. Exploration 02 puts it at the top right of the modal."
@@ -200,6 +192,8 @@ next: manual-route-planning
   />
   <p>In reality, the selection also changed how the split was calculated and which units appeared in the comparison table. After exploring several layouts, I grouped the selector with the suggested split and comparison table to make both effects clearer.</p>
   <ImageFigure
+    tone="solution"
+    framed
     label="Solution: Group the unit selector, capacity target and table together"
     src="/images/case-studies/order-splitting/locked/unit-grouped.webp"
     alt="The Split order modal where the CBM and KG toggle, the capacity target and the comparison table sit together in one group."
@@ -210,6 +204,8 @@ next: manual-route-planning
     <p>Reusing the existing validation pattern for the order split extension would make every product quantity field look mandatory. A product can go entirely into one order, leaving its quantity at zero in the other, as long as both orders contain at least one product.</p>
   </Subhead>
   <ImageFigure
+    tone="problem"
+    framed
     label="Existing validation: Missing values are flagged individually"
     src="/images/case-studies/order-splitting/locked/validation-existing.webp"
     alt="The existing Split order modal where each empty quantity field is outlined in red and labelled Value required."
@@ -218,6 +214,8 @@ next: manual-route-planning
   />
   <p>I designed the validation to check the total quantity in each resulting order and block the split if either order was empty.</p>
   <ImageFigure
+    tone="solution"
+    framed
     label="Solution: Show one error message and highlight the empty order’s quantity fields"
     src="/images/case-studies/order-splitting/locked/empty-order-error.webp"
     alt="The Split order modal with one error message above the table reading that split orders cannot be empty, and the quantity fields of the empty order outlined in red."
@@ -232,9 +230,8 @@ next: manual-route-planning
   title="The client accepted the revised prototype"
   intro="After trying the revised prototype independently, the client identified both ways to split an order and said the flow worked for them."
 >
-  <Quote>
-    <p><Mark>We are good with the split order function here in the prototype. I noticed two options for splitting orders...</Mark></p>
-    <p>Client stakeholder</p>
+  <Quote author="Client stakeholder">
+    <p>We are good with the split order function here in the prototype. I noticed two options for splitting orders...</p>
   </Quote>
   <p>The revised prototype showed how planners could update product quantities within the split flow, reducing the need to maintain a separate record.</p>
   <p>I handed the design over to engineering before I left. I was unable to verify whether the feature was built or released, or whether it affected planning time, loading accuracy or vehicle utilisation.</p>
@@ -246,12 +243,20 @@ next: manual-route-planning
   title="I learnt to ask how planners use the numbers they request"
   intro="When the planner asked to edit the volume on each product line, I realised I needed to understand what he was trying to decide. He already knew how much space was left in the vehicle and needed to work out which products and quantities would fit. That led me to use the vehicle’s remaining capacity as the starting point for the suggested split."
 >
-  <Subhead title="What I would track" small>
-    <p><strong>Unused capacity.</strong> Compare the suggested and confirmed volumes with the capacity target to see how much space is left and whether planners’ edits close the gap.</p>
-    <p><strong>Edits to suggestions.</strong> Track how often planners change the suggested quantities and observe why, such as to get a closer fit or keep products together.</p>
-    <p><strong>Repeat splits.</strong> Track how often planners split a resulting order again and observe what prompts the second split.</p>
-    <p><strong>Finding “split order”.</strong> In the prototype session, the participant needed prompting to find the row icon. I would observe more planners to see whether they find the action on their own and whether they use the row icon or the right-click menu.</p>
-  </Subhead>
+  <Insights title="What I would track">
+    <Insight icon="/images/case-studies/ui/speed.svg" title="Unused capacity">
+      Compare the suggested and confirmed volumes with the capacity target to see how much space is left and whether planners’ edits close the gap.
+    </Insight>
+    <Insight icon="/images/case-studies/ui/table-edit.svg" title="Edits to suggestions">
+      Track how often planners change the suggested quantities and observe why, such as to get a closer fit or keep products together.
+    </Insight>
+    <Insight icon="/images/case-studies/ui/flow.svg" title="Repeat splits">
+      Track how often planners split a resulting order again and observe what prompts the second split.
+    </Insight>
+    <Insight icon="/images/case-studies/ui/screen-search.svg" title="Finding “split order”">
+      Observe whether planners find <strong>Split order</strong> without prompting and whether they use the row icon or the right-click menu.
+    </Insight>
+  </Insights>
 </Section>
 
 </Locked>
