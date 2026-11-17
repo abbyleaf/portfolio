@@ -71,9 +71,12 @@ export function Section({ id, eyebrow, title, intro, children }: SectionProps) {
 export function Subhead({
   title,
   small,
+  label,
   children,
 }: {
   title: string;
+  /** Draws the title as a small uppercase label, like a section's eyebrow, instead of a heading style. */
+  label?: boolean;
   /** The smaller 20px heading style (h4) for a point inside a section that already has subheads; still an h3 for the outline. */
   small?: boolean;
   children?: ReactNode;
@@ -84,9 +87,11 @@ export function Subhead({
     <div className={`mt-item-28 flex flex-col ${small ? "gap-item-16" : "gap-item-20"}`}>
       <h3
         className={
-          small
-            ? "font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary"
-            : sectionTitleClass
+          label
+            ? eyebrowClass
+            : small
+              ? "font-heading font-wonk text-heading-fraunces-md font-normal text-text-primary"
+              : sectionTitleClass
         }
       >
         {title}
