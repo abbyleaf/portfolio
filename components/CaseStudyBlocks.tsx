@@ -241,7 +241,7 @@ type ImageFigureProps = {
    * screenshot. Left out, the panel is canvas.
    */
   tone?: "info" | "problem" | "solution" | "dark";
-  /** No padding under the picture, for one that is cropped to run off the bottom of the panel. */
+  /** No padding under the picture, for one that is cropped to run off the bottom of the panel. With `framed`, only the top corners are rounded. */
   flush?: boolean;
 };
 
@@ -293,7 +293,10 @@ export function ImageFigure({
               ? compact
                 ? "p-item-16"
                 : "p-item-20"
-              : `${compact ? "p-item-16" : "p-item-20"} pt-0 ${flush ? "pb-0" : ""}`
+              : flush
+                ? // The shadow is clipped at the panel's bottom edge; the 8px of padding on top leaves room for it.
+                  `${compact ? "px-item-16" : "px-item-20"} -mt-item-8 overflow-clip pt-item-8`
+                : `${compact ? "p-item-16" : "p-item-20"} pt-0`
         }
       >
         <ZoomImage
@@ -303,7 +306,7 @@ export function ImageFigure({
           height={height}
           sizes="(min-width: 80rem) 740px, 100vw"
           quality={90}
-          className={`h-auto w-full ${framed ? `${small ? "rounded-image-sm" : "rounded-image"} shadow-image` : ""}`}
+          className={`h-auto w-full ${framed ? `${flush ? (small ? "rounded-t-image-sm" : "rounded-t-image") : small ? "rounded-image-sm" : "rounded-image"} shadow-image` : ""}`}
         />
       </div>
     </figure>
