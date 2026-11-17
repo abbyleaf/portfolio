@@ -551,7 +551,7 @@ export function Stat({
           {label}
         </p>
       </div>
-      <div className={bodyClass}>{children}</div>
+      {children && <div className={bodyClass}>{children}</div>}
     </div>
   );
 }
