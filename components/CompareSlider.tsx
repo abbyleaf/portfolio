@@ -55,7 +55,7 @@ export function CompareSlider({ before, after, alt, width, height }: CompareSlid
           <div
             aria-hidden="true"
             style={{ left: `${position}%` }}
-            className="pointer-events-none absolute top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-pill border-(length:--stroke-rule) border-surface-info bg-blue-700 px-item-12 py-item-2"
+            className="pointer-events-none absolute top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-pill border-(length:--stroke-rule) border-surface-info bg-grey-900 px-item-12 py-item-2"
           >
             <svg width="40" height="24" viewBox="0 0 40 24" fill="none" className="text-surface-primary">
               <path
