@@ -58,7 +58,7 @@ export async function CaseStudyLayout({
           />
         )}
         <div className="study-column flex flex-col">
-          <CaseStudyHero meta={meta} />
+          <CaseStudyHero meta={meta} locked={locked} />
           {children}
         </div>
       </main>

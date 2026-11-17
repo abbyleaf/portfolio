@@ -1,13 +1,20 @@
 import Image from "next/image";
 import type { CaseStudyMeta } from "@/lib/case-studies";
 import { Badge } from "./Badge";
+import { LoopVideo } from "./LoopVideo";
 import { Tag } from "./Tag";
 
 const labelClass =
   "font-sans text-heading-inter-label uppercase text-text-sub-headers";
 
 /** Title block, cover picture and facts at the top of a case study. */
-export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
+export function CaseStudyHero({
+  meta,
+  locked,
+}: {
+  meta: CaseStudyMeta;
+  locked?: boolean;
+}) {
   const facts: readonly (readonly [string, string | undefined])[] = meta.facts
     ? meta.facts.map(({ label, value }) => [label, value] as const)
     : [
@@ -46,9 +53,7 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
         </div>
 
         <div className="flex flex-col gap-item-20">
-          {meta.category && (
-            <p className={labelClass}>{meta.category}</p>
-          )}
+          {meta.category && <p className={labelClass}>{meta.category}</p>}
           <div className="flex flex-col gap-item-16">
             <h1
               id="study-title"
@@ -65,16 +70,29 @@ export function CaseStudyHero({ meta }: { meta: CaseStudyMeta }) {
         </div>
       </div>
 
-      {meta.hero && (
-        <Image
-          src={meta.hero.src}
-          alt={meta.hero.alt}
-          width={meta.hero.width}
-          height={meta.hero.height}
-          sizes="(min-width: 64rem) 780px, 100vw"
-          preload
+      {meta.hero?.video ? (
+        <LoopVideo
+          src={
+            locked
+              ? meta.hero.video
+              : (meta.hero.videoUnlocked ?? meta.hero.video)
+          }
+          label={meta.hero.alt}
+          size={{ width: meta.hero.width, height: meta.hero.height }}
           className="h-auto w-full"
         />
+      ) : (
+        meta.hero && (
+          <Image
+            src={meta.hero.src}
+            alt={meta.hero.alt}
+            width={meta.hero.width}
+            height={meta.hero.height}
+            sizes="(min-width: 64rem) 780px, 100vw"
+            preload
+            className="h-auto w-full"
+          />
+        )
       )}
 
       <div className="flex flex-col gap-item-40">

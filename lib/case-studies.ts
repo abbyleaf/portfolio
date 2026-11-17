@@ -10,7 +10,16 @@ export type CaseStudyMeta = {
   badges?: [string, string];
   category?: string;
   summary?: string;
-  hero?: { src: string; alt: string; width: number; height: number };
+  hero?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    /** A looping clip shown in place of the picture (which stays as the still frame's size reference). */
+    video?: string;
+    /** The clip a visitor with the password sees instead of `video`; keep it in a `locked` folder. */
+    videoUnlocked?: string;
+  };
   platform?: string;
   /** Replaces platform, timeline and role when a study needs different facts (e.g. two timelines). */
   facts?: { label: string; value: string }[];
