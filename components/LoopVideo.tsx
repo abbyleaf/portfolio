@@ -11,7 +11,7 @@ type LoopVideoProps = {
   /**
    * Adds pause/play and replay buttons in the top-right corner of the nearest ancestor
    * that is `relative` and has the `group/clip` class. They show on hover and keyboard
-   * focus, and always on touch screens.
+   * focus, and on touch screens for a few seconds after the clip is tapped.
    */
   controls?: boolean;
   /**
@@ -29,6 +29,9 @@ const buttonClass =
 
 const groups = new Map<string, Set<HTMLVideoElement>>();
 
+/** How long the controls stay up after a tap on a touch screen. */
+const REVEAL_MS = 3000;
+
 function playAll(videos: Iterable<HTMLVideoElement>, fromStart: boolean) {
   const list = [...videos];
   if (fromStart) for (const v of list) v.currentTime = 0;
@@ -41,6 +44,17 @@ function playAll(videos: Iterable<HTMLVideoElement>, fromStart: boolean) {
 export function LoopVideo({ src, label, className, size, controls, group }: LoopVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(!group);
+  // A tap shows the controls for a few seconds (hover does not exist on touch screens).
+  const [revealed, setRevealed] = useState(false);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  function reveal() {
+    clearTimeout(hideTimer.current);
+    setRevealed(true);
+    hideTimer.current = setTimeout(() => setRevealed(false), REVEAL_MS);
+  }
+
+  useEffect(() => () => clearTimeout(hideTimer.current), []);
 
   useEffect(() => {
     const video = ref.current;
@@ -88,6 +102,7 @@ export function LoopVideo({ src, label, className, size, controls, group }: Loop
   }
 
   function toggle() {
+    reveal();
     const videos = everyVideo();
     if (videos.length === 0) return;
     if (videos.every((v) => v.paused)) {
@@ -99,6 +114,7 @@ export function LoopVideo({ src, label, className, size, controls, group }: Loop
   }
 
   function replay() {
+    reveal();
     playAll(everyVideo(), true);
   }
 
@@ -115,11 +131,15 @@ export function LoopVideo({ src, label, className, size, controls, group }: Loop
         preload={group ? "auto" : "metadata"}
         className={className}
         style={size ? { aspectRatio: `${size.width} / ${size.height}` } : undefined}
+        onClick={controls ? reveal : undefined}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       />
       {controls && (
-        <div className="absolute top-item-12 right-item-12 flex gap-item-8 opacity-0 transition-opacity duration-200 group-focus-within/clip:opacity-100 group-hover/clip:opacity-100 pointer-coarse:opacity-100">
+        // Hidden controls ignore touches, so a tap near the corner reveals them instead of pressing one unseen.
+        <div
+          className={`absolute top-item-12 right-item-12 flex gap-item-8 transition-opacity duration-200 group-focus-within/clip:pointer-events-auto group-focus-within/clip:opacity-100 group-hover/clip:pointer-events-auto group-hover/clip:opacity-100 ${revealed ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+        >
           <button
             type="button"
             onClick={toggle}
