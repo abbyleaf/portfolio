@@ -12,9 +12,20 @@ import { cleanApplications, type Application } from "./tracker-types";
 const KEY = "jobtracker:applications";
 const LOCAL_FILE = path.join(process.cwd(), ".tracker-data.json");
 
+/**
+ * First environment variable whose name ends with one of `suffixes`. Vercel can add a prefix
+ * to a database's variables (STORAGE_KV_REST_API_URL, say), so the name is matched by its end.
+ */
+function envEndingWith(...suffixes: string[]) {
+  for (const [name, value] of Object.entries(process.env)) {
+    if (value && suffixes.some((suffix) => name.endsWith(suffix))) return value;
+  }
+  return undefined;
+}
+
 function redisConfig() {
-  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+  const url = envEndingWith("KV_REST_API_URL", "UPSTASH_REDIS_REST_URL");
+  const token = envEndingWith("KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_TOKEN");
   return url && token ? { url, token } : null;
 }
 
