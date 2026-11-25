@@ -22,7 +22,7 @@ const STATUS_STYLE: Record<Status, string> = {
   applied: "bg-surface-light-accent-cool text-text-info",
   interviewing: "bg-surface-warning text-text-warning",
   offer: "bg-green-500/25 text-text-primary",
-  rejected: "bg-surface-info text-text-muted",
+  rejected: "bg-surface-accent-warm text-text-accent-warm",
 };
 
 /* ---------- dates ---------- */
