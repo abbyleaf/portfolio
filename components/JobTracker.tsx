@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
-import type { FormEvent } from "react";
+import type { FormEvent, ReactNode } from "react";
 import {
   loadApplications,
   lockTracker,
@@ -57,6 +57,28 @@ const field =
   "h-item-40 w-full min-w-0 border-(length:--stroke-hairline) border-border-strong bg-surface-raised px-item-12 font-sans text-paragraph-md text-text-primary";
 const fieldLabel = "flex min-w-0 flex-col gap-item-8";
 const fieldLabelText = "font-mono text-mono-marker uppercase text-text-muted";
+
+/**
+ * A dropdown with its own arrow. The browser's arrow sits against the edge and cannot be
+ * padded, so the native one is hidden and this one is drawn 8px in from the right.
+ */
+function SelectBox({ className = "", children }: { className?: string; children: ReactNode }) {
+  return (
+    <div className={`relative ${className}`}>
+      {children}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 12 12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="pointer-events-none absolute top-1/2 right-item-8 size-item-12 -translate-y-1/2 text-text-primary"
+      >
+        <path d="M2 4.25 6 8.25l4-4" />
+      </svg>
+    </div>
+  );
+}
 const solidButton =
   "flex h-item-40 items-center justify-center bg-surface-inverted px-item-24 font-sans text-label-link text-text-on-inverted transition-[translate,box-shadow] duration-150 motion-safe:hover:-translate-x-item-2 motion-safe:hover:-translate-y-item-2 hover:shadow-button-hover";
 const outlineButton =
@@ -346,17 +368,19 @@ export function JobTracker() {
         </label>
         <label className={fieldLabel}>
           <span className={fieldLabelText}>Status</span>
-          <select
-            className={field}
-            value={form.status}
-            onChange={(e) => setForm({ ...form, status: e.target.value as Status })}
-          >
-            {STATUSES.map((s) => (
-              <option key={s} value={s}>
-                {LABEL[s]}
-              </option>
-            ))}
-          </select>
+          <SelectBox>
+            <select
+              className={`${field} appearance-none pr-item-32`}
+              value={form.status}
+              onChange={(e) => setForm({ ...form, status: e.target.value as Status })}
+            >
+              {STATUSES.map((s) => (
+                <option key={s} value={s}>
+                  {LABEL[s]}
+                </option>
+              ))}
+            </select>
+          </SelectBox>
         </label>
         <div className="flex gap-item-8">
           <button type="submit" className={solidButton}>
@@ -430,20 +454,22 @@ export function JobTracker() {
                       {a.contact || "—"}
                     </td>
                     <td className="px-item-16 py-item-12">
-                      <select
-                        aria-label={`Status for ${a.company}`}
-                        value={a.status}
-                        onChange={(e) =>
-                          update(a.id, { status: e.target.value as Status, updated: today })
-                        }
-                        className={`rounded-pill border-(length:--stroke-hairline) border-border-strong px-item-12 py-item-6 font-mono text-mono-m uppercase ${STATUS_STYLE[a.status]}`}
-                      >
-                        {STATUSES.map((s) => (
-                          <option key={s} value={s}>
-                            {LABEL[s]}
-                          </option>
-                        ))}
-                      </select>
+                      <SelectBox className="inline-block">
+                        <select
+                          aria-label={`Status for ${a.company}`}
+                          value={a.status}
+                          onChange={(e) =>
+                            update(a.id, { status: e.target.value as Status, updated: today })
+                          }
+                          className={`rounded-pill border-(length:--stroke-hairline) border-border-strong appearance-none py-item-6 pr-item-24 pl-item-12 font-mono text-mono-m uppercase ${STATUS_STYLE[a.status]}`}
+                        >
+                          {STATUSES.map((s) => (
+                            <option key={s} value={s}>
+                              {LABEL[s]}
+                            </option>
+                          ))}
+                        </select>
+                      </SelectBox>
                     </td>
                     <td className="whitespace-nowrap px-item-16 py-item-12 font-mono text-mono-l text-text-body">
                       {ago(age)}
