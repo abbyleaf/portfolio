@@ -20,6 +20,10 @@ type LoopVideoProps = {
    * replayed together, so they never drift apart.
    */
   group?: string;
+  /** A small still shown until the clip plays, so the box is never empty while it loads. */
+  poster?: string;
+  /** Loads the clip only once it is close to the screen, instead of when the page opens. */
+  lazy?: boolean;
 };
 
 // Deliberately a translucent black "glass" button over the video (copied from rachelchen.tech
@@ -41,9 +45,10 @@ function playAll(videos: Iterable<HTMLVideoElement>, fromStart: boolean) {
 }
 
 /** A silent looping clip that holds on its first frame for reduced-motion users. */
-export function LoopVideo({ src, label, className, size, controls, group }: LoopVideoProps) {
+export function LoopVideo({ src, label, className, size, controls, group, poster, lazy }: LoopVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(!group);
+  const [near, setNear] = useState(!lazy);
   // A tap shows the controls for a few seconds (hover does not exist on touch screens).
   const [revealed, setRevealed] = useState(false);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -55,6 +60,22 @@ export function LoopVideo({ src, label, className, size, controls, group }: Loop
   }
 
   useEffect(() => () => clearTimeout(hideTimer.current), []);
+
+  // A lazy clip gets its source once it is within a screen's height of the viewport.
+  useEffect(() => {
+    const video = ref.current;
+    if (!lazy || near || !video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        setNear(true);
+      },
+      { rootMargin: "100% 0px" },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [lazy, near]);
 
   useEffect(() => {
     const video = ref.current;
@@ -122,7 +143,8 @@ export function LoopVideo({ src, label, className, size, controls, group }: Loop
     <>
       <video
         ref={ref}
-        src={src}
+        src={near ? src : undefined}
+        poster={poster}
         aria-label={label}
         autoPlay={!group}
         muted
