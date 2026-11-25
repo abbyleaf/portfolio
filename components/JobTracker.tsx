@@ -1,27 +1,17 @@
 "use client";
 
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
+import {
+  loadApplications,
+  lockTracker,
+  saveApplications,
+  unlockTracker,
+  type UnlockState,
+} from "@/app/jobtracker/actions";
+import { STATUSES, cleanApplications, type Application, type Status } from "@/lib/tracker-types";
 
-type Status = "applied" | "interviewing" | "offer" | "rejected";
-
-type Application = {
-  id: string;
-  company: string;
-  title: string;
-  /** yyyy-mm-dd */
-  date: string;
-  contact: string;
-  status: Status;
-  /** yyyy-mm-dd of the last status change or logged follow-up. */
-  updated: string;
-  sample?: boolean;
-};
-
-const STORAGE_KEY = "jobTracker.v1";
-const SEEDED_KEY = "jobTracker.v1.seeded";
 const STALE_DAYS = 7;
-const STATUSES: Status[] = ["applied", "interviewing", "offer", "rejected"];
 const LABEL: Record<Status, string> = {
   applied: "Applied",
   interviewing: "Interviewing",
@@ -61,83 +51,6 @@ function ago(n: number) {
   return n <= 0 ? "today" : n === 1 ? "1 day ago" : `${n} days ago`;
 }
 
-/* ---------- storage (browser only, so it is read with useSyncExternalStore) ---------- */
-
-const listeners = new Set<() => void>();
-function emit() {
-  listeners.forEach((l) => l());
-}
-
-function seedOnce() {
-  try {
-    if (localStorage.getItem(STORAGE_KEY) || localStorage.getItem(SEEDED_KEY)) return;
-    const back = (n: number) => {
-      const d = new Date();
-      d.setDate(d.getDate() - n);
-      return iso(d);
-    };
-    const samples: Application[] = [
-      {
-        id: "sample-1",
-        company: "Example Co",
-        title: "Product Designer",
-        date: back(12),
-        contact: "Jordan Lee",
-        status: "applied",
-        updated: back(9),
-        sample: true,
-      },
-      {
-        id: "sample-2",
-        company: "Sample Studio",
-        title: "UX Researcher",
-        date: back(5),
-        contact: "Sam Rivera",
-        status: "interviewing",
-        updated: back(2),
-        sample: true,
-      },
-    ];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(samples));
-    localStorage.setItem(SEEDED_KEY, "1");
-  } catch {}
-}
-
-function subscribe(onChange: () => void) {
-  listeners.add(onChange);
-  window.addEventListener("storage", onChange);
-  seedOnce();
-  emit();
-  return () => {
-    listeners.delete(onChange);
-    window.removeEventListener("storage", onChange);
-  };
-}
-function getSnapshot() {
-  try {
-    return localStorage.getItem(STORAGE_KEY) ?? "[]";
-  } catch {
-    return "[]";
-  }
-}
-function getServerSnapshot() {
-  return null;
-}
-function write(apps: Application[]) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(apps));
-  } catch {}
-  emit();
-}
-function parse(raw: string): Application[] {
-  try {
-    const v = JSON.parse(raw);
-    return Array.isArray(v) ? v : [];
-  } catch {
-    return [];
-  }
-}
-
 /* ---------- styles (tokens only) ---------- */
 
 const field =
@@ -168,20 +81,117 @@ const emptyForm = (): FormState => ({
   status: "applied",
 });
 
+type Phase = "loading" | "locked" | "ready" | "error";
+type SaveState = "idle" | "saving" | "saved" | "error";
+
+function PasswordForm({ onUnlocked }: { onUnlocked: () => void }) {
+  const [state, action, pending] = useActionState<UnlockState, FormData>(unlockTracker, {});
+  useEffect(() => {
+    if (state.unlocked) onUnlocked();
+  }, [state.unlocked, onUnlocked]);
+  return (
+    <form action={action} className="flex max-w-width-520 flex-col gap-item-12 border-(length:--stroke-hairline) border-border-strong bg-surface-raised p-item-24">
+      <p className="font-heading text-heading-fraunces-md text-text-primary">Password required</p>
+      <label htmlFor="tracker-password" className="font-mono text-mono-marker uppercase text-text-muted">
+        Password
+      </label>
+      <div className="flex flex-wrap gap-item-12">
+        <input
+          id="tracker-password"
+          name="password"
+          type="password"
+          required
+          autoComplete="current-password"
+          aria-invalid={state.error ? true : undefined}
+          aria-describedby={state.error ? "tracker-password-error" : undefined}
+          className={`${field} max-w-full flex-1`}
+        />
+        <button type="submit" disabled={pending} className={`${solidButton} disabled:opacity-60`}>
+          {pending ? "Checking…" : "Enter"}
+        </button>
+      </div>
+      {state.error && (
+        <p id="tracker-password-error" role="alert" className="font-sans text-label-sm text-text-accent-warm">
+          {state.error}
+        </p>
+      )}
+    </form>
+  );
+}
+
 export function JobTracker() {
-  const raw = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const apps = useMemo(() => (raw === null ? null : parse(raw)), [raw]);
+  const [phase, setPhase] = useState<Phase>("loading");
+  const [apps, setApps] = useState<Application[]>([]);
+  const [loadError, setLoadError] = useState("");
+  const [saveState, setSaveState] = useState<SaveState>("idle");
+  const [saveError, setSaveError] = useState("");
   const [filter, setFilter] = useState<"all" | Status>("all");
   const [form, setForm] = useState<FormState>(emptyForm);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [confirmId, setConfirmId] = useState<string | null>(null);
   const [importError, setImportError] = useState("");
+  // Saves run one after another so an older save can never land after a newer one.
+  const queue = useRef<Promise<unknown>>(Promise.resolve());
 
-  if (apps === null) {
+  function apply(result: Awaited<ReturnType<typeof loadApplications>>) {
+    if (result.status === "ok") {
+      setApps(result.apps);
+      setPhase("ready");
+    } else if (result.status === "locked") {
+      setPhase("locked");
+    } else {
+      setLoadError(result.message);
+      setPhase("error");
+    }
+  }
+  function load() {
+    setPhase("loading");
+    loadApplications().then(apply);
+  }
+  useEffect(() => {
+    let cancelled = false;
+    loadApplications().then((result) => {
+      if (!cancelled) apply(result);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  /** Shows the change at once, then saves the whole list on the server. */
+  function write(next: Application[]) {
+    setApps(next);
+    setSaveState("saving");
+    queue.current = queue.current.then(() =>
+      saveApplications(next).then((result) => {
+        if (result.status === "ok") {
+          setSaveState("saved");
+        } else if (result.status === "locked") {
+          setPhase("locked");
+        } else {
+          setSaveError(result.message);
+          setSaveState("error");
+        }
+      }),
+    );
+  }
+
+  if (phase === "loading") {
     return (
       <p className="font-mono text-mono-marker uppercase text-text-muted" role="status">
         Loading your applications…
       </p>
+    );
+  }
+  if (phase === "locked") return <PasswordForm onUnlocked={load} />;
+  if (phase === "error") {
+    return (
+      <div className="flex flex-col items-start gap-item-12" role="alert">
+        <p className="font-sans text-paragraph-md text-text-accent-warm">{loadError}</p>
+        <button type="button" className={outlineButton} onClick={load}>
+          Try again
+        </button>
+      </div>
     );
   }
 
@@ -218,7 +228,6 @@ export function JobTracker() {
       const current = list.find((a) => a.id === editingId);
       update(editingId, {
         ...data,
-        sample: false,
         updated: current && current.status !== data.status ? today : current?.updated,
       });
     } else {
@@ -248,13 +257,8 @@ export function JobTracker() {
     file
       .text()
       .then((text) => {
-        const data = JSON.parse(text);
-        if (!Array.isArray(data)) throw new Error("not a list");
-        const rows: Application[] = data
-          .filter(
-            (x) => x && x.company && x.title && x.date && STATUSES.includes(x.status),
-          )
-          .map((x) => ({ ...x, id: x.id ?? crypto.randomUUID(), updated: x.updated ?? x.date }));
+        const rows = cleanApplications(JSON.parse(text));
+        if (!rows) throw new Error("not a list");
         write(rows);
       })
       .catch(() => setImportError("That file isn't a backup from this tracker."));
@@ -415,11 +419,6 @@ export function JobTracker() {
                   <tr key={a.id} className="border-b-(length:--stroke-hairline) border-border-subtle last:border-b-0">
                     <td className="px-item-16 py-item-12 font-heading text-heading-fraunces-md text-text-primary">
                       {a.company}
-                      {a.sample && (
-                        <span className="ml-item-8 font-mono text-stamp-xs uppercase tracking-(--tracking-caption) text-text-muted">
-                          Sample
-                        </span>
-                      )}
                     </td>
                     <td className="px-item-16 py-item-12 font-sans text-paragraph-md text-text-body">
                       {a.title}
@@ -508,9 +507,26 @@ export function JobTracker() {
 
         <div className="flex flex-wrap items-center gap-item-12">
           <p className="min-w-0 flex-1 font-sans text-label-sm text-text-muted">
-            Saved in this browser only. A reminder appears after {STALE_DAYS} days without a
-            status change or logged update.
+            <span role="status">
+              {saveState === "saving"
+                ? "Saving…"
+                : saveState === "saved"
+                  ? "Saved."
+                  : saveState === "error"
+                    ? ""
+                    : "Changes save automatically."}
+            </span>{" "}
+            A reminder appears after {STALE_DAYS} days without a status change or logged update.
           </p>
+          <button
+            type="button"
+            className={smallButton}
+            onClick={() => {
+              lockTracker().then(() => setPhase("locked"));
+            }}
+          >
+            Lock
+          </button>
           <button type="button" className={smallButton} onClick={exportBackup}>
             Export backup
           </button>
@@ -527,6 +543,14 @@ export function JobTracker() {
             />
           </label>
         </div>
+        {saveState === "error" && (
+          <div role="alert" className="flex flex-wrap items-center gap-item-12">
+            <p className="font-sans text-label-sm text-text-accent-warm">{saveError}</p>
+            <button type="button" className={smallButton} onClick={() => write(apps)}>
+              Try again
+            </button>
+          </div>
+        )}
         {importError && (
           <p role="alert" className="font-sans text-label-sm text-text-accent-warm">
             {importError}
