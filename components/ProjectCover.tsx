@@ -14,6 +14,8 @@ export function ProjectCover({ slug }: { slug: string }) {
     return (
       <LoopVideo
         src="/videos/case-study-1-hero.mp4"
+        poster="/images/home/case-study-1-poster.webp"
+        lazy
         label="Campus ride app showing shuttle and on-demand booking side by side"
         className="size-full object-cover"
       />
@@ -23,6 +25,8 @@ export function ProjectCover({ slug }: { slug: string }) {
     return (
       <LoopVideo
         src="/videos/case-study-2-hero.mp4"
+        poster="/images/home/case-study-2-poster.webp"
+        lazy
         label="Animated order splitting interface on a soft pink and lilac gradient"
         className="size-full object-cover"
       />
@@ -32,6 +36,8 @@ export function ProjectCover({ slug }: { slug: string }) {
     return (
       <LoopVideo
         src="/videos/case-study-4-hero.mp4"
+        poster="/images/home/case-study-4-poster.webp"
+        lazy
         label="Animated browser window on a soft blue and orange gradient"
         className="size-full object-cover"
       />
@@ -41,6 +47,8 @@ export function ProjectCover({ slug }: { slug: string }) {
     return (
       <LoopVideo
         src="/videos/case-study-5-hero.mp4"
+        poster="/images/home/case-study-5-poster.webp"
+        lazy
         label="Animated inline cell editing in a delivery plan table"
         className="size-full object-cover"
       />
