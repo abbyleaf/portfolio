@@ -1,6 +1,64 @@
 import type { MDXComponents } from "mdx/types";
+import { MapFigure } from "@/components/MapFigure";
+import { CompareSlider } from "@/components/CompareSlider";
+import {
+  Callout,
+  Figure,
+  ImageFigure,
+  ImageText,
+  Insight,
+  Insights,
+  Mark,
+  Pair,
+  Quote,
+  ScreenCompare,
+  Section,
+  ServiceCompare,
+  Showcase,
+  Shot,
+  Stat,
+  Stats,
+  Subhead,
+  VideoFigure,
+  VideoPanel,
+} from "@/components/CaseStudyBlocks";
 
-const components: MDXComponents = {};
+/**
+ * Wraps the part of a case study that needs the password. Visitors with the password see it
+ * as normal; for everyone else the locked page replaces it with the password box.
+ */
+function Locked({ children }: { children?: React.ReactNode }) {
+  return <>{children}</>;
+}
+
+const components: MDXComponents = {
+  p: (props) => (
+    <p className="font-sans text-paragraph-md text-text-muted" {...props} />
+  ),
+  strong: (props) => <strong className="font-semibold text-text-muted" {...props} />,
+  Callout,
+  CompareSlider,
+  Figure,
+  ImageFigure,
+  ImageText,
+  Insight,
+  Insights,
+  Locked,
+  MapFigure,
+  Mark,
+  Pair,
+  Quote,
+  ScreenCompare,
+  Section,
+  ServiceCompare,
+  Showcase,
+  Shot,
+  Stat,
+  Stats,
+  Subhead,
+  VideoFigure,
+  VideoPanel,
+};
 
 export function useMDXComponents(): MDXComponents {
   return components;

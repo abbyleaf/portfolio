@@ -26,7 +26,7 @@ export function StickyTop({ children }: { children: ReactNode }) {
   return (
     <div className="relative shrink-0">
       <div aria-hidden="true" className="invisible">
-        <div className="h-item-80" />
+        <div className="h-item-72" />
         <div className="h-item-30" />
       </div>
       <div

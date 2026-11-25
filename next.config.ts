@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
     agentFeedback: true,
+    agentUpgrade: "security",
   },
   images: {
     // 90 is for the About portrait, which is shown large and tilted.

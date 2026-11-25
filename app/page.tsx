@@ -97,7 +97,7 @@ export default function Home() {
 
         <section
           id="testimonials"
-          data-ruler-section="Kind words"
+          data-ruler-section="Testimonials"
           aria-labelledby="testimonials-title"
           className="flex flex-col items-center bg-surface-light-accent-warm py-item-80"
         >

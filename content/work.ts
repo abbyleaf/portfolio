@@ -8,12 +8,12 @@ export const workStudies: CaseStudySummary[] = [
     year: "2026",
     category: "Product thinking · AI tools",
     title: "Making the problem clear before designing the solution",
+    shortTitle: "Problem framing",
     summary: "This case study is still being written.",
     tags: [
       "Product Thinking",
       "Process Design",
       "Information Architecture",
-      "Facilitation",
       "Cross-functional Collaboration",
     ],
   },
@@ -23,6 +23,7 @@ export const workStudies: CaseStudySummary[] = [
     year: "2025",
     category: "Logistics · web",
     title: "Editing order and trip details without leaving the delivery plan",
+    shortTitle: "Delivery plan editing",
     summary: "This case study is still being written.",
     tags: [
       "Workflow Research",

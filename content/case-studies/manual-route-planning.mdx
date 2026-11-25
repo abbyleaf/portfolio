@@ -1,8 +1,365 @@
 ---
-title: Giving planners control over automated routes
-status: draft
+title: Giving transport planners more control over automated routes
+status: published
+number: "03"
+badges:
+  - Shipped · 2025
+  - Senior PD · 4 months
+category: Logistics / Web · 2024–2025
+hero:
+  src: /images/case-studies/manual-route-planning/hero.jpg
+  alt: A desktop monitor on a blue gradient showing the planning workspace, with a vehicles table at the top left and an orders table below it.
+  width: 1680
+  height: 1080
+facts:
+  - label: Platform
+    value: Web
+  - label: Manual planning
+    value: Jul 2024
+  - label: Violations
+    value: May – Jul 2025
+  - label: Role
+    value: Senior Product Designer
+team: 2 Product Managers, 2 Product Designers (including myself), 4 Software Engineers, 1 QA Engineer
+contribution:
+  - Product Thinking
+  - User Experience Design
+  - Interaction Design
+  - Cross-functional Collaboration
+  - Prototyping
+  - User Research
+responsibilities: I co-designed the manual planning feature for ***SWAT Routes*** in 2024, owning how route edits worked across the planning tables of the interface. I defined what planners could drag, where they could drop it, and how the interface communicated successful implementation of edits. Another designer owned the map experience. In 2025, I designed how planners could identify and investigate issues after editing routes, such as when vehicles exceeded their load limits.
+toc:
+  - id: overview
+    label: Overview
+  - id: problem
+    label: Problem
+  - id: solution
+    label: Solution
+  - id: decision-1
+    label: Interaction Design
+  - id: route-rules
+    label: Rules and Exceptions
+  - id: violations-v2
+    label: Understanding Violations
+  - id: testing
+    label: Testing and Refinement
+  - id: outcome
+    label: Outcome
+  - id: reflection
+    label: Reflection
+lockedFrom: solution
 ---
 
-# Giving planners control over automated routes
+<Section
+  eyebrow="Overview"
+  title="SWAT Routes helps transport teams plan deliveries"
+  intro="SWAT Routes is a B2B logistics platform that helps planners automate the generation of delivery routes. Once routes are approved, they are dispatched to drivers."
+>
+  <VideoPanel
+    label="Automatically generated routes"
+    video="/videos/case-studies/manual-route-planning/auto-planning.mp4"
+    alt="A looping screen recording of the SWAT Routes planning workspace generating routes automatically: the vehicles table, route details and orders table update beside a map of Singapore."
+    size={{ width: 3808, height: 2160 }}
+  />
+</Section>
 
-This case study is still being written.
+<Section
+  id="problem"
+  eyebrow="The problem"
+  title="Automated routes still needed human judgement"
+>
+  <Figure
+    natural
+    zoom={false}
+    src="/images/case-studies/manual-route-planning/problem-planner.svg"
+    alt="Illustration of a planner with a clipboard sitting in front of a large screen showing three vehicle routes, one of them circled as a problem."
+    width={447}
+    height={278}
+  />
+  <Quote>
+    <p>Automatic planning gave planners a starting point. <Mark>They still had to assign orders the system left out and use their experience to decide which routes needed changing.</Mark> For example, clients reported routes covering deliveries across too many cities, making them impractical to carry out.</p>
+    <p><Mark>In SWAT’s previous tool, planners could only assign or remove orders individually and move one stop at a time within a route.</Mark> Clearing a vehicle’s orders also required removing the vehicle from the plan.</p>
+  </Quote>
+</Section>
+
+<Locked>
+
+<Section
+  id="solution"
+  eyebrow="The solution"
+  title="Give planners more ways to adjust automated routes"
+  intro="SWAT Routes’ manual planning feature allows planners to fine-tune automatically generated routes more efficiently before dispatch."
+>
+  <VideoPanel
+    label="Assigning orders"
+    captions={[
+      { at: 0, label: "Assigning orders" },
+      { at: 6.5, label: "Reassigning orders" },
+      { at: 14.33, label: "Unassigning orders" },
+      { at: 28.1, label: "Resequencing stops" },
+    ]}
+    video="/videos/case-studies/manual-route-planning/locked/solution-assign.mp4"
+    alt="Screen recording of the full manual planning solution: orders are assigned to a vehicle, resequenced in the route details table, and the map updates."
+    size={{ width: 1908, height: 1080 }}
+  />
+  <Subhead title="Enable route edits in bulk">
+    <p>In SWAT Routes, I expanded route edit controls so that planners can select several orders and assign them to a vehicle, move them to another vehicle or remove them from a route in one action. They can also clear a vehicle’s orders while still retaining the vehicle. Planners can also move several stops together within the same route.</p>
+  </Subhead>
+  <Pair tight>
+    <VideoPanel
+      small
+      compact
+      label="Assigning one order"
+      video="/videos/case-studies/manual-route-planning/locked/assign-one.mp4"
+      alt="A looping screen recording of one order being assigned to a vehicle in the planning workspace; the route details table and the map update."
+      size={{ width: 1908, height: 1080 }}
+    />
+    <VideoPanel
+      small
+      compact
+      label="Assigning multiple orders"
+      video="/videos/case-studies/manual-route-planning/locked/assign-multiple.mp4"
+      alt="A looping screen recording of several orders being selected and assigned to a vehicle together; the route details table and the map update."
+      size={{ width: 1908, height: 1080 }}
+    />
+  </Pair>
+  <Subhead title="Clearly communicate edits when implemented">
+    <p>I introduced visual feedback to help planners understand whether their route edits were being processed or had succeeded. A loading modal appears while the system processes an edit, followed by a success toast once completed. The tables and map update to reflect the changes, with visual highlights drawing attention to what has changed. If an edit fails, an error message appears and the original plan remains unchanged.</p>
+  </Subhead>
+  <ImageFigure
+    compact
+    src="/images/case-studies/manual-route-planning/locked/state-feedback.webp"
+    alt="Three steps of feedback when assigning orders. Assigning orders: three selected orders are dragged onto a stop in the route details table. Updating the route: a loading spinner with the message Updating route. Assignment confirmed: a dark message reading 3 orders assigned to vehicle SNF123."
+    width={3016}
+    height={984}
+  />
+</Section>
+
+<Section
+  id="decision-1"
+  eyebrow="Interaction design"
+  title="Adapt drag-and-drop to the new planning workspace"
+  intro={[
+    "With a contractual deadline approaching, the product team decided to retain drag-and-drop from SWAT's previous planning tool rather than introduce an assignment modal. Reusing familiar interactions helped limit development effort while easing the transition for existing clients moving to SWAT Routes.",
+    "I worked with product managers and engineers to define how these interactions would work across the three planning tables.",
+  ]}
+>
+  <ImageFigure
+    label="Order assignment flows and interaction logic"
+    src="/images/case-studies/manual-route-planning/locked/assignment-flows-4.webp"
+    alt="A large flow diagram of the order assignment interactions, with a zoomed-in section titled Checks for assigning an order."
+    width={6061}
+    height={3015}
+  />
+  <p>When planners drag an order from the Orders table into the Vehicles table, the system automatically determines its position within the route because no specific stop position was selected. Dropping it into the Route Details table lets planners choose where to insert the pick-up or delivery stop. Planners can also drag existing stops to reorder them within a route.</p>
+  <Pair tight>
+    <VideoPanel
+      small
+      compact
+      label="System chooses the position"
+      video="/videos/case-studies/manual-route-planning/locked/drop-system-position.mp4"
+      alt="A looping screen recording of an order being dragged from the Orders table onto a vehicle in the Vehicles table: the system places it in the van's route and the route details table and map update."
+      size={{ width: 3808, height: 2160 }}
+    />
+    <VideoPanel
+      small
+      compact
+      label="Planner chooses the position"
+      video="/videos/case-studies/manual-route-planning/locked/drop-planner-position.mp4"
+      alt="A looping screen recording of an order being dropped into the Route Details table at a chosen row, so the planner decides where the stop goes in the route."
+      size={{ width: 3808, height: 2160 }}
+    />
+  </Pair>
+  <p>To keep planners focused on reordering stops, I restricted where they could move a stop within the same route. I disabled drop zones in other tables to prevent ambiguity between reordering, unassigning, and reassigning orders.</p>
+  <VideoPanel
+    label="Invalid & valid destinations"
+    video="/videos/case-studies/manual-route-planning/locked/valid-invalid.mp4"
+    alt="A looping screen recording of an order being dragged over the route details table: the rows where it can be dropped are highlighted blue, and the map shows the resulting route."
+    size={{ width: 3812, height: 2160 }}
+  />
+</Section>
+
+<Section
+  id="route-rules"
+  eyebrow="Rules and exceptions"
+  title="When to block a move or show a warning"
+  intro="I designed how the interface responds to route edits based on the planning rules, blocking invalid moves while allowing others to proceed with a warning. This helped planners make changes without breaking essential route rules."
+>
+  <Subhead small title="Prevent invalid stop sequences">
+    <p>Vehicles must collect goods before delivering them. The interface prevents planners from moving a delivery before its corresponding pick-up, or a pick-up after its delivery.</p>
+  </Subhead>
+  <Pair tight>
+    <VideoPanel
+      small
+      compact
+      label="Blocking pick-up after delivery"
+      video="/videos/case-studies/manual-route-planning/locked/rule-1.mp4"
+      alt="A looping screen recording of a pick-up stop being dragged below its related delivery in the route details table; the move is blocked."
+      size={{ width: 3808, height: 2160 }}
+    />
+    <VideoPanel
+      small
+      compact
+      label="Blocking delivery before pick-up"
+      video="/videos/case-studies/manual-route-planning/locked/rule-2.mp4"
+      alt="A looping screen recording of a delivery stop being dragged above its related pick-up in the route details table; the move is blocked."
+      size={{ width: 3808, height: 2160 }}
+    />
+  </Pair>
+  <Subhead small title="Keep stops within fixed route boundaries">
+    <p>Each route has fixed start and end locations that cannot be moved. Planners can only reorder stops between these boundaries.</p>
+  </Subhead>
+  <Pair tight>
+    <VideoPanel
+      small
+      compact
+      label="No moving of start and end points"
+      video="/videos/case-studies/manual-route-planning/locked/rule-3.mp4"
+      alt="A looping screen recording of a stop being dragged onto the fixed start or end of a route in the route details table."
+      size={{ width: 3808, height: 2160 }}
+    />
+    <VideoPanel
+      small
+      compact
+      label="Move stops between start and end points"
+      video="/videos/case-studies/manual-route-planning/locked/rule-4.mp4"
+      alt="A looping screen recording of a stop being dragged to a position before the route's start or after its end in the route details table."
+      size={{ width: 3808, height: 2160 }}
+    />
+  </Pair>
+  <Subhead small title="Warn when planning limits are exceeded">
+    <p>Planners can still make edits that exceed planning limits, such as a vehicle’s load capacity. The interface displays violation warnings to identify which limits have been exceeded and where they occur in the route.</p>
+  </Subhead>
+  <VideoPanel
+    small
+    compact
+    label="Allow edits but show corresponding warning"
+    video="/videos/case-studies/manual-route-planning/locked/exception-warn.mp4"
+    alt="A looping screen recording of a move that is allowed but breaks a constraint: the change is made and a warning appears beside the map."
+    size={{ width: 3812, height: 2160 }}
+  />
+  <p>While designing these warnings, I raised an edge case with product managers:</p>
+  <Quote>
+    <p><Mark>What should happen when a vehicle has no capacity limit defined for an order’s unit of measurement?</Mark></p>
+  </Quote>
+  <p>The team decided to allow the assignment but adopted my recommendation to display a violation warning. I also proposed showing the assigned load even when the system could not calculate its capacity utilisation.</p>
+</Section>
+
+<Section
+  id="violations-v2"
+  eyebrow="Understanding violations"
+  title="Give planners enough context to investigate a violation warning"
+  intro="The team kept the first version of the violation warning feature compact so it could ship sooner. Icons in the planning tables show which rules have been broken. For the second version, I designed a movable window with more detail about each warning and links to the affected rows."
+>
+  <Pair tight>
+    <ImageFigure
+      compact
+      small
+      label="Version 1"
+      framed
+      src="/images/case-studies/manual-route-planning/locked/violations-v1-2.webp"
+      alt="Version 1: the trips and orders tables with violation icons in a column and a tooltip over one of them."
+      width={1050}
+      height={684}
+    />
+    <ImageFigure
+      compact
+      small
+      label="Version 2"
+      framed
+      src="/images/case-studies/manual-route-planning/locked/violations-v2-2.webp"
+      alt="Version 2: a violations window open over the trips table, listing each violation with its description."
+      width={1050}
+      height={684}
+    />
+  </Pair>
+  <Subhead title="Group repeated issues by type">
+    <p>Route Details table already showed the full stop sequence, so I decided to group warnings by type to help planners review repeated issues together. The trade-off is that warnings for the same stop will appear in different groups. Within each group, I kept the warnings sorted by stop order.</p>
+  </Subhead>
+  <Pair tight>
+    <ImageFigure
+      compact
+      small
+      label="Group by type"
+      framed
+      src="/images/case-studies/manual-route-planning/locked/group-type-b.webp"
+      alt="The violations window for Trip 001 with violations grouped under two types, Time window and Truck not accepted, and a footer reading 2 violation types."
+      width={1446}
+      height={760}
+    />
+    <ImageFigure
+      compact
+      small
+      label="Group by stop no."
+      framed
+      src="/images/case-studies/manual-route-planning/locked/group-stop.webp"
+      alt="The violations window for Trip 001 with violations grouped under stop numbers, and a footer reading 4 violations."
+      width={1446}
+      height={760}
+    />
+  </Pair>
+</Section>
+
+<Section
+  id="testing"
+  eyebrow="Testing and refinement"
+  title="Stop numbers alone did not explain the affected activity"
+  intro="In one session with an experienced client planner, I asked how they reviewed violation warnings in their previous tool and validated the prototype with them. They described spotting warnings in the Vehicles table, using the icons to identify the issue and opening the descriptions to understand what caused it. They used both type and severity to prioritise what to address."
+>
+  <Figure
+    src="/images/case-studies/manual-route-planning/locked/interview-5.webp"
+    alt="A video call recording of the Violation Usability Research Session. A slide on screen asks: What’s the first thing you usually do when a violation shows up? It shows the planner’s previous software, with the trips, action and order grids marked up in green."
+    width={1680}
+    height={929}
+  />
+  <p>The planner tried opening the prototype from both Vehicles and Route Details table. Grouping by type matched their expectations, but stop numbers alone did not tell them whether a violation warning pertained to a pickup, delivery or another activity.</p>
+  <Figure
+    src="/images/case-studies/manual-route-planning/locked/usability-test-6.webp"
+    alt="A video call recording of the usability test, with the violations prototype shared on screen."
+    width={1680}
+    height={929}
+  />
+  <p>In response, I added an Action column, removed the Location Code column and moved location details into the descriptions where relevant. Version 2 remains a tested prototype.</p>
+  <ImageFigure
+    label="Refined violation window design"
+    bleed
+    inset
+    src="/images/case-studies/manual-route-planning/locked/final-violation.webp"
+    alt="The final violations window for Trip 001, annotated: violations are grouped by type and ordered by severity, sorted by stop sequence within each group, an Action column shows the affected activity, and location details sit in the description."
+    width={2968}
+    height={1620}
+  />
+</Section>
+
+<Section
+  id="outcome"
+  eyebrow="Outcome"
+  title="Manual planning released across operations at scale"
+  intro="Since the release of SWAT Routes and the first version of its violation warnings feature (V1) in early October 2025, the platform has supported operations across Singapore, Thailand and the Philippines at the following scale:"
+>
+  <Stats>
+    <Stat value="11,000" label="Orders daily">
+      Median across active operations
+    </Stat>
+    <Stat value="1,500+" label="Vehicles daily">
+      Across active operations
+    </Stat>
+    <Stat value="50+" label="Active planners">
+      Across three markets
+    </Stat>
+  </Stats>
+  <p>One large deployment handled around 6,000 to 7,000 orders and 1,000 vehicles each day.</p>
+</Section>
+
+<Section
+  id="reflection"
+  eyebrow="Reflection"
+  title="What I would do better"
+  intro="We were working against a tight contractual deadline, with a large backlog of required features. Given more time and resources, I would prioritise two follow-ups:"
+>
+  <p><strong>Measure whether planners can complete their work in SWAT Routes</strong><br />I would track output variables like task completion, time taken, failed actions and repeated attempts, and also conduct research into which planning tasks still happen outside the platform and why.</p>
+  <p><strong>Check whether violation feedback supports informed decisions</strong><br />I would measure feedback coverage and response time, then observe whether planners could explain which constraint was affected and where. Further testing would cover the complete journey from changing a route to deciding whether to resolve or ignore a violation.</p>
+</Section>
+
+</Locked>

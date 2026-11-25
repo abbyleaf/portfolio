@@ -28,7 +28,7 @@ export function Ruler({ edge, left, right, star, jump = true }: RulerProps) {
           : "border-t-(length:--stroke-hairline) border-b-(length:--stroke-sticker) border-border-strong"
       }`}
     >
-      <div className="mx-auto flex h-full w-full max-w-width-1312 items-center justify-between">
+      <div className="mx-auto flex h-full w-full max-w-width-1400 items-center justify-between">
         <RulerLabel label={left} hint={isTop && jump} />
         <TickRow isTop={isTop} />
         <span className="flex shrink-0 items-center gap-item-6">

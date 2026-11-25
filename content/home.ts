@@ -35,6 +35,8 @@ export type CaseStudySummary = {
   year: string;
   category: string;
   title: string;
+  /** Short name for the case study page header and the "next case study" band. */
+  shortTitle: string;
   summary: string;
   tags: string[];
   /**
@@ -42,6 +44,8 @@ export type CaseStudySummary = {
    * True shows the "Coming soon" card with no link.
    */
   comingSoon?: boolean;
+  /** Shows a "Confidential" badge on the card's picture. */
+  confidential?: boolean;
 };
 
 export const caseStudies: CaseStudySummary[] = [
@@ -51,6 +55,7 @@ export const caseStudies: CaseStudySummary[] = [
     year: "2026",
     category: "Passenger transport · mobile app",
     title: "Bringing shuttle and on-demand rides together",
+    shortTitle: "Campus ride booking",
     summary:
       "Integrated a fixed-route shuttle service into an existing university ride app. Within four months of launch, over 80% of dormitory students who tried the shuttle used it again.",
     tags: [
@@ -65,9 +70,11 @@ export const caseStudies: CaseStudySummary[] = [
     number: "02",
     year: "2026",
     category: "Logistics · web",
-    title: "Helping planners split orders across vehicles",
+    title: "Extending order splitting to suggest product quantities that fit",
+    shortTitle: "Order splitting",
+    confidential: true,
     summary:
-      "Redesigned how transport planners split orders across vehicles based on available capacity, with the aim of supporting 25+ planners handling 2,000 to 3,000 orders daily.",
+      "Designed for a delivery operation handling 2,000 to 3,000 orders daily, with a planned rollout to 25+ planners.",
     tags: [
       "Workflow Research",
       "Product Framing",
@@ -81,6 +88,7 @@ export const caseStudies: CaseStudySummary[] = [
     year: "2025",
     category: "Logistics · web",
     title: "Giving planners control over automated routes",
+    shortTitle: "Manual route planning",
     summary:
       "Designed manual planning and violation review features that gave transport planners control over automated routes. Shipped as part of a logistics platform supporting 30+ planners and a median of 11,000 orders daily.",
     tags: [

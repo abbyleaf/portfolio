@@ -28,7 +28,7 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           <h3 className={`font-heading font-wonk text-heading-fraunces-xl text-text-primary underline-offset-4 ${study.comingSoon ? "" : "group-hover:underline"}`}>
             {study.title}
           </h3>
-          <p className="font-sans text-paragraph-md text-text-body">
+          <p className="font-sans text-paragraph-md text-text-muted">
             {study.summary}
           </p>
           <ul
@@ -70,6 +70,13 @@ export function ProjectCard({ study, media }: ProjectCardProps) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 border-(length:--stroke-hairline) border-border-canvas-subtle"
         />
+        {study.confidential && (
+          // The same translucent black "glass" look as the pause and replay buttons on the case
+          // study videos (see LoopVideo), the same documented exception to the no-blur rule.
+          <p className="pointer-events-none absolute top-item-12 left-item-12 rounded-image-sm bg-black/50 px-item-12 py-item-4 font-sans text-label-sm text-white backdrop-blur-xs">
+            Confidential
+          </p>
+        )}
       </div>
     </ClickableCard>
   );

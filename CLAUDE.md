@@ -20,7 +20,7 @@ Personal portfolio: editorial, sticker-and-stamp, craft-forward. Next.js App Rou
 - `lib/` — shared helpers (`lib/case-studies.ts` decides whether a case study is visible)
 - `mdx-components.tsx` — maps MDX elements and custom components to `components/`
 - `public/` — static assets
-  - `public/icons/` — favicons: `favicon-light.svg` and `favicon-dark.svg` (chosen by the browser's colour scheme), `favicon.ico` and `apple-icon.png`, wired in `app/layout.tsx`. `proxy.ts` leaves `/icons/` reachable in coming-soon mode.
+  - `public/icons/` — favicons: `favicon.svg` (the A monogram, exactly as exported: never crop it), `favicon.ico` (16, 32 and 48px) and `apple-icon.png` (180px), wired in `app/layout.tsx`. `proxy.ts` leaves `/icons/` reachable in coming-soon mode.
 
 ## Design tokens
 
@@ -53,7 +53,7 @@ Editorial, sticker-and-stamp, craft-forward. It must not read as a generic portf
 ## Technical rules
 
 - **Fonts:** `next/font` only (`next/font/google` for Fraunces, Inter and Space Mono). Use `variable` and `display: 'swap'`, expose each as a CSS variable, and map them in `@theme`. No `<link>` tags or CSS `@import` for fonts.
-- **Images:** `next/image` only, never a raw `<img>`. Always set `alt`, plus `width` and `height` or `fill` with a sized parent. Give `fill` images a `sizes` prop. In this version `priority` is replaced by `preload` (`onLoadingComplete` is deprecated). Check `node_modules/next/dist/docs/01-app/03-api-reference/02-components/image.md`.
+- **Images:** `next/image` only, never a raw `<img>`, with one exception: animated SVGs (`MapFigure`) use `<picture>` and `<img>`, because `next/image` does not optimise SVGs. Always set `alt`, plus `width` and `height` or `fill` with a sized parent. Give `fill` images a `sizes` prop. In this version `priority` is replaced by `preload` (`onLoadingComplete` is deprecated). Check `node_modules/next/dist/docs/01-app/03-api-reference/02-components/image.md`.
 - **Case study content:** lives in `content/case-studies/*.mdx` and never in layout or component code. Layout code renders it. Use `@next/mdx` with `mdx-components.tsx` (required for App Router). Load a study with `await import(`@/content/case-studies/${slug}.mdx`)` in a dynamic route with `generateStaticParams`, calling `notFound()` for unknown slugs. Do not export `dynamicParams`: it is incompatible with `cacheComponents`, which this project enables.
 - **Frontmatter:** `@next/mdx` does not parse it by default. Add `remark-frontmatter` and `remark-mdx-frontmatter`. With Turbopack, remark and rehype plugins must be passed by string name with serialisable options. See `node_modules/next/dist/docs/01-app/02-guides/mdx.md`.
 - **Next.js config:** the project uses `next.config.ts`. Add `pageExtensions` for `md` and `mdx` when setting up MDX.
@@ -62,7 +62,7 @@ Editorial, sticker-and-stamp, craft-forward. It must not read as a generic portf
 
 - Text and UI contrast meets WCAG AA. Check text on the pastel accent surfaces and stickers, not just on the canvas.
 - Meaningful images have descriptive `alt`. Decorative stickers and stamps use `alt=""` or `aria-hidden`.
-- Visible focus states on everything interactive. Rotated or overlapping stickers must not hide the focus ring or break tab order.
+- Visible focus states on everything interactive. Links and buttons get the blue ring; a text field (`input:focus-visible` in globals.css) gets a second 1px ink line against its border instead. Rotated or overlapping stickers must not hide the focus ring or break tab order.
 - Use semantic headings in order. MDX content maps to real `h1`–`h3`, `figure` and `figcaption`.
 - Honour `prefers-reduced-motion`.
 
@@ -79,6 +79,26 @@ Case studies are hidden or shown by **content and an environment variable, never
 - Cards read this through `lib/case-studies.ts` and `components/CaseStudyList.tsx`. Do not set `comingSoon` in `content/home.ts` or `content/work.ts`: it is derived.
 - To see drafts locally, run `SHOW_DRAFTS=true npm run dev`, or put `SHOW_DRAFTS=true` in `.env.local` (git-ignored).
 
+## Case study pages
+
+A full case study is one MDX file in `content/case-studies/`; `components/CaseStudyLayout.tsx` draws the page around it. Files with only `title` and `status` stay plain stubs.
+
+- Frontmatter drives the page chrome: `title`, `status`, `number`, `badges`, `category`, `summary`, `hero`, `platform`, `timeline`, `role`, `team`, `contribution`, `responsibilities`, `facts` (replaces platform/timeline/role with a custom list of label/value pairs), `toc` (each `id` must match a `<Section id>`), `lockedFrom` (the `id` of the first `toc` entry inside `<Locked>`, see "Case study password") and `next` (slug of the following study). The type is `CaseStudyMeta` in `lib/case-studies.ts`.
+- The body uses the blocks in `components/CaseStudyBlocks.tsx`, mapped in `mdx-components.tsx`: `Section`, `Locked` (wraps the part that needs the password), `Subhead`, `Figure` (set `scroll` for wide diagrams), `Pair`, `Stats`/`Stat`, `Quote`/`Mark`, `ServiceCompare`, `Showcase` (each phone screen is an image or a looping `video`; clips in one showcase play in sync), `VideoFigure` (a captioned panel around one looping screen recording), `ScreenCompare` (two captioned panels, each holding a phone screen that hangs off the bottom), `ImageFigure` (a captioned panel around a wide transparent diagram that scales to fit; `bleed` for a picture that has its own canvas background; `framed` for a screenshot with rounded corners and the image shadow), `Shot` (a picture in a 300px frame with a mono caption below), `ImageText` (a 440×400 picture panel with a titled note beside it), `MapFigure` (a framed map: `animated` is an SVG with its own animation, `still` the same map without it for reduced motion). Do not import them in the MDX.
+- Pictures go in `public/images/case-studies/<slug>/`, exported from Figma at 2x. Every `Figure` needs real `alt` text. `Figure` and `ImageFigure` pictures open in a lightbox (`components/ZoomImage.tsx`, built on `yet-another-react-lightbox`) showing the full-size file with zoom, so export diagrams large. Looping clips go in `public/videos/case-studies/<slug>/`; they show pause and replay buttons on hover.
+- Link a study only through `isCaseStudyVisible` (draft rules above), including the next-study links and the footer.
+- Dev only: after changing `@theme` tokens or the media blocks in `app/globals.css`, restart `npm run dev` (clear `.next`), or the page keeps the old values.
+
+## Case study password
+
+One password unlocks every case study. Visitors without it see the title, tags, facts, hero image and Overview, then a password box in place of the rest.
+
+- The password is `CASE_STUDY_PASSWORD`. Set it in `.env.local` (git-ignored) and in Vercel (Production, Preview and Development). Never write it in code or content. With it unset, nobody can unlock.
+- `proxy.ts` checks the `case-study-access` cookie on `/case-studies/<slug>`. Without it the visitor gets `/case-studies/<slug>/locked`, which renders the study with `<Locked>` swapped for the gate. The cookie is an HMAC of a fixed phrase keyed with the password (`lib/case-access.ts`), lasts 15 days, and changing the password signs everyone out. The check happens in the server action `app/case-studies/actions.ts`.
+- In a study's MDX, wrap everything to hide in `<Locked>…</Locked>` (it can start anywhere, even mid-section) and set `lockedFrom` in the frontmatter to the `id` of the first hidden `toc` entry. The rail then shows the hidden entries under one "Locked" divider with a single lock icon (no icon per entry); each is plain text that does nothing on hover or click (a link to a hidden section from elsewhere still lands on the password box), and links to hidden sections land on the box. A study with no `<Locked>` block shows only its hero and the box. In development a warning appears if `lockedFrom` and `<Locked>` disagree.
+- On the locked page, `Locked` is `components/LockedGate.tsx`, a **server** component that ignores its children. Never pass the hidden children to a client component such as `PasswordGate`: they would be sent to the browser.
+- Pictures there are served as they are (`ZoomImage` sets `unoptimized`), because Next's image optimiser fetches the file without the visitor's cookie and the proxy would 404 it; so save them as WebP at full size. Files in `public/images/case-studies/<slug>/locked/` and `public/videos/case-studies/<slug>/locked/` return 404 without the cookie, including through `/_next/image`. Every other file is public: put anything hidden-only there.
+
 ## Coming-soon mode
 
 While the portfolio is unfinished, the live site (abigailyeap.com) can show only `app/coming-soon/page.tsx`. It is a switch in code, **never a branch difference**: `test`, `staging` and `main` hold identical code.
@@ -86,7 +106,7 @@ While the portfolio is unfinished, the live site (abigailyeap.com) can show only
 - The switch is `comingSoonOnLiveSite` in `content/site.ts`. `true` means the live site shows the coming-soon page. `false` means it shows the full site.
 - `proxy.ts` applies it only when Vercel's `VERCEL_ENV` is `production`, so `test` and `staging` always keep the full site.
 - While on, every page on the live site shows the coming-soon page, and `/images`, `/videos`, `/resume.pdf` and `/_next/image` return 404.
-- When the user says **"activate coming soon"**, set `comingSoonOnLiveSite` to `true`. When they say **"deactivate coming soon"**, set it to `false`. Commit and push to `test` like any change, then tell the user it goes live only after "push to production". If they asked for it to go live now, follow the "Push to production" steps below, and in the changes list say whether the live site is going to coming soon or back to the full site.
+- When the user says **"activate coming soon"**, set `comingSoonOnLiveSite` to `true`. When they say **"deactivate coming soon"**, set it to `false`. Commit it like any change (do not push until asked), then tell the user it goes live only after "push to test", "push to staging" and "push to production" as they choose. If they asked for it to go live now, follow the "Push to production" steps below, and in the changes list say whether the live site is going to coming soon or back to the full site.
 - Never delete `proxy.ts` or edit pages to turn it on or off.
 - `COMING_SOON=true` forces it on anywhere, e.g. `COMING_SOON=true npm run dev` to preview it locally. The page is also always reachable at `/coming-soon`.
 - The page uses no images, so nothing unfinished is exposed. Keep it that way, and keep it in the portfolio style (tokens, stickers, rulers) like every other page.
@@ -101,7 +121,9 @@ Branches and links:
 
 Default behaviour:
 - Always work on the `test` branch. At the start of every session, check the current branch and switch to `test` if needed.
-- "Commit and push" means commit and push to `test` only.
+- **Never publish on your own.** Every push to GitHub starts a Vercel deployment, and Vercel's free plan allows only 100 a day. Commit changes locally as you go (a commit publishes nothing), and leave them there.
+- Push to `test` only when the user says **"push to test"**. Push to `staging` only when they say **"push to staging"**. Release to production only when they say **"push to production"**. Saying "commit" alone, or finishing a change, never means push. Do not retry or queue a push the user has not asked for.
+- When you finish a change, say whether it is committed only, and how many commits are waiting to be pushed to `test`.
 - Never push to, merge into, or open pull requests against `staging` or `main` unless the user says "push to staging" or "push to production".
 
 "Push to staging":
