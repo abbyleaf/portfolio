@@ -48,6 +48,18 @@ function canUseLocalFile() {
   return process.env.NODE_ENV !== "production" || process.env.TRACKER_LOCAL_FILE === "true";
 }
 
+/**
+ * What the server can see, for the "not set up" message. It names which variables were found
+ * and which build and environment this is, and never includes a value.
+ */
+export function storageDiagnosis() {
+  const url = envEndingWith("KV_REST_API_URL", "UPSTASH_REDIS_REST_URL");
+  const token = envEndingWith("KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_TOKEN");
+  const build = (process.env.VERCEL_GIT_COMMIT_SHA ?? "local").slice(0, 7);
+  const env = process.env.VERCEL_TARGET_ENV ?? process.env.VERCEL_ENV ?? "local";
+  return `build ${build}, environment ${env}, url ${url ? "found" : "missing"}, token ${token ? "found" : "missing"}`;
+}
+
 export function storageIsConfigured() {
   return redisConfig() !== null || canUseLocalFile();
 }

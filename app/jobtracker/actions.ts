@@ -8,7 +8,12 @@ import {
   trackerPasswordMatches,
   trackerToken,
 } from "@/lib/tracker-access";
-import { readApplications, storageIsConfigured, writeApplications } from "@/lib/tracker-store";
+import {
+  readApplications,
+  storageDiagnosis,
+  storageIsConfigured,
+  writeApplications,
+} from "@/lib/tracker-store";
 import { cleanApplications, type Application } from "@/lib/tracker-types";
 
 export type UnlockState = { error?: string; unlocked?: boolean };
@@ -52,7 +57,10 @@ export async function lockTracker(): Promise<void> {
 export async function loadApplications(): Promise<LoadResult> {
   if (!(await allowed())) return { status: "locked" };
   if (!storageIsConfigured()) {
-    return { status: "error", message: "Storage is not set up for this site yet." };
+    return {
+      status: "error",
+      message: `Storage is not set up for this site yet (${storageDiagnosis()}).`,
+    };
   }
   try {
     return { status: "ok", apps: await readApplications() };
