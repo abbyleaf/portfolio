@@ -286,7 +286,7 @@ export function WalkingAbi() {
   return (
     <div
       ref={lane}
-      className={`pointer-events-none relative h-item-236 w-full max-w-width-1400 shrink-0 ${paused ? "abi-paused" : ""}`}
+      className={`pointer-events-none relative h-item-236 w-full max-w-width-1400 shrink-0 max-md:mt-item-56 ${paused ? "abi-paused" : ""}`}
     >
       <div
         ref={figure}
