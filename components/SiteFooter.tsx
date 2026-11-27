@@ -74,9 +74,14 @@ export async function SiteFooter({ comingSoon }: { comingSoon?: boolean } = {}) 
       {/* Abi walks on the copyright's hairline: the lane sits right on top of it. Her stops
           follow the labels marked data-abi-stop. */}
       <WalkingAbi />
-      <p className="-mt-item-m w-full max-w-width-1400 border-t-(length:--stroke-hairline) border-grey-10/10 pt-item-33 text-center font-sans text-label-caption uppercase text-text-sub-headers">
-        © Copyright 2026 Abigail Yeap · Singapore
-      </p>
+      <div className="-mt-item-m flex w-full max-w-width-1400 justify-between gap-item-8 border-t-(length:--stroke-hairline) border-grey-10/10 pt-item-33 font-sans text-label-caption uppercase text-text-sub-headers max-md:flex-col">
+        <p>© Copyright 2026 Abigail Yeap · Singapore</p>
+        {/* A nudge to click Abi, who walks on this row's top line. */}
+        <p>
+          <span className="max-md:hidden">Catch me with a click ✳</span>
+          <span className="md:hidden">Tap me if you can ✳</span>
+        </p>
+      </div>
     </footer>
   );
 }
