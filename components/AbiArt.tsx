@@ -8,8 +8,6 @@
 export function AbiWalkRig() {
   return (
     <>
-            {/* slimmer side view: the whole figure at 92% width, height unchanged */}
-            <g transform="translate(70 0) scale(0.92 1) translate(-70 0)">
             <g className="bob" stroke="var(--color-grey-900)" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round">
 
               {/* far arm: yours, shaded for the far side */}
@@ -76,8 +74,6 @@ export function AbiWalkRig() {
               </g>
 
               {/* head: your two frames (Head.svg = A, Head2.svg = B). Face shared; the hair cuts between A and B with the stride */}
-              {/* The rig is slimmed to 92% width (see WalkingAbi); this undoes it for the head, around the neck, so the face keeps its drawn width. */}
-              <g transform="translate(77.2 0) scale(1.0869565 1) translate(-77.2 0)">
               <g className="head"><g transform="translate(77.2 40.9) scale(-1.08 1.08) translate(-28.6255 -68)">
                 <path d="M4.79904 39.7732C5.21691 38.7218 5.79904 32.7732 5.79904 29.7732C6.15705 22.2732 5.79904 16.7732 12.7991 10.7732C19.7991 4.77318 23.7991 9.27318 41.7991 22.7732C56.1991 33.5732 49.4657 51.6065 44.2991 59.2732L30.7991 65.2732C27.9657 66.4398 21.5991 68.0732 16.7991 67.2732C10.7991 66.2732 7.29907 62.2732 5.79904 59.2732C4.59902 56.8732 4.29905 51.6065 4.29907 49.2732C4.29907 49.2732 2.82103 49.2732 2.10675 48.2732C-0.393253 44.7732 3.60669 42.7732 4.79904 39.7732Z" fill="var(--color-peach-100)" stroke="none"/>
                 <path d="M5.79905 29.7732C6.60683 33.2732 5.94593 36.9255 4.60683 40.2732C3.60682 42.7732 0.106812 44.9732 2.10683 47.7732C2.82112 48.7732 4.29908 49.2732 4.29908 49.2732C4.29906 51.6065 4.59903 56.8732 5.79905 59.2732C7.29908 62.2732 10.7991 66.2732 16.7991 67.2732C21.5991 68.0732 27.9658 66.4399 30.7991 65.2732" fill="none" strokeWidth="3" stroke="var(--color-grey-900)" strokeLinecap="round" strokeLinejoin="round"/>
@@ -90,7 +86,7 @@ export function AbiWalkRig() {
                 <path className="hfB" d="M5.79919 31.7733C5.79919 21.7733 11.1325 14.4399 13.7992 12.7733C13.7992 18.2733 16.7992 24.7732 19.7992 29.7733C23.6438 36.181 29.9659 41.4399 33.7992 42.7732C34.1992 40.7732 36.6326 39.9399 37.7992 39.7732C43.3992 39.3732 44.4659 44.2732 44.2992 46.7732C43.8992 53.1732 38.7992 55.4399 36.2992 55.7732C35.0992 61.3732 37.4659 66.1065 38.7992 67.7732C37.2992 70.6065 35.5992 77.2732 40.7992 81.2732C45.9992 85.2732 48.9659 90.9399 49.7992 93.2732L51.7992 129.273C55.7992 132.073 61.1326 129.44 63.2992 127.773C63.7992 128.607 67.2138 130.204 72.2992 124.773C76.3 120.5 76.3 111.5 74.7992 105.773C73.8426 102.123 73.9659 98.7732 74.7992 97.2732L78.2991 87.2732C80.3 77.5002 74.874 69.7844 72.7991 63.2732C70.8 57.0002 68.8992 58.7732 69.2992 44.7732C69.6992 30.7732 65.1326 20.6066 62.7992 16.2733C53.2992 -0.226742 39.7992 1.27319 33.7992 1.77326C27.82 2.2716 22.7992 3.77319 16.2992 6.27319C9.79922 8.77319 4.29912 13.7732 3.29912 22.2732C2.49912 29.0732 4.29919 31.6066 5.79919 31.7733Z" fill="var(--color-grey-900)" stroke="var(--color-grey-900)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M17.8345 32.3667C15.7487 30.9006 12.9028 29.4259 9.60665 30.7048" fill="none" stroke="var(--color-grey-900)" strokeWidth="2" strokeLinecap="round"/>
                 <path d="M5.67735 55.7309C8.22285 55.8738 9.28329 56.228 12.0422 54.3205" fill="none" stroke="var(--color-grey-900)" strokeWidth="2" strokeLinecap="round"/>
-              </g></g></g>
+              </g></g>
 
               {/* near arm: yours */}
               <g className="near">
@@ -103,7 +99,6 @@ export function AbiWalkRig() {
                 </g>
               </g>
             </g>
-          </g>
     </>
   );
 }

@@ -297,10 +297,7 @@ export function WalkingAbi() {
                 height={226}
                 aria-hidden="true"
               >
-                {/* Slimmer side view: the whole figure at 92% width, height unchanged. */}
-                <g transform="translate(70 0) scale(0.92 1) translate(-70 0)">
-                  <AbiWalkRig />
-                </g>
+                <AbiWalkRig />
               </svg>
             </div>
           ) : (
