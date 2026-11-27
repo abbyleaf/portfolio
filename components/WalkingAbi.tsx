@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AbiFront, AbiWalkRig, SLIM } from "./AbiArt";
 import "./WalkingAbi.css";
 
@@ -25,8 +25,8 @@ const OFFSTAGE_MS = 1400;
 const HI_MS = 2400;
 /** On a phone, how far past the screen edge she walks before turning back. */
 const OFFSTAGE = 24;
-/** On a phone, the bubble's centre stays at least this far from either screen edge. */
-const BUBBLE_EDGE = 140;
+/** On a phone, the closest the bubble may come to either screen edge (room for its shadow and tilt). */
+const BUBBLE_MARGIN = 12;
 /** On desktop, the bubble moves to her left once she is this close to the lane's right end. */
 const FLIP_ZONE = 352;
 
@@ -43,7 +43,7 @@ const STOPS = [
   { text: "Pick a case study ↑", offset: 46 },
 ];
 
-type Bubble = { text: string; side: "right" | "left" | "above"; left: number };
+type Bubble = { text: string; side: "right" | "left" | "above" };
 type View = { walking: boolean; dir: 1 | -1; excited: boolean; bubble: Bubble | null };
 
 const WALKING: View = { walking: true, dir: 1, excited: false, bubble: null };
@@ -51,6 +51,7 @@ const WALKING: View = { walking: true, dir: 1, excited: false, bubble: null };
 export function WalkingAbi() {
   const lane = useRef<HTMLDivElement>(null);
   const figure = useRef<HTMLDivElement>(null);
+  const bubbleBox = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<View>(WALKING);
   const [paused, setPaused] = useState(false);
   // Everything the animation loop needs, kept out of React state.
@@ -83,12 +84,8 @@ export function WalkingAbi() {
   /** The bubble beside or above her, for where she is standing now. */
   const bubbleFor = useCallback((text: string): Bubble => {
     const s = sim.current;
-    if (s.mobile) {
-      const centre = s.edgeLeft + s.x + FIG / 2;
-      const clamped = Math.max(BUBBLE_EDGE, Math.min(s.viewport - BUBBLE_EDGE, centre));
-      return { text, side: "above", left: Math.round(FIG / 2 + (clamped - centre)) };
-    }
-    return { text, side: s.x < s.width - FLIP_ZONE ? "right" : "left", left: 0 };
+    if (s.mobile) return { text, side: "above" };
+    return { text, side: s.x < s.width - FLIP_ZONE ? "right" : "left" };
   }, []);
 
   /** Measures the lane and, on desktop, where each column label sits. */
@@ -219,7 +216,8 @@ export function WalkingAbi() {
         s.dir = s.dir > 0 ? -1 : 1;
         s.x = s.dir > 0 ? start : end;
         s.phase = "in";
-        s.line = (s.line + 1) % STOPS.length;
+        // Only the lines whose footer column is there (coming-soon mode has no case studies).
+        s.line = (s.line + 1) % Math.max(1, s.stops.length);
       }
       const nx = s.x + s.dir * SPEED * dt;
       if (s.phase === "in") {
@@ -255,6 +253,22 @@ export function WalkingAbi() {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [paused, bubbleFor, place]);
+
+  // On a phone the bubble is centred above her head, then nudged sideways by its measured
+  // width so it never leaves the screen.
+  useLayoutEffect(() => {
+    const el = bubbleBox.current;
+    if (!el) return;
+    if (view.bubble?.side !== "above") {
+      el.style.left = "";
+      return;
+    }
+    const s = sim.current;
+    const half = el.offsetWidth / 2 + BUBBLE_MARGIN;
+    const centre = s.edgeLeft + s.x + FIG / 2;
+    const clamped = Math.max(half, Math.min(s.viewport - half, centre));
+    el.style.left = `${FIG / 2 + clamped - centre}px`;
+  }, [view.bubble]);
 
   function sayHi() {
     const s = sim.current;
@@ -318,14 +332,14 @@ export function WalkingAbi() {
         </button>
         {bubble && (
           <div
+            ref={bubbleBox}
             className={`absolute ${
               bubble.side === "above"
-                ? "bottom-full mb-item-4 -translate-x-1/2"
+                ? "bottom-full left-1/2 mb-item-4 -translate-x-1/2"
                 : bubble.side === "right"
                   ? "-top-item-10 left-item-96"
                   : "-top-item-10 -left-item-8 -translate-x-full"
             }`}
-            style={bubble.side === "above" ? { left: bubble.left } : undefined}
           >
             <p
               key={bubble.text}
