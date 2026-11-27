@@ -14,7 +14,7 @@ export const workStudies: CaseStudySummary[] = [
       "Product Thinking",
       "Process Design",
       "Information Architecture",
-      "Cross-functional Collaboration",
+      "Cross-Functional Collaboration",
     ],
   },
   {
@@ -29,7 +29,7 @@ export const workStudies: CaseStudySummary[] = [
       "Workflow Research",
       "Interaction Design",
       "Usability Testing",
-      "Cross-functional Collaboration",
+      "Cross-Functional Collaboration",
     ],
   },
 ];

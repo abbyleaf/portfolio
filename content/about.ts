@@ -66,7 +66,7 @@ export const skillGroups = [
   },
   {
     label: "Collaboration",
-    skills: ["Stakeholder Management", "Cross-functional Collaboration"],
+    skills: ["Stakeholder Management", "Cross-Functional Collaboration"],
   },
   {
     label: "Tools",

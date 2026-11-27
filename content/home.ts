@@ -62,7 +62,7 @@ export const caseStudies: CaseStudySummary[] = [
       "Product Thinking",
       "Product Evolution",
       "AI Tools",
-      "Data-informed Design",
+      "Data-Informed Design",
     ],
   },
   {

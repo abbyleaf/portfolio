@@ -1,0 +1,88 @@
+/*
+ * Global on purpose: next.config.ts runs every .css file through Tailwind, which turns CSS
+ * Modules off, so every class and keyframe here starts with abi- to stay out of the way.
+ *
+ * Abi's walk and standing poses, copied from the owner's Design canvas (SiteFooterWalk).
+ * The rig's joints pivot in the figure's own view-box coordinates (viewBox 0 -36 140 360).
+ * One walk cycle = 24 frames = 1s; each keyframe step of 12.5% is 3 frames.
+ * 0% contact · 12.5% down · 25% passing · 37.5% high · 50% contact (other foot) …
+ * Far-side limbs run the same curves half a cycle later.
+ */
+
+/* Walking: side view */
+.abi-rig * { transform-box: view-box; }
+.abi-rig .bob { animation: abi-bob 0.5s linear infinite; }
+.abi-rig .thigh { transform-origin: 70px 150px; animation: abi-thigh 1s linear infinite; }
+.abi-rig .shin { transform-origin: 72.8px 228.6px; animation: abi-shin 1s linear infinite; }
+.abi-rig .foot { transform-origin: 64.6px 303.4px; animation: abi-foot 1s linear infinite; }
+.abi-rig .upper { transform-origin: 64.5px 71px; animation: abi-upper 1s linear infinite; }
+.abi-rig .fore { transform-origin: 63px 125px; animation: abi-fore 1s linear infinite; }
+.abi-rig .hand { transform-origin: 64.1px 159.6px; animation: abi-hand 1s linear infinite; }
+.abi-rig .far .thigh,
+.abi-rig .far .shin,
+.abi-rig .far .foot,
+.abi-rig .far .upper,
+.abi-rig .far .fore,
+.abi-rig .far .hand { animation-delay: -0.5s; }
+.abi-rig .head { transform-origin: 77.2px 40.9px; animation: abi-head 0.5s ease-in-out infinite; animation-delay: -0.1s; }
+/* hair: hard cut between the two frames, A around contact and down, B through passing and high point */
+.abi-rig .hfB { opacity: 0; }
+.abi-rig .hfA { animation: abi-hfA 0.5s step-end infinite; }
+.abi-rig .hfB { animation: abi-hfB 0.5s step-end infinite; }
+
+/* thigh: + is back, - is forward (facing right) */
+@keyframes abi-thigh { 0% { transform: rotate(-23deg) } 12.5% { transform: rotate(-28deg) } 25% { transform: rotate(-5.4deg) } 37.5% { transform: rotate(6.2deg) } 50% { transform: rotate(10.8deg) } 62.5% { transform: rotate(2deg) } 75% { transform: rotate(-18deg) } 87.5% { transform: rotate(-30deg) } 100% { transform: rotate(-23deg) } }
+/* knee bend, relative to thigh */
+@keyframes abi-shin { 0% { transform: rotate(9.5deg) } 12.5% { transform: rotate(42deg) } 25% { transform: rotate(18deg) } 37.5% { transform: rotate(12deg) } 50% { transform: rotate(28deg) } 62.5% { transform: rotate(55deg) } 75% { transform: rotate(65deg) } 87.5% { transform: rotate(30deg) } 100% { transform: rotate(9.5deg) } }
+/* ankle, relative to the shin */
+@keyframes abi-foot { 0% { transform: rotate(-1.5deg) } 12.5% { transform: rotate(-14deg) } 25% { transform: rotate(-12.6deg) } 37.5% { transform: rotate(11.8deg) } 50% { transform: rotate(1.2deg) } 62.5% { transform: rotate(-32deg) } 75% { transform: rotate(-37deg) } 87.5% { transform: rotate(-5deg) } 100% { transform: rotate(-1.5deg) } }
+/* hips: lowest on down, highest on high point (twice per cycle) */
+@keyframes abi-bob { 0% { transform: translateY(9px) } 25% { transform: translateY(11px) } 50% { transform: translateY(2px) } 75% { transform: translateY(-2px) } 100% { transform: translateY(9px) } }
+/* arms swing opposite the same-side leg */
+@keyframes abi-upper { 0% { transform: rotate(18deg) } 12.5% { transform: rotate(14deg) } 25% { transform: rotate(0deg) } 37.5% { transform: rotate(-10deg) } 50% { transform: rotate(-18deg) } 62.5% { transform: rotate(-14deg) } 75% { transform: rotate(0deg) } 87.5% { transform: rotate(10deg) } 100% { transform: rotate(18deg) } }
+/* elbow: always a little bent, more on the forward swing */
+@keyframes abi-fore { 0% { transform: rotate(-10deg) } 12.5% { transform: rotate(-12deg) } 25% { transform: rotate(-16deg) } 37.5% { transform: rotate(-22deg) } 50% { transform: rotate(-28deg) } 62.5% { transform: rotate(-24deg) } 75% { transform: rotate(-16deg) } 87.5% { transform: rotate(-12deg) } 100% { transform: rotate(-10deg) } }
+/* wrist: trails the swing by a quarter beat */
+@keyframes abi-hand { 0% { transform: rotate(-7deg) } 12.5% { transform: rotate(0deg) } 25% { transform: rotate(7deg) } 37.5% { transform: rotate(10deg) } 50% { transform: rotate(7deg) } 62.5% { transform: rotate(0deg) } 75% { transform: rotate(-7deg) } 87.5% { transform: rotate(-10deg) } 100% { transform: rotate(-7deg) } }
+@keyframes abi-head { 0%, 100% { transform: rotate(-1.8deg) translateY(0) } 50% { transform: rotate(1.8deg) translateY(1px) } }
+@keyframes abi-hfA { 0% { opacity: 1 } 25% { opacity: 0 } 75% { opacity: 1 } 100% { opacity: 1 } }
+@keyframes abi-hfB { 0% { opacity: 0 } 25% { opacity: 1 } 75% { opacity: 0 } 100% { opacity: 0 } }
+
+/* Standing: front view */
+.abi-front * { transform-box: fill-box; }
+.abi-front .idle { transform-origin: 50% 100%; animation: abi-idle 1.6s ease-in-out infinite; }
+.abi-front .wave { transform-box: view-box; transform-origin: 106.5px 103px; animation: abi-wave 900ms ease-in-out infinite; }
+.abi-front .flop { transform-origin: 50% 0%; animation: abi-flop 1.6s ease-in-out infinite; }
+@keyframes abi-idle { 0%, 100% { transform: translateY(0) scaleY(1) } 50% { transform: translateY(-2px) scaleY(1.012) } }
+@keyframes abi-wave { 0%, 100% { transform: rotate(-8deg) } 50% { transform: rotate(7deg) } }
+@keyframes abi-flop { 0%, 100% { transform: rotate(-1.5deg) } 50% { transform: rotate(1.5deg) } }
+
+/* Front face: the happy one only while she says hi after a click */
+.abi-front .face-click { display: none; }
+.abi-front.abi-excited .face-click { display: inline; }
+.abi-front.abi-excited .face-normal { display: none; }
+/* Right arm: the full pointing arm at stops (it moves with the torso); the two-piece waving arm only after a click */
+.abi-front .fore-wave,
+.abi-front .upper-wave { display: none; }
+.abi-front.abi-excited .fore-wave,
+.abi-front.abi-excited .upper-wave { display: inline; }
+.abi-front.abi-excited .fore-point { display: none; }
+
+/* Blush hidden for now: delete this rule to bring it back */
+.abi-front .blush,
+.abi-rig .blush { display: none; }
+
+/* Speech bubble pops in */
+.abi-pop { animation: abi-pop 200ms cubic-bezier(0.3, 1.6, 0.6, 1); }
+/* The bubble's -3deg tilt comes from Tailwind's `rotate` property, which stacks with this scale. */
+@keyframes abi-pop { from { transform: scale(0.5) } to { transform: scale(1) } }
+
+/* Off-screen or hidden tab: hold every pose still */
+.abi-paused *,
+.abi-paused { animation-play-state: paused !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .abi-rig *,
+  .abi-front *,
+  .abi-pop { animation: none !important; }
+}
