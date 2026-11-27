@@ -40,6 +40,9 @@
   --color-red-600: #a8484b;
   --color-red-37: #7e3f3f;
   --color-grey-93-2: #fedcde;
+  /* Abi's skin in the footer walk: near side, and the shaded far side. */
+  --color-peach-100: #fde9dc;
+  --color-peach-200: #f6d9c8;
 
   /* Surface */
   --color-surface-canvas: #f0ebe5;
@@ -170,6 +173,11 @@
   --text-mono-m--line-height: 1;
   --text-mono-m--letter-spacing: 0.72px;
   --text-mono-m--font-weight: 400;
+  /* Abi's speech bubble in the footer */
+  --text-mono-bubble: 0.75rem;
+  --text-mono-bubble--line-height: 1.4;
+  --text-mono-bubble--letter-spacing: 0.72px;
+  --text-mono-bubble--font-weight: 400;
 
   --text-heading-fraunces-hero: 4rem;
   --text-heading-fraunces-hero--line-height: 1.234;
@@ -298,6 +306,11 @@
   --spacing-item-60: 60px;
   --spacing-item-64: 64px;
   --spacing-item-72: 72px;
+  /* Abi, the walking figure in the footer: her box, and the lane she walks in. */
+  --spacing-item-88: 88px;
+  --spacing-item-96: 96px;
+  --spacing-item-226: 226px;
+  --spacing-item-236: 236px;
   --spacing-item-80: 80px;
   --spacing-item-100: 100px;
   --spacing-item-120: 120px;
@@ -355,9 +368,11 @@
   --rotate-polaroid-left: -5deg;
   --rotate-polaroid-right: 5deg;
   --rotate-polaroid-portrait: -4deg;
+  --rotate-bubble: -3deg;
 
   /* Shadow */
   --shadow-sticker: 6px 7px 0 0 var(--color-grey-10);
+  --shadow-bubble: 3px 3px 0 0 var(--color-grey-900);
   --shadow-badge: 2px 3px 0 0 color-mix(in oklab, var(--color-grey-10) 90%, transparent);
   --shadow-button-hover: 4px 4px 0 0 var(--color-azure-55);
   --shadow-image: 0 2px 8px 0 rgb(0 0 0 / 0.08);
