@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AbiFront, AbiWalkRig } from "./AbiArt";
+import { AbiFront, AbiWalkRig, SLIM } from "./AbiArt";
 import "./WalkingAbi.css";
 
 /*
@@ -297,7 +297,11 @@ export function WalkingAbi() {
                 height={226}
                 aria-hidden="true"
               >
-                <AbiWalkRig />
+                {/* Slimmer side view: the figure at 96% width, height unchanged. AbiWalkRig
+                    widens the head back by the same amount, so the face keeps its drawn width. */}
+                <g transform={`translate(70 0) scale(${SLIM} 1) translate(-70 0)`}>
+                  <AbiWalkRig />
+                </g>
               </svg>
             </div>
           ) : (
